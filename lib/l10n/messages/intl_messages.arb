@@ -1,9 +1,189 @@
 {
-  "@@last_modified": "2022-02-23T22:05:14.824678",
+  "@@last_modified": "2022-02-23T23:39:39.552691",
   "title": "Hello World",
   "@title": {
     "description": "Title for the Demo application",
     "type": "text",
     "placeholders": {}
+  },
+  "play": "Play",
+  "@play": {
+    "description": "Play keyword",
+    "type": "text",
+    "placeholders": {}
+  },
+  "ccontinue": "Continue",
+  "@ccontinue": {
+    "description": "Continue keyword",
+    "type": "text",
+    "placeholders": {}
+  },
+  "easy": "Easy",
+  "@easy": {
+    "description": "Easy keyword",
+    "type": "text",
+    "placeholders": {}
+  },
+  "medium": "Medium",
+  "@medium": {
+    "description": "Medium keyword",
+    "type": "text",
+    "placeholders": {}
+  },
+  "hard": "Hard",
+  "@hard": {
+    "description": "Hard keyword",
+    "type": "text",
+    "placeholders": {}
+  },
+  "pieces": "Pieces",
+  "@pieces": {
+    "description": "Pieces keyword",
+    "type": "text",
+    "placeholders": {}
+  },
+  "shuffle": "Shuffle",
+  "@shuffle": {
+    "description": "Shuffle keyword",
+    "type": "text",
+    "placeholders": {}
+  },
+  "retry": "Retry",
+  "@retry": {
+    "description": "Retry keyword",
+    "type": "text",
+    "placeholders": {}
+  },
+  "puzzleCompletedDialogTitle": "YOU MADE IT 👏",
+  "@puzzleCompletedDialogTitle": {
+    "description": "Title of the dialog that is shown after the puzzle is completed",
+    "type": "text",
+    "placeholders": {}
+  },
+  "nextLevel": "Next Level",
+  "@nextLevel": {
+    "description": "Next Level keyword",
+    "type": "text",
+    "placeholders": {}
+  },
+  "exitGame": "Exit Game",
+  "@exitGame": {
+    "description": "Exit game keyword",
+    "type": "text",
+    "placeholders": {}
+  },
+  "timeCaps": "TIME",
+  "@timeCaps": {
+    "description": "Time keyword in all capital case",
+    "type": "text",
+    "placeholders": {}
+  },
+  "welcomeUser": "Hi {username} 👋,",
+  "@welcomeUser": {
+    "description": "Message to welcome user",
+    "type": "text",
+    "placeholders": {
+      "username": {}
+    }
+  },
+  "chooseDifficulty": "Choose a difficulty",
+  "@chooseDifficulty": {
+    "description": "Message that prompts user to select the games difficulty",
+    "type": "text",
+    "placeholders": {}
+  },
+  "leaderboardTitle": "Leaderboard",
+  "@leaderboardTitle": {
+    "description": "Title of leaderboard page",
+    "type": "text",
+    "placeholders": {}
+  },
+  "totalPoints": "{points} pts",
+  "@totalPoints": {
+    "description": "Describes how many points an user has",
+    "type": "text",
+    "placeholders": {
+      "points": {}
+    }
+  },
+  "today": "Today",
+  "@today": {
+    "description": "Today keyword",
+    "type": "text",
+    "placeholders": {}
+  },
+  "week": "Week",
+  "@week": {
+    "description": "Week keyword",
+    "type": "text",
+    "placeholders": {}
+  },
+  "month": "Month",
+  "@month": {
+    "description": "Month keyword",
+    "type": "text",
+    "placeholders": {}
+  },
+  "settingsTitle": "Settings",
+  "@settingsTitle": {
+    "description": "Title of settings page",
+    "type": "text",
+    "placeholders": {}
+  },
+  "changeProfileDetailsOption": "Change profile details",
+  "@changeProfileDetailsOption": {
+    "description": "Settings page option to change user profile details",
+    "type": "text",
+    "placeholders": {}
+  },
+  "notificationsOption": "Notifications",
+  "@notificationsOption": {
+    "description": "Settings page option to enable/disable notifications",
+    "type": "text",
+    "placeholders": {}
+  },
+  "soundsOption": "Sounds",
+  "@soundsOption": {
+    "description": "Settings page option to enable/disable sounds",
+    "type": "text",
+    "placeholders": {}
+  },
+  "vibrationOption": "Vibration",
+  "@vibrationOption": {
+    "description": "Settings page option to enable/disable phone vibration",
+    "type": "text",
+    "placeholders": {}
+  },
+  "profileDetailsTitle": "Profile Details",
+  "@profileDetailsTitle": {
+    "description": "Title of user profile details page",
+    "type": "text",
+    "placeholders": {}
+  },
+  "puzzleGameLevel": "Lv. {level}",
+  "@puzzleGameLevel": {
+    "description": "Indicator of the puzzle game level the user is currently or about to play",
+    "type": "text",
+    "placeholders": {
+      "level": {}
+    }
+  },
+  "_puzzleGameTimeLeft": "{useMins,plural, =0{{secs} s}other{{mins} m {secs} s}}",
+  "@_puzzleGameTimeLeft": {
+    "description": "Indicator of the time left to complete the puzzle game",
+    "type": "text",
+    "placeholders": {
+      "useMins": {},
+      "mins": {},
+      "secs": {}
+    }
+  },
+  "puzzleGameTimeFinalScore": "Score: {score} pts",
+  "@puzzleGameTimeFinalScore": {
+    "description": "Indicator of the score achieved by completing the puzzle game",
+    "type": "text",
+    "placeholders": {
+      "score": {}
+    }
   }
 }
