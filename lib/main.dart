@@ -31,6 +31,8 @@ class MyApp extends StatelessWidget {
         iconTheme: const IconThemeData(
           color: iconsColor,
         ),
+        textTheme: appTextTheme,
+        primaryTextTheme: appTextTheme,
       ),
       home: BlocProvider<AppStartupBloc>(
         create: (context) => AppStartupBloc()..add(AppStartupStarted()),

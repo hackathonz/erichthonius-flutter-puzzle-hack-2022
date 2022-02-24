@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:swap_it/l10n/app_localizations.dart';
 import 'package:swap_it/widgets/widgets.dart';
 
 class HomeView extends StatelessWidget {
@@ -8,39 +9,57 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context);
+
     return Center(
-      child: ListView(
-        children: [
-          const SwapItAlternativeLogo(),
-          const Icon(
-            Icons.play_arrow_outlined,
-            size: 96.0,
-          ),
-          Row(
-            children: const [
-              IconBase(
-                child: Icon(
-                  Icons.help_outline,
-                  size: 32.0,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 64.0),
+        child: ListView(
+          children: [
+            const SwapItAlternativeLogo(),
+            const Padding(
+              padding: EdgeInsets.symmetric(vertical: 44.0),
+            ),
+            SwapItButton(
+              text: localizations.play,
+              onPressed: () {},
+            ),
+            const Padding(
+              padding: EdgeInsets.symmetric(vertical: 12.0),
+            ),
+            SwapItButton(
+              text: localizations.ccontinue,
+              onPressed: () {},
+            ),
+            const Padding(
+              padding: EdgeInsets.symmetric(vertical: 44.0),
+            ),
+            Row(
+              children: const [
+                IconBase(
+                  child: Icon(
+                    Icons.help_outline,
+                    size: 32.0,
+                  ),
                 ),
-              ),
-              IconBase.alternative(
-                child: Icon(
-                  Icons.help_outline,
-                  size: 32.0,
+                IconBase.alternative(
+                  child: Icon(
+                    Icons.help_outline,
+                    size: 32.0,
+                  ),
                 ),
-              ),
-              IconBase(
-                child: Icon(
-                  Icons.settings,
-                  size: 32.0,
+                IconBase(
+                  child: Icon(
+                    Icons.settings,
+                    size: 32.0,
+                  ),
                 ),
-              ),
-            ],
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          ),
-        ],
-        primary: false,
+              ],
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            ),
+          ],
+          primary: false,
+        ),
       ),
     );
   }
