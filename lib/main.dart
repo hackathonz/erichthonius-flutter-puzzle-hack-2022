@@ -32,17 +32,28 @@ class MyApp extends StatelessWidget {
         primaryIconTheme: iconThemeData,
         textTheme: appTextTheme,
         primaryTextTheme: appTextTheme,
+        bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+          backgroundColor: Colors.transparent,
+          elevation: 0.0,
+          selectedIconTheme: iconThemeData,
+          unselectedIconTheme: iconThemeData,
+          enableFeedback: true,
+          showUnselectedLabels: false,
+          showSelectedLabels: false,
+        ),
+        scaffoldBackgroundColor: Colors.transparent,
       ),
-      home: BlocProvider<AppStartupBloc>(
-        create: (context) => AppStartupBloc()..add(AppStartupStarted()),
+      home: BlocProvider<GameBloc>(
+        create: (context) => GameBloc()..add(LoadGameStarted()),
         child: Scaffold(
           body: DecoratedBox(
             decoration: const BoxDecoration(
               gradient: backgroundGradient,
             ),
-            child: BlocBuilder<AppStartupBloc, AppStartupState>(
+            child: BlocBuilder<GameBloc, GameState>(
+              buildWhen: (previous, current) => current is LoadGameSuccess,
               builder: (context, state) {
-                if (state is AppStartupSuccess) {
+                if (state is LoadGameSuccess) {
                   return const HomeView();
                 } else {
                   return const SplashView();
