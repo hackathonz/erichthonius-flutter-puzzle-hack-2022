@@ -35,27 +35,28 @@ class HomeView extends StatelessWidget {
               padding: EdgeInsets.symmetric(vertical: 44.0),
             ),
             Row(
-              children: const [
+              children: [
                 IconBase(
-                  child: Icon(
+                  child: const Icon(
                     Icons.help_outline,
-                    size: 32.0,
                   ),
+                  onPressed: () {},
                 ),
                 IconBase.alternative(
-                  child: Icon(
-                    Icons.help_outline,
-                    size: 32.0,
+                  child: const Icon(
+                    Icons.play_arrow,
+                    size: kIconAlternativeSize,
                   ),
+                  onPressed: () {},
                 ),
                 IconBase(
-                  child: Icon(
+                  child: const Icon(
                     Icons.settings,
-                    size: 32.0,
                   ),
+                  onPressed: () {},
                 ),
               ],
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
             ),
           ],
           primary: false,

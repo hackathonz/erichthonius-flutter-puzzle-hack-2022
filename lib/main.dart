@@ -28,9 +28,8 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         backgroundColor: Colors.transparent,
-        iconTheme: const IconThemeData(
-          color: iconsColor,
-        ),
+        iconTheme: iconThemeData,
+        primaryIconTheme: iconThemeData,
         textTheme: appTextTheme,
         primaryTextTheme: appTextTheme,
       ),
