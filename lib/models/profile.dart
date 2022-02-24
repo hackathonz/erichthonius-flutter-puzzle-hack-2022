@@ -5,6 +5,8 @@ class GameUserProfile {
 
   final List<GameLevel> levelsPlayed;
 
+  bool get hasPlayedAnyGame => levelsPlayed.isNotEmpty;
+
   const GameUserProfile({
     required final this.profile,
     required final this.levelsPlayed,
