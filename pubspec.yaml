@@ -17,6 +17,7 @@ dependencies:
   flutter_bloc: 7.0.1
   colorize_lumberdash: 3.0.0
   google_fonts: 2.2.0
+  flutter_svg: 1.0.3
 
 dev_dependencies:
   flutter_test:
@@ -29,5 +30,5 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/images/swap_it_logo.png
-    - assets/images/swap_it_alternative_logo.png
+    - assets/images/swap_it_logo.svg
+    - assets/images/swap_it_alternative_logo.svg

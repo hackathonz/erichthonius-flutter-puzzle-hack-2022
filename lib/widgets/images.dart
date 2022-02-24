@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
-const _kSwapItLogoAssetPath = 'assets/images/swap_it_logo.png';
+const _kSwapItLogoAssetPath = 'assets/images/swap_it_logo.svg';
 const _kSwapItAlternativeLogoAssetPath =
-    'assets/images/swap_it_alternative_logo.png';
+    'assets/images/swap_it_alternative_logo.svg';
 
 class SwapItLogo extends StatelessWidget {
   const SwapItLogo({
@@ -11,7 +12,7 @@ class SwapItLogo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Image.asset(
+    return SvgPicture.asset(
       _kSwapItLogoAssetPath,
     );
   }
@@ -24,7 +25,7 @@ class SwapItAlternativeLogo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Image.asset(
+    return SvgPicture.asset(
       _kSwapItAlternativeLogoAssetPath,
     );
   }
