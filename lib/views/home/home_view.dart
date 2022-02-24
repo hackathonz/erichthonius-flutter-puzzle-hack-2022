@@ -38,20 +38,20 @@ class HomeView extends StatelessWidget {
               children: [
                 IconBase(
                   child: const Icon(
-                    Icons.help_outline,
+                    SwapItIcons.profile,
                   ),
                   onPressed: () {},
                 ),
                 IconBase.alternative(
                   child: const Icon(
-                    Icons.play_arrow,
+                    SwapItIcons.cup,
                     size: kIconAlternativeSize,
                   ),
                   onPressed: () {},
                 ),
                 IconBase(
                   child: const Icon(
-                    Icons.settings,
+                    SwapItIcons.settings,
                   ),
                   onPressed: () {},
                 ),
