@@ -32,6 +32,9 @@ flutter:
   assets:
     - assets/images/swap_it_logo.svg
     - assets/images/swap_it_alternative_logo.svg
+    - assets/images/easy_map.svg
+    - assets/images/medium_map.svg
+    - assets/images/hard_map.svg
 
   fonts:
     - family: icomoon
