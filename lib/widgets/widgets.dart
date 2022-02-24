@@ -1,6 +1,8 @@
 export 'colors.dart';
 export 'images.dart';
 export 'sizes.dart';
+export 'buttons.dart';
+export 'typography.dart';
 
 import 'package:flutter/material.dart';
 import 'package:swap_it/widgets/colors.dart';

@@ -11,3 +11,7 @@ const backgroundGradient = RadialGradient(
 const iconsColor = Color(0xFFFFFFFF);
 const iconBaseColor = Color(0xFF4447CA);
 const iconBaseAlternativeColor = Color(0xFFEBCD17);
+
+const primaryTextColor = Color(0xFFFFFFFF);
+
+const primaryButtonColor = Color(0xFF4447CA);
