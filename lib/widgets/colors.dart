@@ -7,3 +7,7 @@ const backgroundGradient = RadialGradient(
   ],
   stops: [0.0, 1.0],
 );
+
+const iconsColor = Color(0xFFFFFFFF);
+const iconBaseColor = Color(0xFF4447CA);
+const iconBaseAlternativeColor = Color(0xFFEBCD17);

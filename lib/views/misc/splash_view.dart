@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:swap_it/widgets/images.dart';
+import 'package:swap_it/widgets/widgets.dart';
 
 class SplashView extends StatelessWidget {
   const SplashView({

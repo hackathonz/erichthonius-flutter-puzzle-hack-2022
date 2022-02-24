@@ -18,8 +18,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
         backgroundColor: Colors.transparent,
+        iconTheme: const IconThemeData(
+          color: iconsColor,
+        ),
       ),
       home: BlocProvider<AppStartupBloc>(
         create: (context) => AppStartupBloc()..add(AppStartupStarted()),
@@ -31,7 +33,7 @@ class MyApp extends StatelessWidget {
             child: BlocBuilder<AppStartupBloc, AppStartupState>(
               builder: (context, state) {
                 if (state is AppStartupSuccess) {
-                  return Container();
+                  return const HomeView();
                 } else {
                   return const SplashView();
                 }

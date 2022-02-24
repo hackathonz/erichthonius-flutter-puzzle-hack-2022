@@ -21,7 +21,7 @@ class AppStartupBloc extends Bloc<AppStartupEvent, AppStartupState> {
     await Future.wait(
       [
         Future.delayed(
-          Duration(seconds: 3),
+          Duration(seconds: 0),
         ),
       ],
     );

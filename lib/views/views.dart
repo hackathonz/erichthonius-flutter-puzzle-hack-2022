@@ -1,1 +1,2 @@
-export 'splash_view.dart';
+export 'misc/misc.dart';
+export 'home/home.dart';
