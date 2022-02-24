@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:swap_it/blocs/blocs.dart';
 import 'package:swap_it/l10n/app_localizations.dart';
 import 'package:swap_it/views/views.dart';
 import 'package:swap_it/widgets/widgets.dart';
@@ -19,12 +21,23 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         backgroundColor: Colors.transparent,
       ),
-      home: const Scaffold(
-        body: DecoratedBox(
-          decoration: BoxDecoration(
-            gradient: backgroundGradient,
+      home: BlocProvider<AppStartupBloc>(
+        create: (context) => AppStartupBloc()..add(AppStartupStarted()),
+        child: Scaffold(
+          body: DecoratedBox(
+            decoration: const BoxDecoration(
+              gradient: backgroundGradient,
+            ),
+            child: BlocBuilder<AppStartupBloc, AppStartupState>(
+              builder: (context, state) {
+                if (state is AppStartupSuccess) {
+                  return Container();
+                } else {
+                  return const SplashView();
+                }
+              },
+            ),
           ),
-          child: SplashView(),
         ),
       ),
       localizationsDelegates: const [
