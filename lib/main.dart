@@ -3,10 +3,19 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:swap_it/blocs/blocs.dart';
 import 'package:swap_it/l10n/app_localizations.dart';
+import 'package:swap_it/logging/logging.dart';
 import 'package:swap_it/views/views.dart';
 import 'package:swap_it/widgets/widgets.dart';
 
 void main() {
+  putLumberdashToWork(
+    withClients: [
+      ColorizeLumberdash(),
+    ],
+  );
+
+  Bloc.observer = LogBlocObserver();
+
   runApp(const MyApp());
 }
 
