@@ -21,3 +21,7 @@ const appBarIconThemeData = IconThemeData(
   color: iconsColor,
   size: kIconAppBarSize,
 );
+
+const kScaffoldPadding = EdgeInsets.symmetric(
+  horizontal: 24.0,
+);

@@ -6,3 +6,4 @@ export 'sizes.dart';
 export 'typography.dart';
 export 'cards.dart';
 export 'app_bar.dart';
+export 'scaffold.dart';
