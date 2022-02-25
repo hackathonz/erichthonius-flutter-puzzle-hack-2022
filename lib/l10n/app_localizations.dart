@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
+import 'package:swap_it/models/models.dart';
 import 'messages/messages_all.dart';
 
 typedef GetLocalizations = AppLocalizations Function(BuildContext context);
@@ -29,13 +30,16 @@ class AppLocalizations {
     return Localizations.of<AppLocalizations>(context, AppLocalizations)!;
   }
 
-  String get title {
-    return Intl.message(
-      'Hello World',
-      name: 'title',
-      desc: 'Title for the Demo application',
-      locale: localeName,
-    );
+  String difficulty(final LevelDifficulty difficulty) {
+    switch (difficulty) {
+      case LevelDifficulty.easy:
+        return easy;
+      case LevelDifficulty.medium:
+        return medium;
+      case LevelDifficulty.hard:
+      default:
+        return hard;
+    }
   }
 
   String get play {
@@ -83,11 +87,11 @@ class AppLocalizations {
     );
   }
 
-  String get pieces {
+  String piecesCount(final int pieces) {
     return Intl.message(
-      'Pieces',
-      name: 'pieces',
-      desc: 'Pieces keyword',
+      '$pieces pieces',
+      name: 'piecesCount',
+      desc: 'Describes how many pieces a level has',
       locale: localeName,
     );
   }
@@ -148,7 +152,7 @@ class AppLocalizations {
 
   String welcomeUser(final String username) {
     return Intl.message(
-      'Hi $username 👋,',
+      'Hi $username 👋 ,',
       name: 'welcomeUser',
       desc: 'Message to welcome user',
       args: [username],

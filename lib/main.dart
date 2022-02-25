@@ -24,51 +24,78 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        backgroundColor: Colors.transparent,
-        iconTheme: iconThemeData,
-        primaryIconTheme: iconThemeData,
-        textTheme: appTextTheme,
-        primaryTextTheme: appTextTheme,
-        bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+    return BlocProvider<GameBloc>(
+      create: (context) => GameBloc()..add(LoadGameStarted()),
+      child: MaterialApp(
+        title: 'Flutter Demo',
+        theme: ThemeData(
           backgroundColor: Colors.transparent,
-          elevation: 0.0,
-          selectedIconTheme: iconThemeData,
-          unselectedIconTheme: iconThemeData,
-          enableFeedback: true,
-          showUnselectedLabels: false,
-          showSelectedLabels: false,
-        ),
-        scaffoldBackgroundColor: Colors.transparent,
-      ),
-      home: BlocProvider<GameBloc>(
-        create: (context) => GameBloc()..add(LoadGameStarted()),
-        child: Scaffold(
-          body: DecoratedBox(
-            decoration: const BoxDecoration(
-              gradient: backgroundGradient,
+          iconTheme: iconThemeData,
+          primaryIconTheme: iconThemeData,
+          textTheme: appTextTheme,
+          primaryTextTheme: appTextTheme,
+          bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+            backgroundColor: Colors.transparent,
+            elevation: kBottomNavigationBarElevation,
+            selectedIconTheme: iconThemeData,
+            unselectedIconTheme: iconThemeData,
+            enableFeedback: true,
+            showUnselectedLabels: false,
+            showSelectedLabels: false,
+          ),
+          cardTheme: CardTheme(
+            color: primaryCardColor,
+            elevation: kCardElevation,
+            shadowColor: primaryCardShadowColor,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(kCardRadius),
+              side: BorderSide.none,
             ),
-            child: BlocBuilder<GameBloc, GameState>(
-              buildWhen: (previous, current) => current is LoadGameSuccess,
-              builder: (context, state) {
-                if (state is LoadGameSuccess) {
-                  return const HomeView();
-                } else {
-                  return const SplashView();
+          ),
+          appBarTheme: const AppBarTheme(
+            iconTheme: appBarIconThemeData,
+            actionsIconTheme: appBarIconThemeData,
+            backgroundColor: Colors.transparent,
+            centerTitle: true,
+            elevation: kAppBarElevation,
+            titleTextStyle: appBarTitleTextStyle,
+          ),
+          scaffoldBackgroundColor: Colors.transparent,
+        ),
+        home: Scaffold(
+          body: DecoratedBox(
+            decoration: backgroundDecoration,
+            child: Navigator(
+              initialRoute: '/',
+              onGenerateRoute: (settings) {
+                if (settings.name == '/') {
+                  return MaterialPageRoute(
+                    builder: (routeContext) {
+                      return BlocBuilder<GameBloc, GameState>(
+                        buildWhen: (previous, current) =>
+                            current is LoadGameSuccess,
+                        builder: (context, state) {
+                          if (state is LoadGameSuccess) {
+                            return const HomeView();
+                          } else {
+                            return const SplashView();
+                          }
+                        },
+                      );
+                    },
+                  );
                 }
               },
             ),
           ),
         ),
+        localizationsDelegates: const [
+          AppLocalizations.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+        ],
+        supportedLocales: supportedLocales,
       ),
-      localizationsDelegates: const [
-        AppLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-      ],
-      supportedLocales: supportedLocales,
     );
   }
 }

@@ -21,7 +21,20 @@ class GameBloc extends Bloc<GameEvent, GameState> {
     LoadGameStarted event,
   ) async* {
     game = const Game(
-      gameLevels: {},
+      gameLevels: {
+        GameLevelDifficulty(
+          difficulty: LevelDifficulty.easy,
+          pieces: 9,
+        ): [],
+        GameLevelDifficulty(
+          difficulty: LevelDifficulty.medium,
+          pieces: 16,
+        ): [],
+        GameLevelDifficulty(
+          difficulty: LevelDifficulty.hard,
+          pieces: 25,
+        ): [],
+      },
       gameUserProfile: GameUserProfile(
         profile: UserProfile(username: 'Swapper000'),
         levelsPlayed: [],

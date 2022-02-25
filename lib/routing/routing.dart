@@ -5,7 +5,7 @@ Future<void> navigateToPlayGameView(final BuildContext context) {
   return Navigator.of(context).push(
     MaterialPageRoute(
       builder: (routeContext) {
-        return const DifficultyView();
+        return const ChooseDifficultyView();
       },
     ),
   );

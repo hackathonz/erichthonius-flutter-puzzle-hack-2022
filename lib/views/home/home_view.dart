@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:swap_it/blocs/blocs.dart';
 import 'package:swap_it/l10n/app_localizations.dart';
+import 'package:swap_it/routing/routing.dart';
 import 'package:swap_it/widgets/widgets.dart';
 
 class HomeView extends StatelessWidget {
@@ -30,7 +31,9 @@ class HomeView extends StatelessWidget {
               ),
               SwapItButton(
                 text: localizations.play,
-                onPressed: () {},
+                onPressed: () {
+                  navigateToPlayGameView(context);
+                },
               ),
               if (showContinueButton)
                 Padding(
@@ -54,6 +57,9 @@ class HomeView extends StatelessWidget {
             BottomNavigationBarItem(
               label: localizations.profileDetailsTitle,
               icon: IconBase(
+                key: const Key(
+                  'bottom_navigation_bar_profile_item',
+                ),
                 child: const Icon(
                   SwapItIcons.profile,
                 ),
@@ -63,6 +69,9 @@ class HomeView extends StatelessWidget {
             BottomNavigationBarItem(
               label: localizations.play,
               icon: IconBase.alternative(
+                key: const Key(
+                  'bottom_navigation_bar_play_item',
+                ),
                 child: const Icon(
                   SwapItIcons.cup,
                   size: kIconAlternativeSize,
@@ -73,6 +82,9 @@ class HomeView extends StatelessWidget {
             BottomNavigationBarItem(
               label: localizations.settingsTitle,
               icon: IconBase(
+                key: const Key(
+                  'bottom_navigation_bar_settings_item',
+                ),
                 child: const Icon(
                   SwapItIcons.settings,
                 ),

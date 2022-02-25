@@ -11,7 +11,7 @@ class IconBase extends StatelessWidget {
   final void Function() onPressed;
 
   const IconBase({
-    Key? key,
+    required final Key key,
     required final this.child,
     required final this.onPressed,
     this.color = iconBaseColor,
@@ -19,7 +19,7 @@ class IconBase extends StatelessWidget {
   }) : super(key: key);
 
   const IconBase.alternative({
-    Key? key,
+    required final Key key,
     required final Widget child,
     required final void Function() onPressed,
   }) : this(
@@ -35,6 +35,7 @@ class IconBase extends StatelessWidget {
     return SizedBox.square(
       dimension: diameter,
       child: FloatingActionButton(
+        heroTag: Key('IconBase_FloatingActionButton_$key'),
         onPressed: onPressed,
         child: child,
         backgroundColor: color,

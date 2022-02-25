@@ -9,5 +9,45 @@ const primaryButtonTextStyle = TextStyle(
   fontSize: 16,
   letterSpacing: 0,
   fontWeight: FontWeight.w600,
-  height: 1,
+  height: 1.0,
+);
+
+const gameLevelDifficultyCardTitleTextStyle = TextStyle(
+  color: primaryTextColor,
+  fontSize: 24.0,
+  letterSpacing: 0,
+  fontWeight: FontWeight.w900,
+  height: 1.0,
+);
+
+const gameLevelDifficultyCardSubtitleTextStyle = TextStyle(
+  color: primaryLightTextColor,
+  fontSize: 16.0,
+  letterSpacing: 0,
+  fontWeight: FontWeight.w500,
+  height: 1.0,
+);
+
+const appBarTitleTextStyle = TextStyle(
+  color: primaryTextColor,
+  fontSize: 14.0,
+  letterSpacing: 0,
+  fontWeight: FontWeight.w900,
+  height: 1.0,
+);
+
+const welcomeUserTextStyle = TextStyle(
+  color: primaryTextColor,
+  fontSize: 14.0,
+  letterSpacing: 0,
+  fontWeight: FontWeight.w900,
+  height: 1.0,
+);
+
+const chooseDifficultyTextStyle = TextStyle(
+  color: primaryTextColor,
+  fontSize: 20.0,
+  letterSpacing: 0,
+  fontWeight: FontWeight.w900,
+  height: 1.0,
 );
