@@ -3,16 +3,12 @@ import 'package:swap_it/blocs/blocs.dart';
 import 'package:swap_it/l10n/app_localizations.dart';
 import 'package:swap_it/widgets/widgets.dart';
 
-const _kHorizontalPadding = EdgeInsets.symmetric(
-  horizontal: 24.0,
+const _kAppbarTitleInBetweenPadding = EdgeInsets.symmetric(
+  vertical: 5.0,
 );
 
 const _kListViewPadding = EdgeInsets.symmetric(
   vertical: 16.0,
-);
-
-const _kAppbarTitleInBetweenPadding = EdgeInsets.symmetric(
-  vertical: 5.0,
 );
 
 const _kSeparatorPadding = EdgeInsets.symmetric(
@@ -32,7 +28,7 @@ class ChooseDifficultyView extends StatelessWidget {
 
     final game = gameBloc.game;
 
-    return Scaffold(
+    return SwapItScaffold(
       appBar: SwapItAppBar(
         bottomTitle: [
           Text(
@@ -50,19 +46,16 @@ class ChooseDifficultyView extends StatelessWidget {
           ),
         ],
       ),
-      body: Padding(
-        padding: _kHorizontalPadding,
-        child: ListView.separated(
-          itemBuilder: (context, index) => GameLevelDifficultyCard(
-            gameLevelDifficulty: game.gameLevels.keys.elementAt(index),
-          ),
-          separatorBuilder: (context, index) => const Padding(
-            padding: _kSeparatorPadding,
-          ),
-          itemCount: game.gameLevels.keys.length,
-          padding: _kListViewPadding,
-          primary: false,
+      body: ListView.separated(
+        itemBuilder: (context, index) => GameLevelDifficultyCard(
+          gameLevelDifficulty: game.gameLevels.keys.elementAt(index),
         ),
+        separatorBuilder: (context, index) => const Padding(
+          padding: _kSeparatorPadding,
+        ),
+        itemCount: game.gameLevels.keys.length,
+        padding: _kListViewPadding,
+        primary: false,
       ),
     );
   }

@@ -19,7 +19,8 @@ class HomeView extends StatelessWidget {
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 64.0),
-      child: Scaffold(
+      child: SwapItScaffold(
+        scaffoldPadding: EdgeInsets.zero,
         body: Center(
           child: ListView(
             children: [
@@ -50,48 +51,10 @@ class HomeView extends StatelessWidget {
             primary: false,
           ),
         ),
-        bottomNavigationBar: BottomNavigationBar(
-          selectedFontSize: 32.0,
-          unselectedFontSize: 32.0,
-          items: [
-            BottomNavigationBarItem(
-              label: localizations.profileDetailsTitle,
-              icon: IconBase(
-                key: const Key(
-                  'bottom_navigation_bar_profile_item',
-                ),
-                child: const Icon(
-                  SwapItIcons.profile,
-                ),
-                onPressed: () {},
-              ),
-            ),
-            BottomNavigationBarItem(
-              label: localizations.play,
-              icon: IconBase.alternative(
-                key: const Key(
-                  'bottom_navigation_bar_play_item',
-                ),
-                child: const Icon(
-                  SwapItIcons.cup,
-                  size: kIconAlternativeSize,
-                ),
-                onPressed: () {},
-              ),
-            ),
-            BottomNavigationBarItem(
-              label: localizations.settingsTitle,
-              icon: IconBase(
-                key: const Key(
-                  'bottom_navigation_bar_settings_item',
-                ),
-                child: const Icon(
-                  SwapItIcons.settings,
-                ),
-                onPressed: () {},
-              ),
-            ),
-          ],
+        navigationBarSettings: SwapItNavigationBarSettings(
+          onProfileItemPressed: () {},
+          onLeaderboardItemPressed: () {},
+          onSettingsItemPressed: () {},
         ),
       ),
     );
