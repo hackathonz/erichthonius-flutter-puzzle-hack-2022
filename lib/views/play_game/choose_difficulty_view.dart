@@ -33,40 +33,22 @@ class ChooseDifficultyView extends StatelessWidget {
     final game = gameBloc.game;
 
     return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(
-            SwapItIcons.back,
-          ),
-          onPressed: Navigator.of(context).pop,
-        ),
-        bottom: PreferredSize(
-          child: Padding(
-            padding: _kHorizontalPadding,
-            child: Align(
-              alignment: Alignment.centerLeft,
-              child: Column(
-                children: [
-                  Text(
-                    localizations.welcomeUser(
-                      game.gameUserProfile.profile.username,
-                    ),
-                    style: welcomeUserTextStyle,
-                  ),
-                  const Padding(
-                    padding: _kAppbarTitleInBetweenPadding,
-                  ),
-                  Text(
-                    localizations.chooseDifficulty,
-                    style: chooseDifficultyTextStyle,
-                  ),
-                ],
-                crossAxisAlignment: CrossAxisAlignment.start,
-              ),
+      appBar: SwapItAppBar(
+        bottomTitle: [
+          Text(
+            localizations.welcomeUser(
+              game.gameUserProfile.profile.username,
             ),
+            style: welcomeUserTextStyle,
           ),
-          preferredSize: const Size.fromHeight(kToolbarHeight),
-        ),
+          const Padding(
+            padding: _kAppbarTitleInBetweenPadding,
+          ),
+          Text(
+            localizations.chooseDifficulty,
+            style: chooseDifficultyTextStyle,
+          ),
+        ],
       ),
       body: Padding(
         padding: _kHorizontalPadding,
