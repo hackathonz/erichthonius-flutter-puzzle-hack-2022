@@ -54,7 +54,9 @@ class HomeView extends StatelessWidget {
         navigationBarSettings: SwapItNavigationBarSettings(
           onProfileItemPressed: () {},
           onLeaderboardItemPressed: () {},
-          onSettingsItemPressed: () {},
+          onSettingsItemPressed: () {
+            navigateToSettingsView(context);
+          },
         ),
       ),
     );

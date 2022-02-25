@@ -30,9 +30,9 @@ const gameLevelDifficultyCardSubtitleTextStyle = TextStyle(
 
 const appBarTitleTextStyle = TextStyle(
   color: primaryTextColor,
-  fontSize: 14.0,
+  fontSize: 18.0,
   letterSpacing: 0,
-  fontWeight: FontWeight.w900,
+  fontWeight: FontWeight.w600,
   height: 1.0,
 );
 

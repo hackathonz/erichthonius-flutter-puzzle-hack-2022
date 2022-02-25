@@ -10,3 +10,13 @@ Future<void> navigateToPlayGameView(final BuildContext context) {
     ),
   );
 }
+
+Future<void> navigateToSettingsView(final BuildContext context) {
+  return Navigator.of(context).push(
+    MaterialPageRoute(
+      builder: (routeContext) {
+        return const SettingsView();
+      },
+    ),
+  );
+}
