@@ -36,6 +36,9 @@ flutter:
     - assets/images/easy_map.svg
     - assets/images/medium_map.svg
     - assets/images/hard_map.svg
+    - assets/images/easy_map_preview.svg
+    - assets/images/medium_map_preview.svg
+    - assets/images/hard_map_preview.svg
 
   fonts:
     - family: icomoon
