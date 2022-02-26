@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -24,8 +25,20 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<GameBloc>(
-      create: (context) => GameBloc()..add(LoadGameStarted()),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<GameBloc>(
+          create: (context) => GameBloc()..add(LoadGameStarted()),
+          lazy: false,
+        ),
+        BlocProvider<SettingsBloc>(
+          create: (context) => SettingsBloc()
+            ..add(
+              RetrieveSettingOptionsValuesStarted(),
+            ),
+          lazy: false,
+        ),
+      ],
       child: MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(
