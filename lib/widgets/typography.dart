@@ -51,3 +51,11 @@ const chooseDifficultyTextStyle = TextStyle(
   fontWeight: FontWeight.w900,
   height: 1.0,
 );
+
+const listTileLeadingTextStyle = TextStyle(
+  color: primaryTextColor,
+  fontSize: 14.0,
+  letterSpacing: 0,
+  fontWeight: FontWeight.w600,
+  height: 1.0,
+);

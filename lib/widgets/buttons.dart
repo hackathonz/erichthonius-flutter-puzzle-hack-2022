@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_switch/flutter_switch.dart';
 import 'package:swap_it/widgets/widgets.dart';
 
 const _kButtonMinSize = Size(247.0, 48.0);
@@ -38,6 +40,44 @@ class SwapItButton extends StatelessWidget {
         borderRadius: BorderRadius.all(_kButtonRadius),
         side: BorderSide.none,
       ),
+    );
+  }
+}
+
+class SwapItSwitchButton extends StatelessWidget {
+  final bool initalValue;
+
+  final void Function(bool) onChanged;
+
+  const SwapItSwitchButton({
+    Key? key,
+    required final this.onChanged,
+    final this.initalValue = false,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    var value = initalValue;
+
+    return StatefulBuilder(
+      builder: (context, setState) {
+        return FlutterSwitch(
+          value: value,
+          onToggle: (_value) {
+            setState(
+              () {
+                value = _value;
+              },
+            );
+
+            onChanged(_value);
+          },
+          activeColor: switchActiveColor,
+          inactiveColor: switchTrackColor,
+          width: kSwitchWidth,
+          toggleSize: kSwitchToggleSize,
+        );
+      },
     );
   }
 }
