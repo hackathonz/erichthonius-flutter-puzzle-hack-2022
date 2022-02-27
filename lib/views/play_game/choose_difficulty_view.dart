@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:swap_it/blocs/blocs.dart';
 import 'package:swap_it/l10n/app_localizations.dart';
+import 'package:swap_it/routing/routing.dart';
 import 'package:swap_it/widgets/widgets.dart';
 
 const _kAppbarTitleInBetweenPadding = EdgeInsets.symmetric(
@@ -49,6 +50,7 @@ class ChooseDifficultyView extends StatelessWidget {
       body: ListView.separated(
         itemBuilder: (context, index) => GameLevelDifficultyCard(
           gameLevelDifficulty: game.gameLevels.keys.elementAt(index),
+          onPressed: () => navigateToChooseLevelView(context),
         ),
         separatorBuilder: (context, index) => const Padding(
           padding: _kSeparatorPadding,

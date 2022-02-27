@@ -32,9 +32,7 @@ class HomeView extends StatelessWidget {
               ),
               SwapItButton(
                 text: localizations.play,
-                onPressed: () {
-                  navigateToPlayGameView(context);
-                },
+                onPressed: () => navigateToChooseDifficultyView(context),
               ),
               if (showContinueButton)
                 Padding(
