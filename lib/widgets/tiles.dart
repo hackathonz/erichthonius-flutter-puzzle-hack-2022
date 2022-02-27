@@ -57,46 +57,61 @@ class SwapItSwitchListTile extends StatelessWidget {
 class LevelMarker extends StatelessWidget {
   final GameLevel level;
 
+  final void Function() onPressed;
+
+  final bool isLocked;
+
   const LevelMarker({
     Key? key,
     required final this.level,
+    required final this.onPressed,
+    final this.isLocked = false,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox.fromSize(
-      size: kLevelMarkerSize,
-      child: Stack(
-        children: <Widget>[
-          Container(
-            width: kLevelMarkerSize.width,
-            height: kLevelMarkerSize.height,
-            decoration: BoxDecoration(
-              boxShadow: const [
-                levelMarkerBoxShadow,
-              ],
-              color: mapColorForDifficulty(
-                level.difficulty,
-              ),
-              border: Border.all(
-                color: levelMarkerBorderColor,
-                width: kLevelMarkerBorderThickness,
-              ),
-              borderRadius: BorderRadius.circular(
-                kLevelMarkerRadius,
+    return GestureDetector(
+      child: SizedBox.fromSize(
+        size: kLevelMarkerSize,
+        child: Stack(
+          children: <Widget>[
+            Container(
+              width: kLevelMarkerSize.width,
+              height: kLevelMarkerSize.height,
+              decoration: BoxDecoration(
+                boxShadow: const [
+                  levelMarkerBoxShadow,
+                ],
+                color: mapColorForDifficulty(
+                  level.difficulty.difficulty,
+                ),
+                border: Border.all(
+                  color: levelMarkerBorderColor,
+                  width: kLevelMarkerBorderThickness,
+                ),
+                borderRadius: BorderRadius.circular(
+                  kLevelMarkerRadius,
+                ),
               ),
             ),
-          ),
-          Align(
-            alignment: Alignment.center,
-            child: Text(
-              level.id,
-              textAlign: TextAlign.center,
-              style: levelMarkerTextStyle,
+            Align(
+              alignment: Alignment.center,
+              child: !isLocked
+                  ? Text(
+                      level.id,
+                      textAlign: TextAlign.center,
+                      style: levelMarkerTextStyle,
+                    )
+                  : const Icon(
+                      SwapItIcons.lock,
+                      size: kIconLevelMarkerSize,
+                    ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
+      onTap: onPressed,
+      behavior: HitTestBehavior.translucent,
     );
   }
 }

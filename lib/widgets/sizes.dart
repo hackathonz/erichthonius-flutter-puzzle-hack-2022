@@ -6,6 +6,7 @@ const kIconBaseAlternativeDiameter = 56.0;
 const kIconPrimarySize = 32.0;
 const kIconAlternativeSize = 40.0;
 const kIconAppBarSize = 24.0;
+const kIconLevelMarkerSize = 48.0;
 const kCardRadius = 8.0;
 const kListTileRadius = 8.0;
 const kCardElevation = 2.0;
