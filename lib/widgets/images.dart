@@ -127,3 +127,14 @@ Widget mapPreviewForDifficulty(final LevelDifficulty difficulty) {
       return const HardMapPreview();
   }
 }
+
+Widget mapForDifficulty(final LevelDifficulty difficulty) {
+  switch (difficulty) {
+    case LevelDifficulty.easy:
+      return const EasyMap();
+    case LevelDifficulty.medium:
+      return const MediumMap();
+    case LevelDifficulty.hard:
+      return const HardMap();
+  }
+}

@@ -1,57 +1,23 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:swap_it/blocs/blocs.dart';
 import 'package:swap_it/models/models.dart';
 import 'package:swap_it/widgets/widgets.dart';
 
 class ChooseLevelView extends StatelessWidget {
+  final GameLevelDifficulty gameLevelDifficulty;
+
   const ChooseLevelView({
     Key? key,
+    required final this.gameLevelDifficulty,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    const targetSize = Size(390.0, 844.0);
+    final GameBloc gameBloc = context.read<GameBloc>();
 
-    final sourceSize = MediaQuery.of(context).size;
-
-    final markers = [
-      MapEntry(
-        '1',
-        Point(
-          (sourceSize.width * 27.5) / targetSize.width,
-          (sourceSize.height * 80.0) / targetSize.height,
-        ),
-      ),
-      MapEntry(
-        '2',
-        Point(
-          (sourceSize.width * 150.0) / targetSize.width,
-          (sourceSize.height * 285.0) / targetSize.height,
-        ),
-      ),
-      MapEntry(
-        '3',
-        Point(
-          (sourceSize.width * 230.0) / targetSize.width,
-          (sourceSize.height * 490.0) / targetSize.height,
-        ),
-      ),
-      MapEntry(
-        '4',
-        Point(
-          (sourceSize.width * 26.5) / targetSize.width,
-          (sourceSize.height * 623.5) / targetSize.height,
-        ),
-      ),
-      MapEntry(
-        '5',
-        Point(
-          (sourceSize.width * 178.5) / targetSize.width,
-          (sourceSize.height * 780.5) / targetSize.height,
-        ),
-      ),
-    ];
+    final gameLevels = gameBloc.game.gameLevels[gameLevelDifficulty] ?? [];
 
     return SwapItScaffold(
       appBar: SwapItAppBar(),
@@ -59,16 +25,15 @@ class ChooseLevelView extends StatelessWidget {
         child: SingleChildScrollView(
           child: Stack(
             children: [
-              const EasyMap(),
-              ...markers.map(
+              mapForDifficulty(
+                gameLevelDifficulty.difficulty,
+              ),
+              ...gameLevels.map(
                 (x) => Positioned(
-                  bottom: x.value.y,
-                  right: x.value.x,
+                  bottom: x.point.y.toDouble(),
+                  right: x.point.x.toDouble(),
                   child: LevelMarker(
-                    level: GameLevel(
-                      difficulty: LevelDifficulty.easy,
-                      id: x.key,
-                    ),
+                    level: x,
                   ),
                 ),
               ),

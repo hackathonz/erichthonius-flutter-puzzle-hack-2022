@@ -50,7 +50,10 @@ class ChooseDifficultyView extends StatelessWidget {
       body: ListView.separated(
         itemBuilder: (context, index) => GameLevelDifficultyCard(
           gameLevelDifficulty: game.gameLevels.keys.elementAt(index),
-          onPressed: () => navigateToChooseLevelView(context),
+          onPressed: () => navigateToChooseLevelView(
+            context,
+            game.gameLevels.keys.elementAt(index),
+          ),
         ),
         separatorBuilder: (context, index) => const Padding(
           padding: _kSeparatorPadding,

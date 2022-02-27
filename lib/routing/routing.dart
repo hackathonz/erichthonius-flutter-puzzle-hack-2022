@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:swap_it/models/models.dart';
 import 'package:swap_it/views/views.dart';
 
 Future<void> navigateToChooseDifficultyView(final BuildContext context) {
@@ -11,11 +12,16 @@ Future<void> navigateToChooseDifficultyView(final BuildContext context) {
   );
 }
 
-Future<void> navigateToChooseLevelView(final BuildContext context) {
+Future<void> navigateToChooseLevelView(
+  final BuildContext context,
+  final GameLevelDifficulty gameLevelDifficulty,
+) {
   return Navigator.of(context).push(
     MaterialPageRoute(
       builder: (routeContext) {
-        return const ChooseLevelView();
+        return ChooseLevelView(
+          gameLevelDifficulty: gameLevelDifficulty,
+        );
       },
     ),
   );
