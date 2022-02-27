@@ -86,6 +86,7 @@ class EasyMap extends StatelessWidget {
   Widget build(BuildContext context) {
     return SvgPicture.asset(
       _kEasyMapAssetPath,
+      fit: BoxFit.fitWidth,
     );
   }
 }

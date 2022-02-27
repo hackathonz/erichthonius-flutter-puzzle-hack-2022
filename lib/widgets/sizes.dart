@@ -13,8 +13,11 @@ const kBottomNavigationBarElevation = 0.0;
 const kAppBarElevation = 0.0;
 const kCardSize = Size(327.0, 144.0);
 const kListTileSize = Size(327.0, 48.0);
+const kLevelMarkerSize = Size.square(64.0);
 const kSwitchWidth = 60.0;
 const kSwitchToggleSize = 24.0;
+const kLevelMarkerRadius = 64.0;
+const kLevelMarkerBorderThickness = 4.0;
 
 const iconThemeData = IconThemeData(
   color: iconsColor,

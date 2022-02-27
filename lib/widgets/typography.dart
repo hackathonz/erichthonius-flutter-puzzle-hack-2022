@@ -59,3 +59,11 @@ const listTileLeadingTextStyle = TextStyle(
   fontWeight: FontWeight.w600,
   height: 1.0,
 );
+
+const levelMarkerTextStyle = TextStyle(
+  color: primaryTextColor,
+  fontSize: 26.0,
+  letterSpacing: 0,
+  fontWeight: FontWeight.bold,
+  height: 1.0,
+);

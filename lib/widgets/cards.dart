@@ -14,53 +14,60 @@ const _kCardTitleAndSubtitlePadding = EdgeInsets.symmetric(
 class GameLevelDifficultyCard extends StatelessWidget {
   final GameLevelDifficulty gameLevelDifficulty;
 
+  final void Function() onPressed;
+
   const GameLevelDifficultyCard({
     Key? key,
     required final this.gameLevelDifficulty,
+    required final this.onPressed,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context);
 
-    return SizedBox.fromSize(
-      size: kCardSize,
-      child: Card(
-        child: Padding(
-          padding: _kCardContentPadding,
-          child: Row(
-            children: [
-              Column(
-                children: [
-                  Text(
-                    localizations.difficulty(
-                      gameLevelDifficulty.difficulty,
+    return GestureDetector(
+      child: SizedBox.fromSize(
+        size: kCardSize,
+        child: Card(
+          child: Padding(
+            padding: _kCardContentPadding,
+            child: Row(
+              children: [
+                Column(
+                  children: [
+                    Text(
+                      localizations.difficulty(
+                        gameLevelDifficulty.difficulty,
+                      ),
+                      style: gameLevelDifficultyCardTitleTextStyle,
+                      textAlign: TextAlign.left,
                     ),
-                    style: gameLevelDifficultyCardTitleTextStyle,
-                    textAlign: TextAlign.left,
-                  ),
-                  const Padding(
-                    padding: _kCardTitleAndSubtitlePadding,
-                  ),
-                  Text(
-                    localizations.piecesCount(
-                      gameLevelDifficulty.pieces,
+                    const Padding(
+                      padding: _kCardTitleAndSubtitlePadding,
                     ),
-                    style: gameLevelDifficultyCardSubtitleTextStyle,
-                    textAlign: TextAlign.left,
-                  ),
-                ],
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-              ),
-              mapPreviewForDifficulty(
-                gameLevelDifficulty.difficulty,
-              ),
-            ],
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    Text(
+                      localizations.piecesCount(
+                        gameLevelDifficulty.pieces,
+                      ),
+                      style: gameLevelDifficultyCardSubtitleTextStyle,
+                      textAlign: TextAlign.left,
+                    ),
+                  ],
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                ),
+                mapPreviewForDifficulty(
+                  gameLevelDifficulty.difficulty,
+                ),
+              ],
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            ),
           ),
         ),
       ),
+      onTap: onPressed,
+      behavior: HitTestBehavior.translucent,
     );
   }
 }
