@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:swap_it/blocs/blocs.dart';
 import 'package:swap_it/l10n/app_localizations.dart';
+import 'package:swap_it/models/models.dart';
 import 'package:swap_it/routing/routing.dart';
 import 'package:swap_it/widgets/widgets.dart';
 
@@ -49,16 +50,20 @@ class ChooseDifficultyView extends StatelessWidget {
       ),
       body: ListView.separated(
         itemBuilder: (context, index) => GameLevelDifficultyCard(
-          gameLevelDifficulty: game.gameLevels.keys.elementAt(index),
+          gameLevelDifficulty: mapGameLevelDifficultyForLevelDifficulty(
+            LevelDifficulty.values[index],
+          ),
           onPressed: () => navigateToChooseLevelView(
             context,
-            game.gameLevels.keys.elementAt(index),
+            mapGameLevelDifficultyForLevelDifficulty(
+              LevelDifficulty.values[index],
+            ),
           ),
         ),
         separatorBuilder: (context, index) => const Padding(
           padding: _kSeparatorPadding,
         ),
-        itemCount: game.gameLevels.keys.length,
+        itemCount: LevelDifficulty.values.length,
         padding: _kListViewPadding,
         primary: false,
       ),

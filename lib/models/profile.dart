@@ -3,7 +3,7 @@ import 'package:swap_it/models/models.dart';
 class GameUserProfile {
   final UserProfile profile;
 
-  final List<GameLevel> levelsPlayed;
+  final List<GameLevelPlayEntry> levelsPlayed;
 
   bool get hasPlayedAnyGame => levelsPlayed.isNotEmpty;
 

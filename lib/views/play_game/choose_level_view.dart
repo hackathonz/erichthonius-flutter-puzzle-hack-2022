@@ -15,7 +15,9 @@ class ChooseLevelView extends StatelessWidget {
   Widget build(BuildContext context) {
     final GameBloc gameBloc = context.read<GameBloc>();
 
-    final gameLevels = gameBloc.game.gameLevels[gameLevelDifficulty] ?? [];
+    final gameLevels = gameBloc.game.gameLevels.where(
+      (x) => x.difficulty == gameLevelDifficulty,
+    );
 
     return SwapItScaffold(
       appBar: SwapItAppBar(),
@@ -32,6 +34,8 @@ class ChooseLevelView extends StatelessWidget {
                   right: x.point.x.toDouble(),
                   child: LevelMarker(
                     level: x,
+                    isLocked: !gameBloc.game.canPlayLevel(x),
+                    onPressed: () {},
                   ),
                 ),
               ),
