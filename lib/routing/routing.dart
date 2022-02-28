@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:swap_it/blocs/blocs.dart';
 import 'package:swap_it/models/models.dart';
 import 'package:swap_it/views/views.dart';
 
@@ -34,8 +35,11 @@ Future<void> navigateToPlayGameView(
   return Navigator.of(context).push(
     MaterialPageRoute(
       builder: (routeContext) {
-        return PlayGameView(
-          gameLevel: gameLevel,
+        return BlocProvider(
+          create: (context) => PlayGameLevelBloc(
+            gameLevel: gameLevel,
+          )..add(GameLevelStarted()),
+          child: const PlayGameView(),
         );
       },
     ),
