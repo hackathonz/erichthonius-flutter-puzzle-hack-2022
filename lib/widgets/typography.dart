@@ -67,3 +67,35 @@ const levelMarkerTextStyle = TextStyle(
   fontWeight: FontWeight.bold,
   height: 1.0,
 );
+
+const timeLeftTextStyle = TextStyle(
+  color: primaryTextColor,
+  fontSize: 24.0,
+  letterSpacing: 0,
+  fontWeight: FontWeight.w600,
+  height: 1.0,
+);
+
+const timeCapsTextStyle = TextStyle(
+  color: primaryTextColor,
+  fontSize: 10.0,
+  letterSpacing: 0,
+  fontWeight: FontWeight.w600,
+  height: 1.0,
+);
+
+const appBarGameLevelPiecesCountTextStyle = TextStyle(
+  color: primaryTextColor,
+  fontSize: 16.0,
+  letterSpacing: 0,
+  fontWeight: FontWeight.w600,
+  height: 1.0,
+);
+
+const appBarGameLevelIdTextStyle = TextStyle(
+  color: primaryTextColor,
+  fontSize: 16.0,
+  letterSpacing: 0,
+  fontWeight: FontWeight.w600,
+  height: 1.0,
+);

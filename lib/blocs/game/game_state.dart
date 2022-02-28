@@ -16,3 +16,13 @@ class LoadGameSuccess extends GameState {
 }
 
 class LoadGameFailure extends GameState {}
+
+class StartPlayGameLevelInitial extends GameState {
+  final GameLevel gameLevel;
+
+  StartPlayGameLevelInitial({
+    required final this.gameLevel,
+  });
+}
+
+class PlayGameLevelFailure extends GameState {}

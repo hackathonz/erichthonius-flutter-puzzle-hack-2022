@@ -15,6 +15,8 @@ class GameBloc extends Bloc<GameEvent, GameState> {
   Stream<GameState> mapEventToState(GameEvent event) async* {
     if (event is LoadGameStarted) {
       yield* _mapLoadGameStartedToState(event);
+    } else if (event is PlayGameLevelStarted) {
+      yield* _mapPlayGameLevelStartedToState(event);
     }
   }
 
@@ -177,5 +179,17 @@ class GameBloc extends Bloc<GameEvent, GameState> {
     yield LoadGameSuccess(
       game: game,
     );
+  }
+
+  Stream<GameState> _mapPlayGameLevelStartedToState(
+    PlayGameLevelStarted event,
+  ) async* {
+    if (game.canPlayLevel(event.gameLevel)) {
+      yield StartPlayGameLevelInitial(
+        gameLevel: event.gameLevel,
+      );
+    } else {
+      yield PlayGameLevelFailure();
+    }
   }
 }

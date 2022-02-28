@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:swap_it/blocs/blocs.dart';
 import 'package:swap_it/models/models.dart';
+import 'package:swap_it/routing/routing.dart';
 import 'package:swap_it/widgets/widgets.dart';
 
 class ChooseLevelView extends StatelessWidget {
@@ -19,30 +20,51 @@ class ChooseLevelView extends StatelessWidget {
       (x) => x.difficulty == gameLevelDifficulty,
     );
 
-    return SwapItScaffold(
-      appBar: SwapItAppBar(),
-      body: Center(
-        child: SingleChildScrollView(
-          child: Stack(
-            children: [
-              mapForDifficulty(
-                gameLevelDifficulty.difficulty,
-              ),
-              ...gameLevels.map(
-                (x) => Positioned(
-                  bottom: x.point.y.toDouble(),
-                  right: x.point.x.toDouble(),
-                  child: LevelMarker(
-                    level: x,
-                    isLocked: !gameBloc.game.canPlayLevel(x),
-                    onPressed: () {},
+    return BlocListener<GameBloc, GameState>(
+      listenWhen: (previous, current) => current is StartPlayGameLevelInitial,
+      listener: (context, state) {
+        if (state is StartPlayGameLevelInitial) {
+          _onStartPlayGameLevelInitialStateReact(context, state);
+        }
+      },
+      child: SwapItScaffold(
+        appBar: SwapItAppBar(),
+        body: Center(
+          child: SingleChildScrollView(
+            child: Stack(
+              children: [
+                mapForDifficulty(
+                  gameLevelDifficulty.difficulty,
+                ),
+                ...gameLevels.map(
+                  (x) => Positioned(
+                    bottom: x.point.y.toDouble(),
+                    right: x.point.x.toDouble(),
+                    child: LevelMarker(
+                      level: x,
+                      isLocked: !gameBloc.game.canPlayLevel(x),
+                      onPressed: () {
+                        gameBloc.add(
+                          PlayGameLevelStarted(
+                            gameLevel: x,
+                          ),
+                        );
+                      },
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
     );
+  }
+
+  void _onStartPlayGameLevelInitialStateReact(
+    final BuildContext context,
+    final StartPlayGameLevelInitial state,
+  ) {
+    navigateToPlayGameView(context, state.gameLevel);
   }
 }

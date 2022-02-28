@@ -27,6 +27,21 @@ Future<void> navigateToChooseLevelView(
   );
 }
 
+Future<void> navigateToPlayGameView(
+  final BuildContext context,
+  final GameLevel gameLevel,
+) {
+  return Navigator.of(context).push(
+    MaterialPageRoute(
+      builder: (routeContext) {
+        return PlayGameView(
+          gameLevel: gameLevel,
+        );
+      },
+    ),
+  );
+}
+
 Future<void> navigateToSettingsView(final BuildContext context) {
   return Navigator.of(context).push(
     MaterialPageRoute(
