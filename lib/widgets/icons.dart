@@ -47,7 +47,7 @@ class IconBase extends StatelessWidget {
 class SwapItIcons {
   static const String _fontFamily = 'icomoon';
 
-  static const IconData add = IconData(0xe900, fontFamily: _fontFamily);
+ static const IconData add = IconData(0xe900, fontFamily: _fontFamily);
   static const IconData back = IconData(0xe901, fontFamily: _fontFamily);
   static const IconData chevron = IconData(0xe902, fontFamily: _fontFamily);
   static const IconData close = IconData(0xe903, fontFamily: _fontFamily);
@@ -57,7 +57,8 @@ class SwapItIcons {
   static const IconData lock = IconData(0xe907, fontFamily: _fontFamily);
   static const IconData pencil = IconData(0xe908, fontFamily: _fontFamily);
   static const IconData profile = IconData(0xe909, fontFamily: _fontFamily);
-  static const IconData settings = IconData(0xe90a, fontFamily: _fontFamily);
-  static const IconData star = IconData(0xe90b, fontFamily: _fontFamily);
-  static const IconData stargrey = IconData(0xe90c, fontFamily: _fontFamily);
+  static const IconData puzzle = IconData(0xe90a, fontFamily: _fontFamily);
+  static const IconData settings = IconData(0xe90b, fontFamily: _fontFamily);
+  static const IconData star = IconData(0xe90c, fontFamily: _fontFamily);
+  static const IconData stargrey = IconData(0xe90d, fontFamily: _fontFamily);
 }
