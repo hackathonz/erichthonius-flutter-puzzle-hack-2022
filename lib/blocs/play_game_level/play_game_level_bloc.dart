@@ -64,6 +64,8 @@ class PlayGameLevelBloc extends Bloc<PlayGameLevelEvent, PlayGameLevelState> {
       ),
     );
 
+    gameLevelPictureTiles.safeShuffle();
+
     yield GameLevelInitial(
       difficulty: gameLevel.difficulty.difficulty,
       tiles: [...gameLevelPictureTiles],
@@ -73,7 +75,7 @@ class PlayGameLevelBloc extends Bloc<PlayGameLevelEvent, PlayGameLevelState> {
   Stream<PlayGameLevelState> _mapShuffleGameLevelStartedToState(
     ShuffleGameLevelStarted event,
   ) async* {
-    gameLevelPictureTiles.shuffle();
+    gameLevelPictureTiles.safeShuffle();
 
     yield ShuffleGameSuccess(
       difficulty: gameLevel.difficulty.difficulty,
@@ -144,5 +146,28 @@ class PlayGameLevelBloc extends Bloc<PlayGameLevelEvent, PlayGameLevelState> {
     }
 
     return pictureTiles;
+  }
+}
+
+extension PictureTileListExtension on List<PictureTile> {
+  bool get isOrdered {
+    var currentId = this[0].id;
+
+    for (var i = 1; i < length; i++) {
+      currentId++;
+      if (currentId != this[i].id) {
+        return false;
+      }
+    }
+
+    return true;
+  }
+
+  void safeShuffle() {
+    shuffle();
+
+    if (isOrdered) {
+      shuffle();
+    }
   }
 }
