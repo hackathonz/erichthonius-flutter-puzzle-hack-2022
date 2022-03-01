@@ -66,7 +66,7 @@ class PlayGameLevelBloc extends Bloc<PlayGameLevelEvent, PlayGameLevelState> {
 
     yield GameLevelInitial(
       difficulty: gameLevel.difficulty.difficulty,
-      tiles: gameLevelPictureTiles,
+      tiles: [...gameLevelPictureTiles],
     );
   }
 
@@ -77,7 +77,7 @@ class PlayGameLevelBloc extends Bloc<PlayGameLevelEvent, PlayGameLevelState> {
 
     yield ShuffleGameSuccess(
       difficulty: gameLevel.difficulty.difficulty,
-      tiles: gameLevelPictureTiles,
+      tiles: [...gameLevelPictureTiles],
     );
   }
 

@@ -54,6 +54,7 @@ class PlayGameView extends StatelessWidget {
               return PuzzleGame(
                 tiles: state.tiles,
                 difficulty: state.difficulty,
+                onTileTap: print,
               );
             } else {
               return Container();
