@@ -92,6 +92,7 @@ class AppLocalizations {
       '$pieces pieces',
       name: 'piecesCount',
       desc: 'Describes how many pieces a level has',
+      args: [pieces],
       locale: localeName,
     );
   }
@@ -123,11 +124,41 @@ class AppLocalizations {
     );
   }
 
+  String get puzzleNotCompletedDialogTitle {
+    return Intl.message(
+      'GAME OVER 😔',
+      name: 'puzzleNotCompletedDialogTitle',
+      desc:
+          'Title of the dialog that is shown after the puzzle was not completed in time',
+      locale: localeName,
+    );
+  }
+
+  String puzzleNotCompletedDialogPiecesLeft(final int piecesLeft) {
+    return Intl.message(
+      'There were $piecesLeft pieces left',
+      name: 'puzzleNotCompletedDialogPiecesLeft',
+      desc:
+          'Message displayed inside the dialog shown after the puzzle was not completed in time',
+      args: [piecesLeft],
+      locale: localeName,
+    );
+  }
+
   String get nextLevel {
     return Intl.message(
       'Next Level',
       name: 'nextLevel',
       desc: 'Next Level keyword',
+      locale: localeName,
+    );
+  }
+
+  String get tryAgain {
+    return Intl.message(
+      'Try Again',
+      name: 'tryAgain',
+      desc: 'Try again keyword',
       locale: localeName,
     );
   }

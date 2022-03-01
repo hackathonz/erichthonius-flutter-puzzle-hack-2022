@@ -5,8 +5,10 @@ import 'dart:typed_data';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
+import 'package:swap_it/blocs/blocs.dart';
 import 'package:swap_it/models/models.dart';
 import 'package:image/image.dart';
+import 'package:swap_it/widgets/widgets.dart';
 
 part 'play_game_level_event.dart';
 part 'play_game_level_state.dart';
@@ -34,37 +36,15 @@ class PlayGameLevelBloc extends Bloc<PlayGameLevelEvent, PlayGameLevelState> {
       yield* _mapShuffleGameLevelStartedToState(event);
     } else if (event is GameLevelTimerUpdated) {
       yield* _mapGameLevelTimerUpdatedToState(event);
+    } else if (event is GameLevelRestarted) {
+      yield* _mapGameLevelRestartedToState(event);
     }
   }
 
   Stream<PlayGameLevelState> _mapGameLevelStartedToState(
     GameLevelStarted event,
   ) async* {
-    gameLevelTimer = Timer.periodic(
-      const Duration(seconds: 1),
-      (timer) {
-        add(
-          GameLevelTimerUpdated(),
-        );
-      },
-    );
-
-    gameLevelPictureTiles.addAll(
-      _splitPictureInTiles(
-        picture: gameLevel.image,
-        tileCount: gameLevel.difficulty.pieces,
-      ),
-    );
-
-    final lastTile = gameLevelPictureTiles.removeLast();
-
-    gameLevelPictureTiles.add(
-      PictureTile.empty(
-        id: lastTile.id,
-      ),
-    );
-
-    gameLevelPictureTiles.safeShuffle();
+    _setupGameLevel();
 
     yield GameLevelInitial(
       difficulty: gameLevel.difficulty.difficulty,
@@ -89,7 +69,9 @@ class PlayGameLevelBloc extends Bloc<PlayGameLevelEvent, PlayGameLevelState> {
     gameLevelTimeLeftInSeconds--;
 
     if (gameLevelTimeLeftInSeconds <= 0) {
-      yield GameLevelFinish();
+      yield GameLevelNotFinish(
+        piecesLeft: 6,
+      );
 
       gameLevelTimer.cancel();
     } else {
@@ -98,6 +80,53 @@ class PlayGameLevelBloc extends Bloc<PlayGameLevelEvent, PlayGameLevelState> {
         alertTimeLeft: gameLevelTimeLeftInSeconds < 60,
       );
     }
+  }
+
+  Stream<PlayGameLevelState> _mapGameLevelRestartedToState(
+    GameLevelRestarted event,
+  ) async* {
+    gameLevelTimeLeftInSeconds = gameLevel.difficulty.gameDuration.inSeconds;
+
+    _setupGameLevel(
+      isRestart: true,
+    );
+
+    yield GameLevelRestart(
+      difficulty: gameLevel.difficulty.difficulty,
+      tiles: [...gameLevelPictureTiles],
+    );
+  }
+
+  void _setupGameLevel({
+    final bool isRestart = false,
+  }) {
+    gameLevelTimer = Timer.periodic(
+      const Duration(seconds: 1),
+      (timer) {
+        add(
+          GameLevelTimerUpdated(),
+        );
+      },
+    );
+
+    if (!isRestart) {
+      gameLevelPictureTiles.addAll(
+        _splitPictureInTiles(
+          picture: gameLevel.image,
+          tileCount: gameLevel.difficulty.pieces,
+        ),
+      );
+
+      final lastTile = gameLevelPictureTiles.removeLast();
+
+      gameLevelPictureTiles.add(
+        PictureTile.empty(
+          id: lastTile.id,
+        ),
+      );
+    }
+
+    gameLevelPictureTiles.safeShuffle();
   }
 
   List<PictureTile> _splitPictureInTiles({
@@ -147,6 +176,13 @@ class PlayGameLevelBloc extends Bloc<PlayGameLevelEvent, PlayGameLevelState> {
     }
 
     return pictureTiles;
+  }
+
+  @override
+  Future<void> close() {
+    gameLevelTimer.cancel();
+
+    return super.close();
   }
 }
 

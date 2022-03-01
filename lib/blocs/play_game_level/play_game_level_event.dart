@@ -7,4 +7,14 @@ class GameLevelStarted extends PlayGameLevelEvent {}
 
 class GameLevelTimerUpdated extends PlayGameLevelEvent {}
 
+class GameLevelTilesUpdated extends PlayGameLevelEvent {
+  final List<PuzzleGameTile> puzzleTiles;
+
+  GameLevelTilesUpdated({
+    required final this.puzzleTiles,
+  });
+}
+
 class ShuffleGameLevelStarted extends PlayGameLevelEvent {}
+
+class GameLevelRestarted extends PlayGameLevelEvent {}

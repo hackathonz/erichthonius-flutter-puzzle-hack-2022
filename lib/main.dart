@@ -73,6 +73,17 @@ class MyApp extends StatelessWidget {
             elevation: kAppBarElevation,
             titleTextStyle: appBarTitleTextStyle,
           ),
+          dialogBackgroundColor: dialogBackgroundColor,
+          dialogTheme: DialogTheme(
+            backgroundColor: dialogBackgroundColor,
+            contentTextStyle: dialogContentTextStyle,
+            titleTextStyle: dialogTitleTextStyle,
+            elevation: kDialogElevation,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(kDialogRadius),
+              side: BorderSide.none,
+            ),
+          ),
           scaffoldBackgroundColor: Colors.transparent,
         ),
         home: Scaffold(

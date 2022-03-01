@@ -26,10 +26,27 @@ class GameLevelUpdate extends PlayGameLevelState {
   });
 }
 
+class GameLevelInProgress extends PlayGameLevelState {}
+
+class GameLevelNotFinish extends PlayGameLevelState {
+  final int piecesLeft;
+
+  GameLevelNotFinish({
+    required final this.piecesLeft,
+  });
+}
+
 class GameLevelFinish extends PlayGameLevelState {}
 
 class ShuffleGameSuccess extends GameLevelInitial {
   ShuffleGameSuccess({
+    required final LevelDifficulty difficulty,
+    required final List<PictureTile> tiles,
+  }) : super(difficulty: difficulty, tiles: tiles);
+}
+
+class GameLevelRestart extends GameLevelInitial {
+  GameLevelRestart({
     required final LevelDifficulty difficulty,
     required final List<PictureTile> tiles,
   }) : super(difficulty: difficulty, tiles: tiles);

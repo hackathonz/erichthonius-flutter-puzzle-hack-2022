@@ -50,20 +50,35 @@ class PlayGameView extends StatelessWidget {
           ),
         ],
       ),
-      body: Center(
-        child: BlocBuilder<PlayGameLevelBloc, PlayGameLevelState>(
-          buildWhen: (previous, current) => current is GameLevelInitial,
-          builder: (context, state) {
-            if (state is GameLevelInitial) {
-              return PuzzleGame(
-                tiles: state.tiles,
-                difficulty: state.difficulty,
-                onTileTap: print,
-              );
-            } else {
-              return Container();
-            }
-          },
+      body: BlocListener<PlayGameLevelBloc, PlayGameLevelState>(
+        listenWhen: (previous, current) =>
+            current is GameLevelFinish || current is GameLevelNotFinish,
+        listener: (context, state) {
+          if (state is GameLevelNotFinish) {
+            _onGameLevelNotFinishStateReact(context, state, playGameLevelBloc);
+          }
+        },
+        child: Center(
+          child: BlocBuilder<PlayGameLevelBloc, PlayGameLevelState>(
+            buildWhen: (previous, current) => current is GameLevelInitial,
+            builder: (context, state) {
+              if (state is GameLevelInitial) {
+                return PuzzleGame(
+                  tiles: state.tiles,
+                  difficulty: state.difficulty,
+                  onTileMove: (puzzleTiles) {
+                    playGameLevelBloc.add(
+                      GameLevelTilesUpdated(
+                        puzzleTiles: puzzleTiles,
+                      ),
+                    );
+                  },
+                );
+              } else {
+                return Container();
+              }
+            },
+          ),
         ),
       ),
       scaffoldPadding: kScaffoldPadding + kGameLevelPadding,
@@ -74,6 +89,35 @@ class PlayGameView extends StatelessWidget {
             ShuffleGameLevelStarted(),
           );
         },
+      ),
+    );
+  }
+
+  void _onGameLevelNotFinishStateReact(
+    final BuildContext context,
+    final GameLevelNotFinish state,
+    final PlayGameLevelBloc playGameLevelBloc,
+  ) {
+    showSwapItDialog(
+      context: context,
+      dialogBuilder: (dialogContext) {
+        return GameOverDialog(
+          piecesLeft: state.piecesLeft,
+          onExitGamePressed: () {
+            Navigator.of(dialogContext).pop();
+            Navigator.of(context).pop();
+          },
+          onTryAgainPressed: () {
+            Navigator.of(dialogContext).pop();
+
+            playGameLevelBloc.add(
+              GameLevelRestarted(),
+            );
+          },
+        );
+      },
+      routeSettings: const RouteSettings(
+        name: '/game_over_dialog',
       ),
     );
   }
