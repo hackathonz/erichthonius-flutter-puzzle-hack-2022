@@ -15,6 +15,8 @@ class SwapItButton extends StatelessWidget {
 
   final void Function() onPressed;
 
+  final BorderSide border;
+
   SwapItButton({
     Key? key,
     required final this.onPressed,
@@ -26,6 +28,23 @@ class SwapItButton extends StatelessWidget {
         ),
         color = primaryButtonColor,
         size = _kButtonMinSize,
+        border = BorderSide.none,
+        super(key: key);
+
+  SwapItButton.alternative({
+    Key? key,
+    required final this.onPressed,
+    required final String text,
+  })  : text = Text(
+          text,
+          style: alternativeButtonTextStyle,
+          textAlign: TextAlign.center,
+        ),
+        color = alternativeButtonColor,
+        size = _kButtonMinSize,
+        border = const BorderSide(
+          color: alternativeButtonBorderColor,
+        ),
         super(key: key);
 
   @override
@@ -36,9 +55,9 @@ class SwapItButton extends StatelessWidget {
       minWidth: size.width,
       height: size.height,
       onPressed: onPressed,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(_kButtonRadius),
-        side: BorderSide.none,
+      shape: RoundedRectangleBorder(
+        borderRadius: const BorderRadius.all(_kButtonRadius),
+        side: border,
       ),
     );
   }

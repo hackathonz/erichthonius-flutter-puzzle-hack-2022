@@ -9,6 +9,7 @@ const kIconAlternativeSize = 40.0;
 const kIconAppBarSize = 24.0;
 const kIconAppBarTitleSize = 16.0;
 const kIconLevelMarkerSize = 48.0;
+const kIconGameFinishDialogStarSize = 48.0;
 const kCardRadius = 8.0;
 const kDialogRadius = 18.0;
 const kListTileRadius = 8.0;

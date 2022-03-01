@@ -56,6 +56,8 @@ class PlayGameView extends StatelessWidget {
         listener: (context, state) {
           if (state is GameLevelNotFinish) {
             _onGameLevelNotFinishStateReact(context, state, playGameLevelBloc);
+          } else if (state is GameLevelFinish) {
+            _onGameLevelFinishStateReact(context, state, playGameLevelBloc);
           }
         },
         child: Center(
@@ -118,6 +120,36 @@ class PlayGameView extends StatelessWidget {
       },
       routeSettings: const RouteSettings(
         name: '/game_over_dialog',
+      ),
+    );
+  }
+
+  void _onGameLevelFinishStateReact(
+    final BuildContext context,
+    final GameLevelFinish state,
+    final PlayGameLevelBloc playGameLevelBloc,
+  ) {
+    showSwapItDialog(
+      context: context,
+      dialogBuilder: (dialogContext) {
+        return GameFinishDialog(
+          playEntry: state.results,
+          onExitGamePressed: () {
+            Navigator.of(dialogContext).pop();
+            Navigator.of(context).pop();
+          },
+          onNextLevelPressed: () {},
+          onRetryPressed: () {
+            Navigator.of(dialogContext).pop();
+
+            playGameLevelBloc.add(
+              GameLevelRestarted(),
+            );
+          },
+        );
+      },
+      routeSettings: const RouteSettings(
+        name: '/game_level_finish_dialog',
       ),
     );
   }

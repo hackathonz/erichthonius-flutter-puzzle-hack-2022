@@ -20,12 +20,17 @@ class PlayGameLevelBloc extends Bloc<PlayGameLevelEvent, PlayGameLevelState> {
 
   late Timer gameLevelTimer;
 
+  late List<PictureTile> currentGameLevelPictureTiles;
+
   int gameLevelTimeLeftInSeconds;
+
+  int piecesMoved;
 
   PlayGameLevelBloc({
     required final this.gameLevel,
   })  : gameLevelTimeLeftInSeconds =
             gameLevel.difficulty.gameDuration.inSeconds,
+        piecesMoved = 0,
         super(PlayGameInitial());
 
   @override
@@ -38,6 +43,8 @@ class PlayGameLevelBloc extends Bloc<PlayGameLevelEvent, PlayGameLevelState> {
       yield* _mapGameLevelTimerUpdatedToState(event);
     } else if (event is GameLevelRestarted) {
       yield* _mapGameLevelRestartedToState(event);
+    } else if (event is GameLevelTilesUpdated) {
+      yield* _mapGameLevelTilesUpdatedToState(event);
     }
   }
 
@@ -69,11 +76,19 @@ class PlayGameLevelBloc extends Bloc<PlayGameLevelEvent, PlayGameLevelState> {
     gameLevelTimeLeftInSeconds--;
 
     if (gameLevelTimeLeftInSeconds <= 0) {
-      yield GameLevelNotFinish(
-        piecesLeft: 6,
+      final results = GameLevelPlayEntry(
+        gameLevel: gameLevel,
+        piecesLeftForCompletion:
+            currentGameLevelPictureTiles.piecesLeftForCompletion,
+        piecesMoved: piecesMoved,
+        timeTookToFinish: gameLevel.difficulty.gameDuration,
       );
 
       gameLevelTimer.cancel();
+
+      yield GameLevelNotFinish(
+        piecesLeft: results.piecesLeftForCompletion,
+      );
     } else {
       yield GameLevelUpdate(
         timeLeftInSeconds: gameLevelTimeLeftInSeconds,
@@ -85,8 +100,6 @@ class PlayGameLevelBloc extends Bloc<PlayGameLevelEvent, PlayGameLevelState> {
   Stream<PlayGameLevelState> _mapGameLevelRestartedToState(
     GameLevelRestarted event,
   ) async* {
-    gameLevelTimeLeftInSeconds = gameLevel.difficulty.gameDuration.inSeconds;
-
     _setupGameLevel(
       isRestart: true,
     );
@@ -97,9 +110,42 @@ class PlayGameLevelBloc extends Bloc<PlayGameLevelEvent, PlayGameLevelState> {
     );
   }
 
+  Stream<PlayGameLevelState> _mapGameLevelTilesUpdatedToState(
+    GameLevelTilesUpdated event,
+  ) async* {
+    final pictureTiles = [for (var x in event.puzzleTiles) x.tile];
+
+    currentGameLevelPictureTiles = pictureTiles;
+
+    piecesMoved++;
+
+    if (pictureTiles.isOrdered) {
+      gameLevelTimer.cancel();
+
+      final results = GameLevelPlayEntry(
+        gameLevel: gameLevel,
+        piecesLeftForCompletion: 0,
+        piecesMoved: piecesMoved,
+        timeTookToFinish: Duration(
+          seconds: gameLevel.difficulty.gameDuration.inSeconds -
+              gameLevelTimeLeftInSeconds,
+        ),
+      );
+
+      yield GameLevelFinish(
+        results: results,
+      );
+    } else {
+      yield GameLevelInProgress();
+    }
+  }
+
   void _setupGameLevel({
     final bool isRestart = false,
   }) {
+    gameLevelTimeLeftInSeconds = gameLevel.difficulty.gameDuration.inSeconds;
+    piecesMoved = 0;
+
     gameLevelTimer = Timer.periodic(
       const Duration(seconds: 1),
       (timer) {
@@ -127,6 +173,7 @@ class PlayGameLevelBloc extends Bloc<PlayGameLevelEvent, PlayGameLevelState> {
     }
 
     gameLevelPictureTiles.safeShuffle();
+    currentGameLevelPictureTiles = gameLevelPictureTiles;
   }
 
   List<PictureTile> _splitPictureInTiles({
@@ -187,6 +234,18 @@ class PlayGameLevelBloc extends Bloc<PlayGameLevelEvent, PlayGameLevelState> {
 }
 
 extension PictureTileListExtension on List<PictureTile> {
+  int get piecesLeftForCompletion {
+    var correctPieces = 0;
+
+    for (var i = 0; i < length; i++) {
+      if (this[i].id == i) {
+        correctPieces++;
+      }
+    }
+
+    return length - correctPieces;
+  }
+
   bool get isOrdered {
     var currentId = this[0].id;
 

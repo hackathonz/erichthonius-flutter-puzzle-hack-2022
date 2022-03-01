@@ -36,7 +36,13 @@ class GameLevelNotFinish extends PlayGameLevelState {
   });
 }
 
-class GameLevelFinish extends PlayGameLevelState {}
+class GameLevelFinish extends PlayGameLevelState {
+  final GameLevelPlayEntry results;
+
+  GameLevelFinish({
+    required final this.results,
+  });
+}
 
 class ShuffleGameSuccess extends GameLevelInitial {
   ShuffleGameSuccess({

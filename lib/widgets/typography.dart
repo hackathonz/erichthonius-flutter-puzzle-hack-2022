@@ -12,6 +12,14 @@ const primaryButtonTextStyle = TextStyle(
   height: 1.0,
 );
 
+const alternativeButtonTextStyle = TextStyle(
+  color: alternativeButtonTextColor,
+  fontSize: 16,
+  letterSpacing: 0,
+  fontWeight: FontWeight.w600,
+  height: 1.0,
+);
+
 const primaryTextButtonTextStyle = TextStyle(
   color: primaryTextButtonColor,
   fontSize: 16,

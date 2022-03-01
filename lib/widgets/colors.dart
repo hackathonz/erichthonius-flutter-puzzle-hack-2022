@@ -16,6 +16,8 @@ const backgroundDecoration = BoxDecoration(
 const iconsColor = Color(0xFFFFFFFF);
 const iconBaseColor = Color(0xFF4447CA);
 const iconBaseAlternativeColor = Color(0xFFEBCD17);
+const iconStarColor = Color(0xFFFCD261);
+const iconStarGrayColor = Color(0xFFEEEEEE);
 
 const primaryTextColor = Color(0xFFFFFFFF);
 const primaryLightTextColor = Color(0xFFDDDDDD);
@@ -28,6 +30,9 @@ const primaryCardShadowColor = Color(0x20000000);
 const dialogTextColor = Color(0xFF4447CA);
 const dialogBackgroundColor = Color(0xFFFFFFFF);
 const dialogBarrierColor = Color(0x449C9C9C);
+const alternativeButtonColor = Color(0xFFFFFFFF);
+const alternativeButtonTextColor = Color(0xFF4447CA);
+const alternativeButtonBorderColor = Color(0xFF4447CA);
 
 const kListTileColor = Color(0xFF4447CA);
 
