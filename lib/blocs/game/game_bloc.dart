@@ -22,6 +22,10 @@ class GameBloc extends Bloc<GameEvent, GameState> {
       yield* _mapLoadGameStartedToState(event);
     } else if (event is PlayGameLevelStarted) {
       yield* _mapPlayGameLevelStartedToState(event);
+    } else if (event is SaveGameStarted) {
+      yield* _mapSaveGameStartedToState(event);
+    } else if (event is SaveGameLevelPlayEntryStarted) {
+      yield* _mapSaveGameLevelPlayEntryStartedToState(event);
     }
   }
 
@@ -51,5 +55,31 @@ class GameBloc extends Bloc<GameEvent, GameState> {
     } else {
       yield PlayGameLevelFailure();
     }
+  }
+
+  Stream<GameState> _mapSaveGameStartedToState(
+    SaveGameStarted event,
+  ) async* {
+    try {
+      await gameRepository.saveGame(game);
+
+      yield SaveGameSuccess(
+        game: game,
+      );
+    } on Object catch (error, stacktrace) {
+      logError(error, stacktrace: stacktrace);
+
+      yield SaveGameFailure();
+    }
+  }
+
+  Stream<GameState> _mapSaveGameLevelPlayEntryStartedToState(
+    SaveGameLevelPlayEntryStarted event,
+  ) async* {
+    game.registerPlayEntry(event.gameLevelPlayEntry);
+
+    yield SaveGameLevelPlayEntrySuccess();
+
+    add(SaveGameStarted());
   }
 }

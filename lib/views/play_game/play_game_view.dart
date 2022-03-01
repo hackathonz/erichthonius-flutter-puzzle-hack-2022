@@ -17,6 +17,7 @@ class PlayGameView extends StatelessWidget {
     final localizations = AppLocalizations.of(context);
 
     final playGameLevelBloc = context.read<PlayGameLevelBloc>();
+    final gameBloc = context.read<GameBloc>();
 
     final gameLevel = playGameLevelBloc.gameLevel;
 
@@ -55,9 +56,19 @@ class PlayGameView extends StatelessWidget {
             current is GameLevelFinish || current is GameLevelNotFinish,
         listener: (context, state) {
           if (state is GameLevelNotFinish) {
-            _onGameLevelNotFinishStateReact(context, state, playGameLevelBloc);
+            _onGameLevelNotFinishStateReact(
+              context,
+              state,
+              playGameLevelBloc,
+              gameBloc,
+            );
           } else if (state is GameLevelFinish) {
-            _onGameLevelFinishStateReact(context, state, playGameLevelBloc);
+            _onGameLevelFinishStateReact(
+              context,
+              state,
+              playGameLevelBloc,
+              gameBloc,
+            );
           }
         },
         child: Center(
@@ -99,12 +110,19 @@ class PlayGameView extends StatelessWidget {
     final BuildContext context,
     final GameLevelNotFinish state,
     final PlayGameLevelBloc playGameLevelBloc,
+    final GameBloc gameBloc,
   ) {
+    gameBloc.add(
+      SaveGameLevelPlayEntryStarted(
+        gameLevelPlayEntry: state.results,
+      ),
+    );
+
     showSwapItDialog(
       context: context,
       dialogBuilder: (dialogContext) {
         return GameOverDialog(
-          piecesLeft: state.piecesLeft,
+          piecesLeft: state.results.piecesLeftForCompletion,
           onExitGamePressed: () {
             Navigator.of(dialogContext).pop();
             Navigator.of(context).pop();
@@ -128,7 +146,14 @@ class PlayGameView extends StatelessWidget {
     final BuildContext context,
     final GameLevelFinish state,
     final PlayGameLevelBloc playGameLevelBloc,
+    final GameBloc gameBloc,
   ) {
+    gameBloc.add(
+      SaveGameLevelPlayEntryStarted(
+        gameLevelPlayEntry: state.results,
+      ),
+    );
+
     showSwapItDialog(
       context: context,
       dialogBuilder: (dialogContext) {

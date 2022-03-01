@@ -29,10 +29,10 @@ class GameLevelUpdate extends PlayGameLevelState {
 class GameLevelInProgress extends PlayGameLevelState {}
 
 class GameLevelNotFinish extends PlayGameLevelState {
-  final int piecesLeft;
+  final GameLevelPlayEntry results;
 
   GameLevelNotFinish({
-    required final this.piecesLeft,
+    required final this.results,
   });
 }
 

@@ -87,7 +87,7 @@ class PlayGameLevelBloc extends Bloc<PlayGameLevelEvent, PlayGameLevelState> {
       gameLevelTimer.cancel();
 
       yield GameLevelNotFinish(
-        piecesLeft: results.piecesLeftForCompletion,
+        results: results,
       );
     } else {
       yield GameLevelUpdate(

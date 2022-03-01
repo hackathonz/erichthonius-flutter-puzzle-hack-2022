@@ -26,3 +26,15 @@ class StartPlayGameLevelInitial extends GameState {
 }
 
 class PlayGameLevelFailure extends GameState {}
+
+class SaveGameSuccess extends GameState {
+  final Game game;
+
+  SaveGameSuccess({
+    required final this.game,
+  });
+}
+
+class SaveGameFailure extends GameState {}
+
+class SaveGameLevelPlayEntrySuccess extends GameState {}
