@@ -33,4 +33,8 @@ class Game {
           .isNotEmpty;
     }
   }
+
+  void registerPlayEntry(final GameLevelPlayEntry playEntry) {
+    gameUserProfile.registerPlayEntry(playEntry);
+  }
 }

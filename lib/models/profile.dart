@@ -11,6 +11,10 @@ class GameUserProfile {
     required final this.profile,
     required final this.levelsPlayed,
   });
+
+  void registerPlayEntry(final GameLevelPlayEntry playEntry) {
+    levelsPlayed.add(playEntry);
+  }
 }
 
 class UserProfile {
