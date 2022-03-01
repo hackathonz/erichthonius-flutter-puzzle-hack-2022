@@ -33,7 +33,11 @@ class PlayGameView extends StatelessWidget {
                       ? state.timeLeftInSeconds
                       : gameLevel.difficulty.gameDuration.inSeconds,
                 ),
-                style: timeLeftTextStyle,
+                style: state is GameLevelUpdate
+                    ? state.alertTimeLeft
+                        ? alertTimeLeftTextStyle
+                        : timeLeftTextStyle
+                    : timeLeftTextStyle,
               );
             },
           ),

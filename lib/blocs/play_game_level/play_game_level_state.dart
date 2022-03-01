@@ -18,9 +18,11 @@ class GameLevelInitial extends PlayGameLevelState {
 
 class GameLevelUpdate extends PlayGameLevelState {
   final int timeLeftInSeconds;
+  final bool alertTimeLeft;
 
   GameLevelUpdate({
     required final this.timeLeftInSeconds,
+    required final this.alertTimeLeft,
   });
 }
 

@@ -76,6 +76,14 @@ const timeLeftTextStyle = TextStyle(
   height: 1.0,
 );
 
+const alertTimeLeftTextStyle = TextStyle(
+  color: alertTextColor,
+  fontSize: 24.0,
+  letterSpacing: 0,
+  fontWeight: FontWeight.w600,
+  height: 1.0,
+);
+
 const timeCapsTextStyle = TextStyle(
   color: primaryTextColor,
   fontSize: 10.0,

@@ -101,7 +101,7 @@ class SwapItAppBar extends AppBar {
           title: Row(
             children: [
               const Icon(
-                SwapItIcons.star,
+                SwapItIcons.puzzle,
                 size: kIconAppBarTitleSize,
               ),
               const Padding(

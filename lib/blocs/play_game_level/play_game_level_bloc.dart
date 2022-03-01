@@ -95,6 +95,7 @@ class PlayGameLevelBloc extends Bloc<PlayGameLevelEvent, PlayGameLevelState> {
     } else {
       yield GameLevelUpdate(
         timeLeftInSeconds: gameLevelTimeLeftInSeconds,
+        alertTimeLeft: gameLevelTimeLeftInSeconds < 60,
       );
     }
   }
