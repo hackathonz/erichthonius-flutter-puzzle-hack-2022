@@ -64,7 +64,11 @@ class PlayGameView extends StatelessWidget {
       scaffoldPadding: kScaffoldPadding + kGameLevelPadding,
       bottomButton: SwapItButton(
         text: localizations.shuffle,
-        onPressed: () {},
+        onPressed: () {
+          playGameLevelBloc.add(
+            ShuffleGameLevelStarted(),
+          );
+        },
       ),
     );
   }

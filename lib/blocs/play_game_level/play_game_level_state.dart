@@ -26,4 +26,9 @@ class GameLevelUpdate extends PlayGameLevelState {
 
 class GameLevelFinish extends PlayGameLevelState {}
 
-class ShuffleGameSuccess extends PlayGameLevelState {}
+class ShuffleGameSuccess extends GameLevelInitial {
+  ShuffleGameSuccess({
+    required final LevelDifficulty difficulty,
+    required final List<PictureTile> tiles,
+  }) : super(difficulty: difficulty, tiles: tiles);
+}

@@ -14,6 +14,8 @@ part 'play_game_level_state.dart';
 class PlayGameLevelBloc extends Bloc<PlayGameLevelEvent, PlayGameLevelState> {
   final GameLevel gameLevel;
 
+  final List<PictureTile> gameLevelPictureTiles = [];
+
   late Timer gameLevelTimer;
 
   int gameLevelTimeLeftInSeconds;
@@ -47,18 +49,29 @@ class PlayGameLevelBloc extends Bloc<PlayGameLevelEvent, PlayGameLevelState> {
       },
     );
 
-    yield GameLevelInitial(
-      difficulty: gameLevel.difficulty.difficulty,
-      tiles: _splitPictureInTiles(
+    gameLevelPictureTiles.addAll(
+      _splitPictureInTiles(
         picture: gameLevel.image,
         tileCount: gameLevel.difficulty.pieces,
       ),
+    );
+
+    yield GameLevelInitial(
+      difficulty: gameLevel.difficulty.difficulty,
+      tiles: gameLevelPictureTiles,
     );
   }
 
   Stream<PlayGameLevelState> _mapShuffleGameLevelStartedToState(
     ShuffleGameLevelStarted event,
-  ) async* {}
+  ) async* {
+    gameLevelPictureTiles.shuffle();
+
+    yield ShuffleGameSuccess(
+      difficulty: gameLevel.difficulty.difficulty,
+      tiles: gameLevelPictureTiles,
+    );
+  }
 
   Stream<PlayGameLevelState> _mapGameLevelTimerUpdatedToState(
     GameLevelTimerUpdated event,
