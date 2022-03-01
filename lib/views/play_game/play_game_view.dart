@@ -46,7 +46,26 @@ class PlayGameView extends StatelessWidget {
           ),
         ],
       ),
-      body: const Center(),
+      body: Center(
+        child: BlocBuilder<PlayGameLevelBloc, PlayGameLevelState>(
+          buildWhen: (previous, current) => current is GameLevelInitial,
+          builder: (context, state) {
+            if (state is GameLevelInitial) {
+              return PuzzleGame(
+                tiles: state.tiles,
+                difficulty: state.difficulty,
+              );
+            } else {
+              return Container();
+            }
+          },
+        ),
+      ),
+      scaffoldPadding: kScaffoldPadding + kGameLevelPadding,
+      bottomButton: SwapItButton(
+        text: localizations.shuffle,
+        onPressed: () {},
+      ),
     );
   }
 }
