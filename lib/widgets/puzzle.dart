@@ -22,12 +22,16 @@ class PuzzleGameTile extends StatelessWidget {
       borderRadius: const BorderRadius.all(
         Radius.circular(kPictureTileRadius),
       ),
-      child: Image(
-        image: tile.imageProvider,
-        fit: BoxFit.cover,
-        width: tileSize.width,
-        height: tileSize.height,
-      ),
+      child: !tile.isEmpty
+          ? Image(
+              image: tile.imageProvider!,
+              fit: BoxFit.cover,
+              width: tileSize.width,
+              height: tileSize.height,
+            )
+          : SizedBox.fromSize(
+              size: tileSize,
+            ),
     );
   }
 }

@@ -56,6 +56,14 @@ class PlayGameLevelBloc extends Bloc<PlayGameLevelEvent, PlayGameLevelState> {
       ),
     );
 
+    final lastTile = gameLevelPictureTiles.removeLast();
+
+    gameLevelPictureTiles.add(
+      PictureTile.empty(
+        id: lastTile.id,
+      ),
+    );
+
     yield GameLevelInitial(
       difficulty: gameLevel.difficulty.difficulty,
       tiles: gameLevelPictureTiles,
