@@ -2,6 +2,7 @@ export 'app_bar.dart';
 export 'buttons.dart';
 export 'cards.dart';
 export 'colors.dart';
+export 'dialogs.dart';
 export 'icons.dart';
 export 'images.dart';
 export 'puzzle.dart';

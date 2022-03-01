@@ -12,6 +12,14 @@ const primaryButtonTextStyle = TextStyle(
   height: 1.0,
 );
 
+const primaryTextButtonTextStyle = TextStyle(
+  color: primaryTextButtonColor,
+  fontSize: 16,
+  letterSpacing: 0,
+  fontWeight: FontWeight.w600,
+  height: 1.0,
+);
+
 const gameLevelDifficultyCardTitleTextStyle = TextStyle(
   color: primaryTextColor,
   fontSize: 24.0,
@@ -105,5 +113,21 @@ const appBarGameLevelIdTextStyle = TextStyle(
   fontSize: 16.0,
   letterSpacing: 0,
   fontWeight: FontWeight.w600,
+  height: 1.0,
+);
+
+const dialogContentTextStyle = TextStyle(
+  color: alternativeTextColor,
+  fontSize: 16.0,
+  letterSpacing: 0,
+  fontWeight: FontWeight.w600,
+  height: 1.0,
+);
+
+const dialogTitleTextStyle = TextStyle(
+  color: dialogTextColor,
+  fontSize: 18.0,
+  letterSpacing: 0,
+  fontWeight: FontWeight.bold,
   height: 1.0,
 );

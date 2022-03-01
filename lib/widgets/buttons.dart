@@ -44,6 +44,34 @@ class SwapItButton extends StatelessWidget {
   }
 }
 
+class SwapItTextButton extends StatelessWidget {
+  final Text text;
+
+  final Color color;
+
+  final void Function() onPressed;
+
+  SwapItTextButton({
+    Key? key,
+    required final this.onPressed,
+    required final String text,
+  })  : text = Text(
+          text,
+          style: primaryTextButtonTextStyle,
+          textAlign: TextAlign.center,
+        ),
+        color = primaryTextButtonColor,
+        super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return TextButton(
+      child: text,
+      onPressed: onPressed,
+    );
+  }
+}
+
 class SwapItSwitchButton extends StatelessWidget {
   final bool initalValue;
 

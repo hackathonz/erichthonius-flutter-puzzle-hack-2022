@@ -47,13 +47,13 @@ class PuzzleGame extends StatefulWidget {
 
   final List<PictureTile> tiles;
 
-  final void Function(PictureTile) onTileTap;
+  final void Function(List<PuzzleGameTile>) onTileMove;
 
   const PuzzleGame({
     Key? key,
     required final this.tiles,
     required final this.difficulty,
-    required final this.onTileTap,
+    required final this.onTileMove,
   }) : super(key: key);
 
   @override
@@ -111,11 +111,11 @@ class _PuzzleGameState extends State<PuzzleGame> {
           tile: x,
           tileSize: tileSize,
           onPressed: () {
-            widget.onTileTap(x);
-
             setState(
               () {
                 puzzleTiles.swap(tile);
+
+                widget.onTileMove(puzzleTiles);
               },
             );
           },

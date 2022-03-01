@@ -10,6 +10,7 @@ const kIconAppBarSize = 24.0;
 const kIconAppBarTitleSize = 16.0;
 const kIconLevelMarkerSize = 48.0;
 const kCardRadius = 8.0;
+const kDialogRadius = 18.0;
 const kListTileRadius = 8.0;
 const kCardElevation = 2.0;
 const kBottomNavigationBarElevation = 0.0;
@@ -29,6 +30,7 @@ const kEasyPuzzleGameTileCount = 9;
 const kMediumPuzzleGameTileCount = 16;
 const kHardPuzzleGameTileCount = 25;
 const kPuzzleGameTilesSpacing = 13.0;
+const kDialogElevation = 24.0;
 
 const iconThemeData = IconThemeData(
   color: iconsColor,
@@ -46,6 +48,16 @@ const kScaffoldPadding = EdgeInsets.symmetric(
 
 const kGameLevelPadding = EdgeInsets.symmetric(
   vertical: 24.0,
+);
+
+const kDialogTitlePadding = EdgeInsets.only(
+  top: 40.0,
+);
+
+const kDialogContentPadding = EdgeInsets.only(
+  left: 40.0,
+  right: 40.0,
+  bottom: 35.0,
 );
 
 Size mapPictureTileSizeForDifficulty(
