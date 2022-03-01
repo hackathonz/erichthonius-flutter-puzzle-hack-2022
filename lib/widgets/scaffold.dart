@@ -4,6 +4,7 @@ import 'package:swap_it/widgets/widgets.dart';
 
 const _kBottomNavigationBarSelectedFontSize = 32.0;
 const _kBottomNavigationBarUnselectedFontSize = 32.0;
+const _kBottomButtonAlignment = Alignment(0.0, 0.9);
 
 class SwapItScaffold extends StatelessWidget {
   final Widget body;
@@ -12,6 +13,8 @@ class SwapItScaffold extends StatelessWidget {
 
   final SwapItNavigationBarSettings? navigationBarSettings;
 
+  final SwapItButton? bottomButton;
+
   final EdgeInsets scaffoldPadding;
 
   const SwapItScaffold({
@@ -19,6 +22,7 @@ class SwapItScaffold extends StatelessWidget {
     required final this.body,
     final this.appBar,
     final this.navigationBarSettings,
+    final this.bottomButton,
     final this.scaffoldPadding = kScaffoldPadding,
   }) : super(key: key);
 
@@ -28,7 +32,23 @@ class SwapItScaffold extends StatelessWidget {
       appBar: appBar,
       body: Padding(
         padding: scaffoldPadding,
-        child: body,
+        child: Builder(
+          builder: (context) {
+            if (bottomButton == null) {
+              return body;
+            } else {
+              return Stack(
+                children: [
+                  body,
+                  Align(
+                    alignment: _kBottomButtonAlignment,
+                    child: bottomButton,
+                  ),
+                ],
+              );
+            }
+          },
+        ),
       ),
       bottomNavigationBar: navigationBarSettings != null
           ? Builder(

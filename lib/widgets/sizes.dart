@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:swap_it/models/level.dart';
 import 'package:swap_it/widgets/widgets.dart';
 
 const kIconBaseDiameter = 48.0;
@@ -20,6 +21,14 @@ const kSwitchWidth = 60.0;
 const kSwitchToggleSize = 24.0;
 const kLevelMarkerRadius = 64.0;
 const kLevelMarkerBorderThickness = 4.0;
+const kEasyPictureTileSize = Size.square(99.0);
+const kMediumPictureTileSize = Size.square(72.0);
+const kHardPictureTileSize = Size.square(56.0);
+const kPictureTileRadius = 8.04;
+const kEasyPuzzleGameTileCount = 9;
+const kMediumPuzzleGameTileCount = 16;
+const kHardPuzzleGameTileCount = 25;
+const kPuzzleGameTilesSpacing = 13.0;
 
 const iconThemeData = IconThemeData(
   color: iconsColor,
@@ -34,3 +43,35 @@ const appBarIconThemeData = IconThemeData(
 const kScaffoldPadding = EdgeInsets.symmetric(
   horizontal: 24.0,
 );
+
+const kGameLevelPadding = EdgeInsets.symmetric(
+  vertical: 24.0,
+);
+
+Size mapPictureTileSizeForDifficulty(
+  final LevelDifficulty difficulty,
+) {
+  switch (difficulty) {
+    case LevelDifficulty.easy:
+      return kEasyPictureTileSize;
+    case LevelDifficulty.medium:
+      return kMediumPictureTileSize;
+    case LevelDifficulty.hard:
+    default:
+      return kHardPictureTileSize;
+  }
+}
+
+int mapPuzzleGameTileCountForDifficulty(
+  final LevelDifficulty difficulty,
+) {
+  switch (difficulty) {
+    case LevelDifficulty.easy:
+      return kEasyPuzzleGameTileCount;
+    case LevelDifficulty.medium:
+      return kMediumPuzzleGameTileCount;
+    case LevelDifficulty.hard:
+    default:
+      return kHardPuzzleGameTileCount;
+  }
+}
