@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'dart:typed_data';
 
 import 'package:flutter/painting.dart';
 
@@ -28,10 +29,13 @@ class GameLevel {
 
   final LevelMarkerPoint point;
 
+  final Uint8List image;
+
   const GameLevel({
     required final this.id,
     required final this.difficulty,
     required final this.point,
+    required final this.image,
   });
 }
 
