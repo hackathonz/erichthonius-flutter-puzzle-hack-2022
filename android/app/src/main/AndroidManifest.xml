@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.swap_it">
+    package="ctw.erichthonius.swapit">
    <application
         android:label="swap_it"
         android:icon="@mipmap/ic_launcher">

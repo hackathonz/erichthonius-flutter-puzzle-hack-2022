@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.10)
 project(runner LANGUAGES CXX)
 
 set(BINARY_NAME "swap_it")
-set(APPLICATION_ID "com.example.swap_it")
+set(APPLICATION_ID "ctw.erichthonius.swapit")
 
 cmake_policy(SET CMP0063 NEW)
 

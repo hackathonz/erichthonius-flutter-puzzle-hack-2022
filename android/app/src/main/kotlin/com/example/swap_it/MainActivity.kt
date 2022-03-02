@@ -1,4 +1,4 @@
-package com.example.swap_it
+package ctw.erichthonius.swapit
 
 import io.flutter.embedding.android.FlutterActivity
 
