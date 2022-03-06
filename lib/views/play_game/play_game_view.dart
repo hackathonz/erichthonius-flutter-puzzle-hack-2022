@@ -1,3 +1,4 @@
+import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
 import 'package:swap_it/blocs/blocs.dart';
 import 'package:swap_it/l10n/app_localizations.dart';
@@ -20,6 +21,8 @@ class PlayGameView extends StatelessWidget {
     final gameBloc = context.read<GameBloc>();
 
     final gameLevel = playGameLevelBloc.gameLevel;
+
+    late ConfettiController confettiController;
 
     return SwapItScaffold(
       appBar: SwapItAppBar.game(
@@ -68,29 +71,34 @@ class PlayGameView extends StatelessWidget {
               state,
               playGameLevelBloc,
               gameBloc,
+              confettiController,
             );
           }
         },
-        child: Center(
-          child: BlocBuilder<PlayGameLevelBloc, PlayGameLevelState>(
-            buildWhen: (previous, current) => current is GameLevelInitial,
-            builder: (context, state) {
-              if (state is GameLevelInitial) {
-                return PuzzleGame(
-                  tiles: state.tiles,
-                  difficulty: state.difficulty,
-                  onTileMove: (puzzleTiles) {
-                    playGameLevelBloc.add(
-                      GameLevelTilesUpdated(
-                        puzzleTiles: puzzleTiles,
-                      ),
-                    );
-                  },
-                );
-              } else {
-                return Container();
-              }
-            },
+        child: ConfettiAnimation(
+          onControllerCreate: (controller) => confettiController = controller,
+          blastDirectionality: BlastDirectionality.explosive,
+          child: Center(
+            child: BlocBuilder<PlayGameLevelBloc, PlayGameLevelState>(
+              buildWhen: (previous, current) => current is GameLevelInitial,
+              builder: (context, state) {
+                if (state is GameLevelInitial) {
+                  return PuzzleGame(
+                    tiles: state.tiles,
+                    difficulty: state.difficulty,
+                    onTileMove: (puzzleTiles) {
+                      playGameLevelBloc.add(
+                        GameLevelTilesUpdated(
+                          puzzleTiles: puzzleTiles,
+                        ),
+                      );
+                    },
+                  );
+                } else {
+                  return Container();
+                }
+              },
+            ),
           ),
         ),
       ),
@@ -147,12 +155,15 @@ class PlayGameView extends StatelessWidget {
     final GameLevelFinish state,
     final PlayGameLevelBloc playGameLevelBloc,
     final GameBloc gameBloc,
+    final ConfettiController confettiController,
   ) {
     gameBloc.add(
       SaveGameLevelPlayEntryStarted(
         gameLevelPlayEntry: state.results,
       ),
     );
+
+    confettiController.play();
 
     showSwapItDialog(
       context: context,
