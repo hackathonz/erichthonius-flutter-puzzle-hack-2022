@@ -268,7 +268,6 @@ extension PictureTileListExtension on List<PictureTile> {
   }
 
   void safeShuffle() {
-    return;
     shuffle();
 
     if (isOrdered) {
