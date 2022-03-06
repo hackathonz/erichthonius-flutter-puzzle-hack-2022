@@ -57,3 +57,5 @@ class GameLevelRestart extends GameLevelInitial {
     required final List<PictureTile> tiles,
   }) : super(difficulty: difficulty, tiles: tiles);
 }
+
+class PlayNextLevelSuccess extends PlayGameLevelState {}

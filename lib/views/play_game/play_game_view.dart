@@ -2,6 +2,7 @@ import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
 import 'package:swap_it/blocs/blocs.dart';
 import 'package:swap_it/l10n/app_localizations.dart';
+import 'package:swap_it/models/models.dart';
 import 'package:swap_it/widgets/widgets.dart';
 
 const _kAppBarPaddingBetweenTimeLeftAndTimeCaps = EdgeInsets.symmetric(
@@ -56,7 +57,9 @@ class PlayGameView extends StatelessWidget {
       ),
       body: BlocListener<PlayGameLevelBloc, PlayGameLevelState>(
         listenWhen: (previous, current) =>
-            current is GameLevelFinish || current is GameLevelNotFinish,
+            current is GameLevelFinish ||
+            current is GameLevelNotFinish ||
+            current is PlayNextLevelSuccess,
         listener: (context, state) {
           if (state is GameLevelNotFinish) {
             _onGameLevelNotFinishStateReact(
@@ -72,6 +75,12 @@ class PlayGameView extends StatelessWidget {
               playGameLevelBloc,
               gameBloc,
               confettiController,
+            );
+          } else if (state is PlayNextLevelSuccess) {
+            _onPlayNextLevelSuccessStateReact(
+              context,
+              gameBloc,
+              gameLevel,
             );
           }
         },
@@ -174,7 +183,13 @@ class PlayGameView extends StatelessWidget {
             Navigator.of(dialogContext).pop();
             Navigator.of(context).pop();
           },
-          onNextLevelPressed: () {},
+          onNextLevelPressed: () {
+            Navigator.of(dialogContext).pop();
+
+            playGameLevelBloc.add(
+              PlayNextLevelStarted(),
+            );
+          },
           onRetryPressed: () {
             Navigator.of(dialogContext).pop();
 
@@ -186,6 +201,20 @@ class PlayGameView extends StatelessWidget {
       },
       routeSettings: const RouteSettings(
         name: '/game_level_finish_dialog',
+      ),
+    );
+  }
+
+  void _onPlayNextLevelSuccessStateReact(
+    final BuildContext context,
+    final GameBloc gameBloc,
+    final GameLevel currentGameLevel,
+  ) {
+    Navigator.of(context).pop();
+
+    gameBloc.add(
+      PlayNextGameLevelStarted(
+        previousGameLevel: currentGameLevel,
       ),
     );
   }

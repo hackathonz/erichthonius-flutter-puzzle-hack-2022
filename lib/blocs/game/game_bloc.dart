@@ -26,6 +26,8 @@ class GameBloc extends Bloc<GameEvent, GameState> {
       yield* _mapSaveGameStartedToState(event);
     } else if (event is SaveGameLevelPlayEntryStarted) {
       yield* _mapSaveGameLevelPlayEntryStartedToState(event);
+    } else if (event is PlayNextGameLevelStarted) {
+      yield* _mapPlayNextGameLevelStartedToState(event);
     }
   }
 
@@ -81,5 +83,24 @@ class GameBloc extends Bloc<GameEvent, GameState> {
     yield SaveGameLevelPlayEntrySuccess();
 
     add(SaveGameStarted());
+  }
+
+  Stream<GameState> _mapPlayNextGameLevelStartedToState(
+    PlayNextGameLevelStarted event,
+  ) async* {
+    final gameLevels = game.gameLevels
+        .where(
+          (x) => x.difficulty == event.previousGameLevel.difficulty,
+        )
+        .toList();
+
+    final indexOfPreviousGameLevel =
+        gameLevels.indexOf(event.previousGameLevel);
+
+    final nextGameLevel = gameLevels[indexOfPreviousGameLevel + 1];
+
+    yield StartPlayGameLevelInitial(
+      gameLevel: nextGameLevel,
+    );
   }
 }

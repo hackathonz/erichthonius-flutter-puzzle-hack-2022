@@ -18,3 +18,5 @@ class GameLevelTilesUpdated extends PlayGameLevelEvent {
 class ShuffleGameLevelStarted extends PlayGameLevelEvent {}
 
 class GameLevelRestarted extends PlayGameLevelEvent {}
+
+class PlayNextLevelStarted extends PlayGameLevelEvent {}

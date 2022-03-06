@@ -22,3 +22,11 @@ class SaveGameLevelPlayEntryStarted extends GameEvent {
     required final this.gameLevelPlayEntry,
   });
 }
+
+class PlayNextGameLevelStarted extends GameEvent {
+  final GameLevel previousGameLevel;
+
+  PlayNextGameLevelStarted({
+    required final this.previousGameLevel,
+  });
+}

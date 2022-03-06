@@ -45,6 +45,8 @@ class PlayGameLevelBloc extends Bloc<PlayGameLevelEvent, PlayGameLevelState> {
       yield* _mapGameLevelRestartedToState(event);
     } else if (event is GameLevelTilesUpdated) {
       yield* _mapGameLevelTilesUpdatedToState(event);
+    } else if (event is PlayNextLevelStarted) {
+      yield* _mapPlayNextLevelStartedToState(event);
     }
   }
 
@@ -138,6 +140,12 @@ class PlayGameLevelBloc extends Bloc<PlayGameLevelEvent, PlayGameLevelState> {
     } else {
       yield GameLevelInProgress();
     }
+  }
+
+  Stream<PlayGameLevelState> _mapPlayNextLevelStartedToState(
+    PlayNextLevelStarted event,
+  ) async* {
+    yield PlayNextLevelSuccess();
   }
 
   void _setupGameLevel({
@@ -260,6 +268,7 @@ extension PictureTileListExtension on List<PictureTile> {
   }
 
   void safeShuffle() {
+    return;
     shuffle();
 
     if (isOrdered) {
