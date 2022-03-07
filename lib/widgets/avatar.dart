@@ -15,47 +15,51 @@ class SwapItAvatar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Container(
-          width: kAvatarCircleDiameter,
-          height: kAvatarCircleDiameter,
-          child: ClipOval(
-            child: Center(
-              child: Text(
-                avatar.data,
-                style: avatarEmojiTextStyle,
-                textAlign: TextAlign.center,
+    return GestureDetector(
+      child: Stack(
+        children: [
+          Container(
+            width: kAvatarCircleDiameter,
+            height: kAvatarCircleDiameter,
+            child: ClipOval(
+              child: Center(
+                child: Text(
+                  avatar.data,
+                  style: avatarEmojiTextStyle,
+                  textAlign: TextAlign.center,
+                ),
               ),
             ),
-          ),
-          decoration: BoxDecoration(
-            color: avatarBackgroundColor,
-            shape: BoxShape.circle,
-            image: avatar.isUrl
-                ? DecorationImage(
-                    image: NetworkImage(avatar.data),
-                    fit: BoxFit.cover,
-                  )
-                : null,
-          ),
-        ),
-        if (onEditAvatarPressedCallback != null)
-          Positioned(
-            bottom: 0,
-            right: kAvatarCircleDiameter,
-            child: IconBase(
-              key: const Key('avatar_edit_icon'),
-              child: const Icon(
-                SwapItIcons.pencil,
-                size: kIconAvatarEditSize,
-              ),
-              onPressed: onEditAvatarPressedCallback!,
-              diameter: kIconBaseAvatarEditDiameter,
+            decoration: BoxDecoration(
+              color: avatarBackgroundColor,
+              shape: BoxShape.circle,
+              image: avatar.isUrl
+                  ? DecorationImage(
+                      image: NetworkImage(avatar.data),
+                      fit: BoxFit.cover,
+                    )
+                  : null,
             ),
           ),
-      ],
-      alignment: Alignment.center,
+          if (onEditAvatarPressedCallback != null)
+            Positioned(
+              bottom: 0,
+              right: kAvatarCircleDiameter,
+              child: IconBase(
+                key: const Key('avatar_edit_icon'),
+                child: const Icon(
+                  SwapItIcons.pencil,
+                  size: kIconAvatarEditSize,
+                ),
+                onPressed: onEditAvatarPressedCallback!,
+                diameter: kIconBaseAvatarEditDiameter,
+              ),
+            ),
+        ],
+        alignment: Alignment.center,
+      ),
+      onTap: onEditAvatarPressedCallback,
+      behavior: HitTestBehavior.translucent,
     );
   }
 }

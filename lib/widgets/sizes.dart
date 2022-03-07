@@ -14,6 +14,7 @@ const kIconLevelMarkerSize = 48.0;
 const kIconGameFinishDialogStarSize = 48.0;
 const kCardRadius = 8.0;
 const kDialogRadius = 18.0;
+const kInputDecorationBorderRadius = 8.0;
 const kListTileRadius = 8.0;
 const kCardElevation = 2.0;
 const kBottomNavigationBarElevation = 0.0;
@@ -62,6 +63,23 @@ const kDialogContentPadding = EdgeInsets.only(
   left: 40.0,
   right: 40.0,
   bottom: 35.0,
+);
+
+const kProfileViewsPadding = EdgeInsets.symmetric(
+  vertical: 24.0,
+  horizontal: 24.0,
+);
+
+const inputDecorationBorderSide = BorderSide(
+  color: inputDecorationBorderColor,
+  style: BorderStyle.solid,
+  width: 1.0,
+);
+
+const inputDecorationErrorBorderSide = BorderSide(
+  color: inputDecorationErrorBorderColor,
+  style: BorderStyle.solid,
+  width: 1.0,
 );
 
 Size mapPictureTileSizeForDifficulty(

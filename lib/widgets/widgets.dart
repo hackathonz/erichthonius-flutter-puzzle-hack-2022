@@ -7,6 +7,7 @@ export 'colors.dart';
 export 'dialogs.dart';
 export 'icons.dart';
 export 'images.dart';
+export 'input.dart';
 export 'puzzle.dart';
 export 'scaffold.dart';
 export 'sizes.dart';

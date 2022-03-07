@@ -22,9 +22,12 @@ class UserProfile {
 
   final Avatar avatar;
 
+  final DateTime dateJoined;
+
   const UserProfile({
     required final this.username,
     required final this.avatar,
+    required final this.dateJoined,
   });
 }
 

@@ -146,3 +146,51 @@ const avatarEmojiTextStyle = TextStyle(
   fontWeight: FontWeight.normal,
   height: 1.0,
 );
+
+const profileUsernameTextStyle = TextStyle(
+  color: primaryTextColor,
+  fontSize: 16.0,
+  letterSpacing: 0,
+  fontWeight: FontWeight.w600,
+  height: 1.0,
+);
+
+const profileDateJoinedTextStyle = TextStyle(
+  color: primaryTextColor,
+  fontSize: 12.0,
+  letterSpacing: 0,
+  fontWeight: FontWeight.normal,
+  height: 1.0,
+);
+
+const inputBorderLabelTextStyle = TextStyle(
+  color: inputDecorationTextColor,
+  fontSize: 12.0,
+  letterSpacing: 0,
+  fontWeight: FontWeight.w600,
+  height: 1.0,
+);
+
+const inputBorderHintTextStyle = TextStyle(
+  color: inputDecorationHintTextColor,
+  fontSize: 14.0,
+  letterSpacing: 0,
+  fontWeight: FontWeight.normal,
+  height: 1.0,
+);
+
+const inputBorderTextStyle = TextStyle(
+  color: inputDecorationHintTextColor,
+  fontSize: 14.0,
+  letterSpacing: 0,
+  fontWeight: FontWeight.normal,
+  height: 1.0,
+);
+
+const inputBorderErrorTextStyle = TextStyle(
+  color: inputDecorationErrorTextColor,
+  fontSize: 10.0,
+  letterSpacing: 0,
+  fontWeight: FontWeight.normal,
+  height: 1.0,
+);
