@@ -384,6 +384,42 @@ class AppLocalizations {
       locale: localeName,
     );
   }
+
+  String get changeAvatarTitle {
+    return Intl.message(
+      'My Avatar',
+      name: 'changeAvatarTitle',
+      desc: 'Title of change avatar page',
+      locale: localeName,
+    );
+  }
+
+  String get changeAvatar {
+    return Intl.message(
+      'Change Avatar',
+      name: 'changeAvatar',
+      desc: 'Change avatar keyword',
+      locale: localeName,
+    );
+  }
+
+  String get emojis {
+    return Intl.message(
+      'Emojis',
+      name: 'emojis',
+      desc: 'Emojis keyword',
+      locale: localeName,
+    );
+  }
+
+  String get personalPhotos {
+    return Intl.message(
+      'Personal Photos',
+      name: 'personalPhotos',
+      desc: 'Personal photos keyword',
+      locale: localeName,
+    );
+  }
 }
 
 class AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

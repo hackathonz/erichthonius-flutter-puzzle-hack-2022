@@ -77,3 +77,28 @@ Future<void> navigateToSettingsView(final BuildContext context) {
     ),
   );
 }
+
+Future<void> navigateToChangeAvatarView(
+  final BuildContext context,
+  final ProfileBloc profileBloc,
+) {
+  return Navigator.of(context).push(
+    MaterialPageRoute(
+      builder: (routeContext) {
+        return BlocProvider(
+          create: (context) => AvatarBloc(
+            userProfile: profileBloc.userProfile,
+            profileRepository: profileBloc.profileRepository,
+          )
+            ..add(
+              LoadAvailableEmojisStarted(),
+            )
+            ..add(
+              LoadPersonalPhotosStarted(),
+            ),
+          child: const ChangeAvatarView(),
+        );
+      },
+    ),
+  );
+}

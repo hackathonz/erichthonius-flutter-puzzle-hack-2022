@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:swap_it/blocs/blocs.dart';
 import 'package:swap_it/l10n/app_localizations.dart';
+import 'package:swap_it/routing/routing.dart';
 import 'package:swap_it/widgets/scaffold.dart';
 import 'package:swap_it/widgets/widgets.dart';
 
@@ -43,7 +44,10 @@ class ProfileView extends StatelessWidget {
           children: [
             SwapItAvatar(
               avatar: userProfile.avatar,
-              onEditAvatarPressedCallback: () {},
+              onEditAvatarPressedCallback: () => navigateToChangeAvatarView(
+                context,
+                profileBloc,
+              ),
             ),
             const Padding(
               padding: _kAppBarPaddingBetweenAvatarAndUsername,
