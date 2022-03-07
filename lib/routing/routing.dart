@@ -46,6 +46,16 @@ Future<void> navigateToPlayGameView(
   );
 }
 
+Future<void> navigateToProfileView(final BuildContext context) {
+  return Navigator.of(context).push(
+    MaterialPageRoute(
+      builder: (routeContext) {
+        return const ProfileView();
+      },
+    ),
+  );
+}
+
 Future<void> navigateToSettingsView(final BuildContext context) {
   return Navigator.of(context).push(
     MaterialPageRoute(
