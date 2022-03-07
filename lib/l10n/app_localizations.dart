@@ -374,6 +374,16 @@ class AppLocalizations {
       locale: localeName,
     );
   }
+
+  String get usernameAlreadyUsed {
+    return Intl.message(
+      'This username is already being used. Try another one.',
+      name: 'usernameAlreadyUsed',
+      desc:
+          'Message that warns the user that the username it typed has been already used',
+      locale: localeName,
+    );
+  }
 }
 
 class AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
