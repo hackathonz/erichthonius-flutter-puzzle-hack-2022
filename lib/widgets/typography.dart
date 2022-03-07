@@ -180,7 +180,7 @@ const inputBorderHintTextStyle = TextStyle(
 );
 
 const inputBorderTextStyle = TextStyle(
-  color: inputDecorationHintTextColor,
+  color: primaryTextColor,
   fontSize: 14.0,
   letterSpacing: 0,
   fontWeight: FontWeight.normal,
@@ -189,7 +189,7 @@ const inputBorderTextStyle = TextStyle(
 
 const inputBorderErrorTextStyle = TextStyle(
   color: inputDecorationErrorTextColor,
-  fontSize: 10.0,
+  fontSize: 12.0,
   letterSpacing: 0,
   fontWeight: FontWeight.normal,
   height: 1.0,

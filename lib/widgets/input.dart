@@ -5,6 +5,10 @@ const _kPaddingBetweenLabelAndForm = EdgeInsets.symmetric(
   vertical: 4.0,
 );
 
+const _kPaddingBetweenFormAndErrorText = EdgeInsets.only(
+  top: 8.0,
+);
+
 final inputDecorationTheme = InputDecorationTheme(
   alignLabelWithHint: false,
   border: OutlineInputBorder(
@@ -36,14 +40,23 @@ class SwapItTextFormInput extends StatelessWidget {
 
   final String? hint;
 
-  final String? Function(String?)? validator;
+  final String? errorText;
+
+  final bool showTrailingIcon;
+
+  final void Function(String)? onChanged;
+
+  final void Function()? onTrailingIconPressed;
 
   const SwapItTextFormInput({
     Key? key,
     required final this.controller,
     required final this.label,
     final this.hint,
-    final this.validator,
+    final this.errorText,
+    final this.onChanged,
+    final this.onTrailingIconPressed,
+    final this.showTrailingIcon = false,
   }) : super(key: key);
 
   @override
@@ -61,9 +74,37 @@ class SwapItTextFormInput extends StatelessWidget {
           controller: controller,
           decoration: InputDecoration(
             hintText: hint,
+            fillColor: errorText != null ? inputDecorationErrorFillColor : null,
+            suffixIcon: showTrailingIcon
+                ? Center(
+                    child: IconBase(
+                      key: const Key('text_form_input_close_icon'),
+                      child: const Icon(
+                        SwapItIcons.close,
+                        size: kIconInputTrailingIconSize,
+                      ),
+                      onPressed: onTrailingIconPressed!,
+                      diameter: kIconBaseInputTrailingIconDiameter,
+                    ),
+                  )
+                : null,
+            suffixIconConstraints: BoxConstraints.tight(
+              const Size.square(
+                kIconBaseInputTrailingIconDiameter * 2,
+              ),
+            ),
           ),
-          validator: validator,
+          onChanged: onChanged,
+          style: inputBorderTextStyle,
         ),
+        if (errorText != null)
+          Padding(
+            padding: _kPaddingBetweenFormAndErrorText,
+            child: Text(
+              errorText!,
+              style: inputBorderErrorTextStyle,
+            ),
+          ),
       ],
       crossAxisAlignment: CrossAxisAlignment.start,
     );
