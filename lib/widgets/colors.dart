@@ -33,6 +33,7 @@ const dialogBarrierColor = Color(0x449C9C9C);
 const alternativeButtonColor = Color(0xFFFFFFFF);
 const alternativeButtonTextColor = Color(0xFF4447CA);
 const alternativeButtonBorderColor = Color(0xFF4447CA);
+const avatarBackgroundColor = Color(0xFFD2D3FF);
 
 const kListTileColor = Color(0xFF4447CA);
 

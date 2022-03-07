@@ -4,8 +4,10 @@ import 'package:swap_it/widgets/widgets.dart';
 
 const kIconBaseDiameter = 48.0;
 const kIconBaseAlternativeDiameter = 56.0;
+const kIconBaseAvatarEditDiameter = 32.0;
 const kIconPrimarySize = 32.0;
 const kIconAlternativeSize = 40.0;
+const kIconAvatarEditSize = 24.0;
 const kIconAppBarSize = 24.0;
 const kIconAppBarTitleSize = 16.0;
 const kIconLevelMarkerSize = 48.0;
@@ -32,6 +34,7 @@ const kMediumPuzzleGameTileCount = 16;
 const kHardPuzzleGameTileCount = 25;
 const kPuzzleGameTilesSpacing = 13.0;
 const kDialogElevation = 24.0;
+const kAvatarCircleDiameter = 112.0;
 
 const iconThemeData = IconThemeData(
   color: iconsColor,

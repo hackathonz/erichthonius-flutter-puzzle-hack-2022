@@ -20,7 +20,21 @@ class GameUserProfile {
 class UserProfile {
   final String username;
 
+  final Avatar avatar;
+
   const UserProfile({
     required final this.username,
+    required final this.avatar,
+  });
+}
+
+class Avatar {
+  final String data;
+
+  final bool isUrl;
+
+  const Avatar({
+    required final this.data,
+    required final this.isUrl,
   });
 }

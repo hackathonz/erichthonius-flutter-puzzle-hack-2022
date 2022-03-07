@@ -204,6 +204,10 @@ class MockGameRepository extends GameRepository {
       ],
       gameUserProfile: GameUserProfile(
         profile: UserProfile(
+          avatar: const Avatar(
+            data: '😎',
+            isUrl: false,
+          ),
           username: 'Swapper$idString',
         ),
         levelsPlayed: [],

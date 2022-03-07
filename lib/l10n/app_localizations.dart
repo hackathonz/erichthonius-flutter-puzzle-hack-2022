@@ -346,6 +346,15 @@ class AppLocalizations {
       locale: localeName,
     );
   }
+
+  String get saveProfile {
+    return Intl.message(
+      'Save Profile',
+      name: 'saveProfile',
+      desc: 'Description of save profile button',
+      locale: localeName,
+    );
+  }
 }
 
 class AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

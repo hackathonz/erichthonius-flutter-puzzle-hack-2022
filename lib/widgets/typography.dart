@@ -139,3 +139,10 @@ const dialogTitleTextStyle = TextStyle(
   fontWeight: FontWeight.bold,
   height: 1.0,
 );
+
+const avatarEmojiTextStyle = TextStyle(
+  fontSize: 35.0,
+  letterSpacing: 0,
+  fontWeight: FontWeight.normal,
+  height: 1.0,
+);

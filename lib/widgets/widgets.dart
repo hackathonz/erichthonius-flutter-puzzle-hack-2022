@@ -1,5 +1,6 @@
 export 'animations.dart';
 export 'app_bar.dart';
+export 'avatar.dart';
 export 'buttons.dart';
 export 'cards.dart';
 export 'colors.dart';
