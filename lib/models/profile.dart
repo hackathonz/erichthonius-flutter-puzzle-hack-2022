@@ -29,6 +29,17 @@ class UserProfile {
     required final this.avatar,
     required final this.dateJoined,
   });
+
+  UserProfile copyWith({
+    final String? username,
+    final Avatar? avatar,
+  }) {
+    return UserProfile(
+      username: username ?? this.username,
+      avatar: avatar ?? this.avatar,
+      dateJoined: dateJoined,
+    );
+  }
 }
 
 class Avatar {
