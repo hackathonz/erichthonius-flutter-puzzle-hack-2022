@@ -139,6 +139,7 @@ class MyApp extends StatelessWidget {
             AppLocalizations.delegate,
             GlobalMaterialLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
           ],
           supportedLocales: supportedLocales,
         ),
@@ -164,9 +165,17 @@ Vault<Object> vault({
     vault.store<GameRepository>(
       RealGameRepository(),
     );
+
+    vault.store<ProfileRepository>(
+      RealProfileRepository(),
+    );
   } else {
     vault.store<GameRepository>(
       MockGameRepository(),
+    );
+
+    vault.store<ProfileRepository>(
+      MockProfileRepository(),
     );
   }
 

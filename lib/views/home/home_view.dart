@@ -51,7 +51,10 @@ class HomeView extends StatelessWidget {
         ),
         navigationBarSettings: SwapItNavigationBarSettings(
           onProfileItemPressed: () {
-            navigateToProfileView(context);
+            navigateToProfileView(
+              context,
+              gameBloc.game.gameUserProfile.profile,
+            );
           },
           onLeaderboardItemPressed: () {},
           onSettingsItemPressed: () {

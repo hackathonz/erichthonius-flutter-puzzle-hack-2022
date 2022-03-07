@@ -25,9 +25,13 @@ class ProfileView extends StatelessWidget {
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context);
 
-    final gameBloc = context.read<GameBloc>();
+    final profileBloc = context.read<ProfileBloc>();
 
-    final userProfile = gameBloc.game.gameUserProfile.profile;
+    final userProfile = profileBloc.userProfile;
+
+    final usernameTextEditingController = TextEditingController(
+      text: userProfile.username,
+    );
 
     return SwapItScaffold(
       appBar: SwapItAppBar(
@@ -62,12 +66,38 @@ class ProfileView extends StatelessWidget {
             const Padding(
               padding: _kAppBarPaddingBetweenDateJoinedAndUsernameForm,
             ),
-            SwapItTextFormInput(
-              controller: TextEditingController(
-                text: userProfile.username,
-              ),
-              label: localizations.username,
-              validator: (p0) => null,
+            BlocBuilder<ProfileBloc, ProfileState>(
+              buildWhen: (previous, current) =>
+                  current is ValidateUsernameSuccess ||
+                  current is ValidateUsernameInitial,
+              builder: (context, state) {
+                String? errorText;
+
+                if (state is ValidateUsernameSuccess && !state.isValid) {
+                  errorText = localizations.usernameAlreadyUsed;
+                } else if (state is ValidateUsernameInitial) {
+                  usernameTextEditingController.text = userProfile.username;
+                }
+
+                return SwapItTextFormInput(
+                  controller: usernameTextEditingController,
+                  label: localizations.username,
+                  errorText: errorText,
+                  showTrailingIcon: errorText != null,
+                  onTrailingIconPressed: () {
+                    profileBloc.add(
+                      UsernameReset(),
+                    );
+                  },
+                  onChanged: (username) {
+                    profileBloc.add(
+                      ValidateUsernameStarted(
+                        newUsername: username,
+                      ),
+                    );
+                  },
+                );
+              },
             ),
           ],
           primary: false,
@@ -75,7 +105,13 @@ class ProfileView extends StatelessWidget {
       ),
       bottomButton: SwapItButton(
         text: localizations.saveProfile,
-        onPressed: () {},
+        onPressed: () {
+          profileBloc.add(
+            UpdateProfileStarted(
+              newUsername: usernameTextEditingController.text,
+            ),
+          );
+        },
       ),
     );
   }
