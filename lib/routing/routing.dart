@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:swap_it/blocs/blocs.dart';
+import 'package:swap_it/data/data.dart';
+import 'package:swap_it/main.dart';
 import 'package:swap_it/models/models.dart';
 import 'package:swap_it/views/views.dart';
 
@@ -46,11 +48,21 @@ Future<void> navigateToPlayGameView(
   );
 }
 
-Future<void> navigateToProfileView(final BuildContext context) {
+Future<void> navigateToProfileView(
+  final BuildContext context,
+  final UserProfile userProfile,
+) {
   return Navigator.of(context).push(
     MaterialPageRoute(
       builder: (routeContext) {
-        return const ProfileView();
+        return BlocProvider(
+          create: (context) => ProfileBloc(
+            userProfile: userProfile,
+            profileRepository:
+                context.read<Vault>().lookup<ProfileRepository>(),
+          ),
+          child: const ProfileView(),
+        );
       },
     ),
   );
