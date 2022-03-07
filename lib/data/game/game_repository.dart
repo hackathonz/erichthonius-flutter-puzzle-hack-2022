@@ -209,6 +209,7 @@ class MockGameRepository extends GameRepository {
             isUrl: false,
           ),
           username: 'Swapper$idString',
+          dateJoined: DateTime.now(),
         ),
         levelsPlayed: [],
       ),

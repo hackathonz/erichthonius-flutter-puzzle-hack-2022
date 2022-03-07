@@ -105,6 +105,7 @@ class MyApp extends StatelessWidget {
                 side: BorderSide.none,
               ),
             ),
+            inputDecorationTheme: inputDecorationTheme,
             scaffoldBackgroundColor: Colors.transparent,
           ),
           home: Scaffold(

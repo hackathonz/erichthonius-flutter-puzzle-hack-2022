@@ -355,6 +355,25 @@ class AppLocalizations {
       locale: localeName,
     );
   }
+
+  String profileDateJoined(final DateTime joinedDateTime) {
+    return Intl.message(
+      'Swapper since ${DateFormat('d MMM y').format(joinedDateTime)}',
+      name: 'profileDateJoined',
+      desc: 'Indicator of when the user joined the app',
+      args: [joinedDateTime],
+      locale: localeName,
+    );
+  }
+
+  String get username {
+    return Intl.message(
+      'Username',
+      name: 'username',
+      desc: 'Username keyword',
+      locale: localeName,
+    );
+  }
 }
 
 class AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
