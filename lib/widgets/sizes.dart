@@ -9,6 +9,7 @@ const kIconBaseInputTrailingIconDiameter = 20.0;
 const kIconPrimarySize = 32.0;
 const kIconAlternativeSize = 40.0;
 const kIconAvatarEditSize = 24.0;
+const kIconGridTileSize = 28.0;
 const kIconInputTrailingIconSize = 12.0;
 const kIconAppBarSize = 24.0;
 const kIconAppBarTitleSize = 16.0;
@@ -18,6 +19,7 @@ const kCardRadius = 8.0;
 const kDialogRadius = 18.0;
 const kInputDecorationBorderRadius = 8.0;
 const kListTileRadius = 8.0;
+const kGridTileRadius = 8.0;
 const kCardElevation = 2.0;
 const kBottomNavigationBarElevation = 0.0;
 const kAppBarElevation = 0.0;
@@ -38,6 +40,7 @@ const kHardPuzzleGameTileCount = 25;
 const kPuzzleGameTilesSpacing = 13.0;
 const kDialogElevation = 24.0;
 const kAvatarCircleDiameter = 112.0;
+const kGridTileSize = Size.square(48.0);
 
 const iconThemeData = IconThemeData(
   color: iconsColor,

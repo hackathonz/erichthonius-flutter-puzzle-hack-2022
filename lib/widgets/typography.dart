@@ -194,3 +194,18 @@ const inputBorderErrorTextStyle = TextStyle(
   fontWeight: FontWeight.normal,
   height: 1.0,
 );
+
+const gridTileEmojiTextStyle = TextStyle(
+  fontSize: 18.0,
+  letterSpacing: 0,
+  fontWeight: FontWeight.normal,
+  height: 1.0,
+);
+
+const gridTileLabelTextStyle = TextStyle(
+  color: primaryTextColor,
+  fontSize: 12.0,
+  letterSpacing: 0,
+  fontWeight: FontWeight.w600,
+  height: 1.0,
+);

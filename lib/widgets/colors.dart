@@ -41,6 +41,10 @@ const inputDecorationErrorFillColor = Color(0x1FFA4C2B);
 const inputDecorationTextColor = Color(0xFFFFFFFF);
 const inputDecorationHintTextColor = Color(0xB8FFFFFF);
 const inputDecorationErrorTextColor = Color(0xFFFA4C2B);
+const primaryGridTileColor = Color(0x664447CA);
+const alternativeGridTileColor = Color(0xFFD2D3FF);
+const primaryGridTileBorderColor = Color(0xFF4447CA);
+const alternativeGridTileBorderColor = Color(0xFFFFFFFF);
 
 const kListTileColor = Color(0xFF4447CA);
 

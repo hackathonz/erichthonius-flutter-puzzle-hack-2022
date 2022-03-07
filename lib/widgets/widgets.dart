@@ -5,6 +5,7 @@ export 'buttons.dart';
 export 'cards.dart';
 export 'colors.dart';
 export 'dialogs.dart';
+export 'grid.dart';
 export 'icons.dart';
 export 'images.dart';
 export 'input.dart';

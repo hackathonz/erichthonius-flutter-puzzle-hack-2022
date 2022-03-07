@@ -12,20 +12,42 @@ class SwapItAppBar extends AppBar {
     Key? key,
     final IconData leadingIconData = SwapItIcons.back,
     final void Function()? leadingPressCallback,
+    final IconData trailingIconData = SwapItIcons.close,
+    final void Function()? trailingPressCallback,
     final String? title,
     final List<Widget> bottomTitle = const [],
+    final bool showLeading = true,
+    final bool showTrailing = false,
   }) : super(
           key: key,
-          leading: Builder(
-            builder: (context) {
-              return IconButton(
-                icon: Icon(
-                  leadingIconData,
-                ),
-                onPressed: leadingPressCallback ?? Navigator.of(context).pop,
-              );
-            },
-          ),
+          leading: showLeading
+              ? Builder(
+                  builder: (context) {
+                    return IconButton(
+                      icon: Icon(
+                        leadingIconData,
+                      ),
+                      onPressed:
+                          leadingPressCallback ?? Navigator.of(context).pop,
+                    );
+                  },
+                )
+              : null,
+          automaticallyImplyLeading: showLeading,
+          actions: [
+            if (showTrailing)
+              Builder(
+                builder: (context) {
+                  return IconButton(
+                    icon: Icon(
+                      trailingIconData,
+                    ),
+                    onPressed:
+                        trailingPressCallback ?? Navigator.of(context).pop,
+                  );
+                },
+              ),
+          ],
           bottom: bottomTitle.isNotEmpty
               ? PreferredSize(
                   child: Padding(
