@@ -23,100 +23,118 @@ class ChangeAvatarView extends StatelessWidget {
 
     final avatarBloc = context.read<AvatarBloc>();
 
-    final userProfile = avatarBloc.userProfile;
+    final profileBloc = context.read<ProfileBloc>();
 
-    return SwapItScaffold(
-      appBar: SwapItAppBar(
-        title: localizations.changeAvatarTitle,
-        showLeading: false,
-        showTrailing: true,
-      ),
-      scaffoldPadding: kProfileViewsPadding,
-      body: Center(
-        child: ListView(
-          children: [
-            BlocBuilder<AvatarBloc, AvatarState>(
-              buildWhen: (previous, current) => current is AvatarUpdate,
-              builder: (context, state) {
-                return SwapItAvatar(
-                  avatar:
-                      state is AvatarUpdate ? state.avatar : userProfile.avatar,
-                );
-              },
+    return BlocListener<AvatarBloc, AvatarState>(
+      listenWhen: (previous, current) =>
+          current is AvatarUpdate && current.markedAsChangeAvatar,
+      listener: (context, state) {
+        if (state is AvatarUpdate) {
+          profileBloc.add(
+            AvatarChanged(
+              avatar: state.avatar,
             ),
-            const Padding(
-              padding: _kAppBarPaddingBetweenAvatarAndEmojisGrid,
-            ),
-            BlocBuilder<AvatarBloc, AvatarState>(
-              buildWhen: (previous, current) =>
-                  current is LoadAvailableEmojisSuccess,
-              builder: (context, state) {
-                return Grid(
-                  label: localizations.emojis,
-                  tiles: [
-                    if (state is LoadAvailableEmojisSuccess)
-                      ...state.emojis.map(
-                        (x) => GridTile(
-                          data: EmojiGridTileData(
-                            emojiText: x,
-                          ),
-                          isSelected: x == state.selectedEmoji,
-                          onPressed: () => avatarBloc.add(
-                            EmojiSelected(
-                              emoji: x,
-                            ),
-                          ),
-                        ),
-                      ),
-                  ],
-                );
-              },
-            ),
-            const Padding(
-              padding: _kAppBarPaddingBetweenEmojisGridAndPPhotosGrid,
-            ),
-            BlocBuilder<AvatarBloc, AvatarState>(
-              buildWhen: (previous, current) =>
-                  current is LoadPersonalPhotosSuccess,
-              builder: (context, state) {
-                if (state is LoadPersonalPhotosSuccess) {
+          );
+        }
+      },
+      child: SwapItScaffold(
+        appBar: SwapItAppBar(
+          title: localizations.changeAvatarTitle,
+          showLeading: false,
+          showTrailing: true,
+        ),
+        scaffoldPadding: kProfileViewsPadding,
+        body: Center(
+          child: ListView(
+            children: [
+              BlocBuilder<AvatarBloc, AvatarState>(
+                buildWhen: (previous, current) => current is AvatarUpdate,
+                builder: (context, state) {
+                  return SwapItAvatar(
+                    avatar: state is AvatarUpdate
+                        ? state.avatar
+                        : avatarBloc.avatar,
+                  );
+                },
+              ),
+              const Padding(
+                padding: _kAppBarPaddingBetweenAvatarAndEmojisGrid,
+              ),
+              BlocBuilder<AvatarBloc, AvatarState>(
+                buildWhen: (previous, current) =>
+                    current is LoadAvailableEmojisSuccess,
+                builder: (context, state) {
                   return Grid(
-                    label: localizations.personalPhotos,
+                    label: localizations.emojis,
                     tiles: [
-                      ...state.urls.map(
-                        (x) => GridTile(
-                          data: PhotoGridTileData(
-                            url: x,
-                          ),
-                          isSelected: x == state.selectedPhotoUrl,
-                          onPressed: () => avatarBloc.add(
-                            PersonalPhotoSelected(
-                              photoUrl: x,
+                      if (state is LoadAvailableEmojisSuccess)
+                        ...state.emojis.map(
+                          (x) => GridTile(
+                            data: EmojiGridTileData(
+                              emojiText: x,
+                            ),
+                            isSelected: x == state.selectedEmoji,
+                            onPressed: () => avatarBloc.add(
+                              EmojiSelected(
+                                emoji: x,
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                      GridTile(
-                        data: IconGridTileData(
-                          iconData: SwapItIcons.add,
-                        ),
-                        isSelected: false,
-                        onPressed: () {},
-                      ),
                     ],
                   );
-                } else {
-                  return const SizedBox.shrink();
-                }
-              },
-            ),
-          ],
-          primary: false,
+                },
+              ),
+              const Padding(
+                padding: _kAppBarPaddingBetweenEmojisGridAndPPhotosGrid,
+              ),
+              BlocBuilder<AvatarBloc, AvatarState>(
+                buildWhen: (previous, current) =>
+                    current is LoadPersonalPhotosSuccess,
+                builder: (context, state) {
+                  if (state is LoadPersonalPhotosSuccess) {
+                    return Grid(
+                      label: localizations.personalPhotos,
+                      tiles: [
+                        ...state.urls.map(
+                          (x) => GridTile(
+                            data: PhotoGridTileData(
+                              url: x,
+                            ),
+                            isSelected: x == state.selectedPhotoUrl,
+                            onPressed: () => avatarBloc.add(
+                              PersonalPhotoSelected(
+                                photoUrl: x,
+                              ),
+                            ),
+                          ),
+                        ),
+                        GridTile(
+                          data: IconGridTileData(
+                            iconData: SwapItIcons.add,
+                          ),
+                          isSelected: false,
+                          onPressed: () {},
+                        ),
+                      ],
+                    );
+                  } else {
+                    return const SizedBox.shrink();
+                  }
+                },
+              ),
+            ],
+            primary: false,
+          ),
         ),
-      ),
-      bottomButton: SwapItButton(
-        text: localizations.changeAvatar,
-        onPressed: () {},
+        bottomButton: SwapItButton(
+          text: localizations.changeAvatar,
+          onPressed: () {
+            avatarBloc.add(
+              ChangeAvatarStarted(),
+            );
+          },
+        ),
       ),
     );
   }

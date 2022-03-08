@@ -11,7 +11,7 @@ part 'avatar_state.dart';
 class AvatarBloc extends Bloc<AvatarEvent, AvatarState> {
   final AvatarRepository avatarRepository;
 
-  final UserProfile userProfile;
+  final Avatar avatar;
 
   String? selectedPhotoUrl;
 
@@ -23,7 +23,7 @@ class AvatarBloc extends Bloc<AvatarEvent, AvatarState> {
 
   AvatarBloc({
     required final this.avatarRepository,
-    required final this.userProfile,
+    required final this.avatar,
   }) : super(AvatarInitial());
 
   @override
@@ -36,6 +36,8 @@ class AvatarBloc extends Bloc<AvatarEvent, AvatarState> {
       yield* _mapEmojiSelectedToState(event);
     } else if (event is PersonalPhotoSelected) {
       yield* _mapPersonalPhotoSelectedToState(event);
+    } else if (event is ChangeAvatarStarted) {
+      yield* _mapChangeAvatarStartedToState(event);
     }
   }
 
@@ -49,7 +51,7 @@ class AvatarBloc extends Bloc<AvatarEvent, AvatarState> {
 
       yield LoadAvailableEmojisSuccess(
         emojis: emojis,
-        selectedEmoji: userProfile.avatar.data,
+        selectedEmoji: avatar.data,
       );
     } on Object catch (error, stacktrace) {
       logError(error, stacktrace: stacktrace);
@@ -70,7 +72,7 @@ class AvatarBloc extends Bloc<AvatarEvent, AvatarState> {
 
       yield LoadPersonalPhotosSuccess(
         urls: _personalPhotos,
-        selectedPhotoUrl: userProfile.avatar.data,
+        selectedPhotoUrl: avatar.data,
       );
     } on Object catch (error, stacktrace) {
       logError(error, stacktrace: stacktrace);
@@ -83,6 +85,7 @@ class AvatarBloc extends Bloc<AvatarEvent, AvatarState> {
     EmojiSelected event,
   ) async* {
     selectedEmoji = event.emoji;
+    selectedPhotoUrl = null;
 
     yield LoadAvailableEmojisSuccess(
       emojis: _availableEmojis,
@@ -105,6 +108,7 @@ class AvatarBloc extends Bloc<AvatarEvent, AvatarState> {
     PersonalPhotoSelected event,
   ) async* {
     selectedPhotoUrl = event.photoUrl;
+    selectedEmoji = null;
 
     yield LoadPersonalPhotosSuccess(
       urls: _personalPhotos,
@@ -120,6 +124,18 @@ class AvatarBloc extends Bloc<AvatarEvent, AvatarState> {
 
     yield LoadAvailableEmojisSuccess(
       emojis: _availableEmojis,
+    );
+  }
+
+  Stream<AvatarState> _mapChangeAvatarStartedToState(
+    ChangeAvatarStarted event,
+  ) async* {
+    yield AvatarUpdate(
+      avatar: Avatar(
+        data: (selectedEmoji ?? selectedPhotoUrl)!,
+        isUrl: selectedPhotoUrl != null,
+      ),
+      markedAsChangeAvatar: true,
     );
   }
 }

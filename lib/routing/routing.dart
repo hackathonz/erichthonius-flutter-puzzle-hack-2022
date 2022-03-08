@@ -81,21 +81,30 @@ Future<void> navigateToSettingsView(final BuildContext context) {
 Future<void> navigateToChangeAvatarView(
   final BuildContext context,
   final ProfileBloc profileBloc,
+  final Avatar avatar,
 ) {
   return Navigator.of(context).push(
     MaterialPageRoute(
       builder: (routeContext) {
-        return BlocProvider(
-          create: (context) => AvatarBloc(
-            avatarRepository: context.read<Vault>().lookup<AvatarRepository>(),
-            userProfile: profileBloc.userProfile,
-          )
-            ..add(
-              LoadAvailableEmojisStarted(),
-            )
-            ..add(
-              LoadPersonalPhotosStarted(),
+        return MultiBlocProvider(
+          providers: [
+            BlocProvider(
+              create: (context) => AvatarBloc(
+                avatarRepository:
+                    context.read<Vault>().lookup<AvatarRepository>(),
+                avatar: avatar,
+              )
+                ..add(
+                  LoadAvailableEmojisStarted(),
+                )
+                ..add(
+                  LoadPersonalPhotosStarted(),
+                ),
             ),
+            BlocProvider.value(
+              value: profileBloc,
+            ),
+          ],
           child: const ChangeAvatarView(),
         );
       },

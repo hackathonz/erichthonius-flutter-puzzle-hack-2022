@@ -42,12 +42,21 @@ class ProfileView extends StatelessWidget {
       body: Center(
         child: ListView(
           children: [
-            SwapItAvatar(
-              avatar: userProfile.avatar,
-              onEditAvatarPressedCallback: () => navigateToChangeAvatarView(
-                context,
-                profileBloc,
-              ),
+            BlocBuilder<ProfileBloc, ProfileState>(
+              buildWhen: (previous, current) => current is AvatarChange,
+              builder: (context, state) {
+                final avatar =
+                    state is AvatarChange ? state.avatar : userProfile.avatar;
+
+                return SwapItAvatar(
+                  avatar: avatar,
+                  onEditAvatarPressedCallback: () => navigateToChangeAvatarView(
+                    context,
+                    profileBloc,
+                    avatar,
+                  ),
+                );
+              },
             ),
             const Padding(
               padding: _kAppBarPaddingBetweenAvatarAndUsername,

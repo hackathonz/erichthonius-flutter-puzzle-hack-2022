@@ -20,3 +20,11 @@ class ValidateUsernameFailure extends ProfileState {}
 class UpdateProfileSuccess extends ProfileState {}
 
 class UpdateProfileFailure extends ProfileState {}
+
+class AvatarChange extends ProfileState {
+  final Avatar avatar;
+
+  AvatarChange({
+    required final this.avatar,
+  });
+}

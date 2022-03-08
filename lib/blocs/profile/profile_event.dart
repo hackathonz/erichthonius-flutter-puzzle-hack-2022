@@ -20,3 +20,11 @@ class UpdateProfileStarted extends ProfileEvent {
 }
 
 class UsernameReset extends ProfileEvent {}
+
+class AvatarChanged extends ProfileEvent {
+  final Avatar avatar;
+
+  AvatarChanged({
+    required final this.avatar,
+  });
+}

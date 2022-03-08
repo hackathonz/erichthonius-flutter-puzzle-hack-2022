@@ -12,10 +12,13 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
 
   final UserProfile userProfile;
 
+  Avatar _avatar;
+
   ProfileBloc({
     required final this.profileRepository,
     required final this.userProfile,
-  }) : super(ProfileInitial());
+  })  : _avatar = userProfile.avatar,
+        super(ProfileInitial());
 
   @override
   Stream<ProfileState> mapEventToState(ProfileEvent event) async* {
@@ -25,6 +28,8 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       yield* _mapUpdateProfileStartedToState(event);
     } else if (event is UsernameReset) {
       yield* _mapUsernameResetToState(event);
+    } else if (event is AvatarChanged) {
+      yield* _mapAvatarChangedToState(event);
     }
   }
 
@@ -44,8 +49,9 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
 
       if (validationState is ValidateUsernameSuccess &&
           validationState.isValid) {
-        profileRepository.updateProfile(
+        await profileRepository.updateProfile(
           userProfile.copyWith(
+            avatar: _avatar,
             username: event.newUsername,
           ),
         );
@@ -65,6 +71,16 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     UsernameReset event,
   ) async* {
     yield ValidateUsernameInitial();
+  }
+
+  Stream<ProfileState> _mapAvatarChangedToState(
+    AvatarChanged event,
+  ) async* {
+    _avatar = event.avatar;
+
+    yield AvatarChange(
+      avatar: _avatar,
+    );
   }
 
   Future<ProfileState> _mapUsernameValidationCallToState(

@@ -32,7 +32,10 @@ class LoadPersonalPhotosFailure extends AvatarState {}
 class AvatarUpdate extends AvatarState {
   final Avatar avatar;
 
+  final bool markedAsChangeAvatar;
+
   AvatarUpdate({
     required final this.avatar,
+    final this.markedAsChangeAvatar = false,
   });
 }
