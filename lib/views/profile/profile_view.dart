@@ -61,10 +61,15 @@ class ProfileView extends StatelessWidget {
             const Padding(
               padding: _kAppBarPaddingBetweenAvatarAndUsername,
             ),
-            Text(
-              userProfile.username,
-              style: profileUsernameTextStyle,
-              textAlign: TextAlign.center,
+            BlocBuilder<ProfileBloc, ProfileState>(
+              buildWhen: (previous, current) => current is UpdateProfileSuccess,
+              builder: (context, state) {
+                return Text(
+                  usernameTextEditingController.text,
+                  style: profileUsernameTextStyle,
+                  textAlign: TextAlign.center,
+                );
+              },
             ),
             const Padding(
               padding: _kAppBarPaddingBetweenUsernameAndDateJoined,
