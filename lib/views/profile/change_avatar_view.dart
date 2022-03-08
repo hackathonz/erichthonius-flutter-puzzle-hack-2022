@@ -69,10 +69,10 @@ class ChangeAvatarView extends StatelessWidget {
               buildWhen: (previous, current) =>
                   current is LoadPersonalPhotosSuccess,
               builder: (context, state) {
-                return Grid(
-                  label: localizations.personalPhotos,
-                  tiles: [
-                    if (state is LoadPersonalPhotosSuccess)
+                if (state is LoadPersonalPhotosSuccess) {
+                  return Grid(
+                    label: localizations.personalPhotos,
+                    tiles: [
                       ...state.urls.map(
                         (x) => GridTile(
                           data: PhotoGridTileData(
@@ -82,15 +82,18 @@ class ChangeAvatarView extends StatelessWidget {
                           onPressed: () {},
                         ),
                       ),
-                    GridTile(
-                      data: IconGridTileData(
-                        iconData: SwapItIcons.add,
+                      GridTile(
+                        data: IconGridTileData(
+                          iconData: SwapItIcons.add,
+                        ),
+                        isSelected: false,
+                        onPressed: () {},
                       ),
-                      isSelected: false,
-                      onPressed: () {},
-                    ),
-                  ],
-                );
+                    ],
+                  );
+                } else {
+                  return const SizedBox.shrink();
+                }
               },
             ),
           ],

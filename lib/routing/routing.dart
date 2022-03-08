@@ -87,8 +87,8 @@ Future<void> navigateToChangeAvatarView(
       builder: (routeContext) {
         return BlocProvider(
           create: (context) => AvatarBloc(
+            avatarRepository: context.read<Vault>().lookup<AvatarRepository>(),
             userProfile: profileBloc.userProfile,
-            profileRepository: profileBloc.profileRepository,
           )
             ..add(
               LoadAvailableEmojisStarted(),

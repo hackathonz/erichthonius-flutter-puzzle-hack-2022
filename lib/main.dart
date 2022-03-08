@@ -169,6 +169,10 @@ Vault<Object> vault({
     vault.store<ProfileRepository>(
       RealProfileRepository(),
     );
+
+    vault.store<AvatarRepository>(
+      RealAvatarRepository(),
+    );
   } else {
     vault.store<GameRepository>(
       MockGameRepository(),
@@ -176,6 +180,10 @@ Vault<Object> vault({
 
     vault.store<ProfileRepository>(
       MockProfileRepository(),
+    );
+
+    vault.store<AvatarRepository>(
+      MockAvatarRepository(),
     );
   }
 

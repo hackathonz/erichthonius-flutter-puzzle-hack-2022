@@ -1,18 +1,19 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:swap_it/data/data.dart';
+import 'package:swap_it/logging/logging.dart';
 import 'package:swap_it/models/models.dart';
 
 part 'avatar_event.dart';
 part 'avatar_state.dart';
 
 class AvatarBloc extends Bloc<AvatarEvent, AvatarState> {
-  final ProfileRepository profileRepository;
+  final AvatarRepository avatarRepository;
 
   final UserProfile userProfile;
 
   AvatarBloc({
-    required final this.profileRepository,
+    required final this.avatarRepository,
     required final this.userProfile,
   }) : super(AvatarInitial());
 
@@ -28,32 +29,36 @@ class AvatarBloc extends Bloc<AvatarEvent, AvatarState> {
   Stream<AvatarState> _mapLoadAvailableEmojisStartedToState(
     LoadAvailableEmojisStarted event,
   ) async* {
-    yield LoadAvailableEmojisSuccess(
-      emojis: const [
-        '😎',
-        '🎃',
-        '❤️',
-        '👻',
-        '😇',
-        '🚀',
-        '🚘',
-        '🤔',
-        '🙈',
-        '😈',
-        '👀',
-        '🧩',
-      ],
-      selectedEmoji: '😎',
-    );
+    try {
+      final emojis = await avatarRepository.availableEmojis();
+
+      yield LoadAvailableEmojisSuccess(
+        emojis: emojis,
+        selectedEmoji: userProfile.avatar.data,
+      );
+    } on Object catch (error, stacktrace) {
+      logError(error, stacktrace: stacktrace);
+
+      yield LoadAvailableEmojisSuccess(
+        emojis: defaultAvailableEmojis,
+      );
+    }
   }
 
   Stream<AvatarState> _mapLoadPersonalPhotosStartedToState(
     LoadPersonalPhotosStarted event,
   ) async* {
-    yield LoadPersonalPhotosSuccess(
-      urls: const [
-        'https://lh3.googleusercontent.com/a-/AOh14GgDn_JFNit9gPzQNfeV8I-yB28qKK1fGPfoFg=s256'
-      ],
-    );
+    try {
+      final photosUrls = await avatarRepository.personalPhotos();
+
+      yield LoadPersonalPhotosSuccess(
+        urls: photosUrls,
+        selectedPhotoUrl: userProfile.avatar.data,
+      );
+    } on Object catch (error, stacktrace) {
+      logError(error, stacktrace: stacktrace);
+
+      yield LoadPersonalPhotosFailure();
+    }
   }
 }
