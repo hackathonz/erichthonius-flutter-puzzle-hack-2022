@@ -23,11 +23,13 @@ class SwapItAvatar extends StatelessWidget {
             height: kAvatarCircleDiameter,
             child: ClipOval(
               child: Center(
-                child: Text(
-                  avatar.data,
-                  style: avatarEmojiTextStyle,
-                  textAlign: TextAlign.center,
-                ),
+                child: !avatar.isUrl
+                    ? Text(
+                        avatar.data,
+                        style: avatarEmojiTextStyle,
+                        textAlign: TextAlign.center,
+                      )
+                    : null,
               ),
             ),
             decoration: BoxDecoration(
