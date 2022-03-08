@@ -37,4 +37,13 @@ class Game {
   void registerPlayEntry(final GameLevelPlayEntry playEntry) {
     gameUserProfile.registerPlayEntry(playEntry);
   }
+
+  Game copyWith({
+    final GameUserProfile? gameUserProfile,
+  }) {
+    return Game(
+      gameLevels: gameLevels,
+      gameUserProfile: gameUserProfile ?? this.gameUserProfile,
+    );
+  }
 }

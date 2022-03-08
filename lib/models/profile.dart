@@ -15,6 +15,15 @@ class GameUserProfile {
   void registerPlayEntry(final GameLevelPlayEntry playEntry) {
     levelsPlayed.add(playEntry);
   }
+
+  GameUserProfile copyWith({
+    final UserProfile? profile,
+  }) {
+    return GameUserProfile(
+      levelsPlayed: levelsPlayed,
+      profile: profile ?? this.profile,
+    );
+  }
 }
 
 class UserProfile {

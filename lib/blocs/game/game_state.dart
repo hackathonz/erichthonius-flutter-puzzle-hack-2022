@@ -38,3 +38,5 @@ class SaveGameSuccess extends GameState {
 class SaveGameFailure extends GameState {}
 
 class SaveGameLevelPlayEntrySuccess extends GameState {}
+
+class SyncUserProfileChangesSuccess extends GameState {}

@@ -30,3 +30,11 @@ class PlayNextGameLevelStarted extends GameEvent {
     required final this.previousGameLevel,
   });
 }
+
+class SyncUserProfileChangesStarted extends GameEvent {
+  final UserProfile userProfile;
+
+  SyncUserProfileChangesStarted({
+    required final this.userProfile,
+  });
+}

@@ -30,11 +30,7 @@ class ChangeAvatarView extends StatelessWidget {
           current is AvatarUpdate && current.markedAsChangeAvatar,
       listener: (context, state) {
         if (state is AvatarUpdate) {
-          profileBloc.add(
-            AvatarChanged(
-              avatar: state.avatar,
-            ),
-          );
+          _onAvatarUpdateStateReact(state, profileBloc);
         }
       },
       child: SwapItScaffold(
@@ -135,6 +131,17 @@ class ChangeAvatarView extends StatelessWidget {
             );
           },
         ),
+      ),
+    );
+  }
+
+  void _onAvatarUpdateStateReact(
+    final AvatarUpdate state,
+    final ProfileBloc profileBloc,
+  ) {
+    profileBloc.add(
+      AvatarChanged(
+        avatar: state.avatar,
       ),
     );
   }

@@ -28,6 +28,8 @@ class GameBloc extends Bloc<GameEvent, GameState> {
       yield* _mapSaveGameLevelPlayEntryStartedToState(event);
     } else if (event is PlayNextGameLevelStarted) {
       yield* _mapPlayNextGameLevelStartedToState(event);
+    } else if (event is SyncUserProfileChangesStarted) {
+      yield* _mapSyncUserProfileChangesStartedToState(event);
     }
   }
 
@@ -102,5 +104,17 @@ class GameBloc extends Bloc<GameEvent, GameState> {
     yield StartPlayGameLevelInitial(
       gameLevel: nextGameLevel,
     );
+  }
+
+  Stream<GameState> _mapSyncUserProfileChangesStartedToState(
+    SyncUserProfileChangesStarted event,
+  ) async* {
+    game = game.copyWith(
+      gameUserProfile: game.gameUserProfile.copyWith(
+        profile: event.userProfile,
+      ),
+    );
+
+    yield SyncUserProfileChangesSuccess();
   }
 }

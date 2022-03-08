@@ -10,7 +10,7 @@ part 'profile_state.dart';
 class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   final ProfileRepository profileRepository;
 
-  final UserProfile userProfile;
+  UserProfile userProfile;
 
   Avatar _avatar;
 
@@ -48,15 +48,18 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       );
 
       if (validationState is ValidateUsernameSuccess &&
-          validationState.isValid) {
-        await profileRepository.updateProfile(
-          userProfile.copyWith(
-            avatar: _avatar,
-            username: event.newUsername,
-          ),
+              validationState.isValid ||
+          validationState is ValidateUsernameInitial) {
+        userProfile = userProfile.copyWith(
+          avatar: _avatar,
+          username: event.newUsername,
         );
 
-        yield UpdateProfileSuccess();
+        await profileRepository.updateProfile(userProfile);
+
+        yield UpdateProfileSuccess(
+          userProfile: userProfile,
+        );
       } else {
         yield validationState;
       }

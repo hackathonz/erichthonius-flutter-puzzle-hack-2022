@@ -17,7 +17,13 @@ class ValidateUsernameSuccess extends ProfileState {
 
 class ValidateUsernameFailure extends ProfileState {}
 
-class UpdateProfileSuccess extends ProfileState {}
+class UpdateProfileSuccess extends ProfileState {
+  final UserProfile userProfile;
+
+  UpdateProfileSuccess({
+    required final this.userProfile,
+  });
+}
 
 class UpdateProfileFailure extends ProfileState {}
 
