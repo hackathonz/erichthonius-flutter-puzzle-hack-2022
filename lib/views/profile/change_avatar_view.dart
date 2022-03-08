@@ -21,9 +21,9 @@ class ChangeAvatarView extends StatelessWidget {
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context);
 
-    final profileBloc = context.read<AvatarBloc>();
+    final avatarBloc = context.read<AvatarBloc>();
 
-    final userProfile = profileBloc.userProfile;
+    final userProfile = avatarBloc.userProfile;
 
     return SwapItScaffold(
       appBar: SwapItAppBar(
@@ -35,8 +35,14 @@ class ChangeAvatarView extends StatelessWidget {
       body: Center(
         child: ListView(
           children: [
-            SwapItAvatar(
-              avatar: userProfile.avatar,
+            BlocBuilder<AvatarBloc, AvatarState>(
+              buildWhen: (previous, current) => current is AvatarUpdate,
+              builder: (context, state) {
+                return SwapItAvatar(
+                  avatar:
+                      state is AvatarUpdate ? state.avatar : userProfile.avatar,
+                );
+              },
             ),
             const Padding(
               padding: _kAppBarPaddingBetweenAvatarAndEmojisGrid,
@@ -55,7 +61,11 @@ class ChangeAvatarView extends StatelessWidget {
                             emojiText: x,
                           ),
                           isSelected: x == state.selectedEmoji,
-                          onPressed: () {},
+                          onPressed: () => avatarBloc.add(
+                            EmojiSelected(
+                              emoji: x,
+                            ),
+                          ),
                         ),
                       ),
                   ],
@@ -79,7 +89,11 @@ class ChangeAvatarView extends StatelessWidget {
                             url: x,
                           ),
                           isSelected: x == state.selectedPhotoUrl,
-                          onPressed: () {},
+                          onPressed: () => avatarBloc.add(
+                            PersonalPhotoSelected(
+                              photoUrl: x,
+                            ),
+                          ),
                         ),
                       ),
                       GridTile(

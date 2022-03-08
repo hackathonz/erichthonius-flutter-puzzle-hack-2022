@@ -28,3 +28,11 @@ class LoadPersonalPhotosSuccess extends AvatarState {
 }
 
 class LoadPersonalPhotosFailure extends AvatarState {}
+
+class AvatarUpdate extends AvatarState {
+  final Avatar avatar;
+
+  AvatarUpdate({
+    required final this.avatar,
+  });
+}
