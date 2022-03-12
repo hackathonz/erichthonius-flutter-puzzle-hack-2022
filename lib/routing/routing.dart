@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:swap_it/blocs/blocs.dart';
 import 'package:swap_it/data/data.dart';
 import 'package:swap_it/main.dart';
@@ -100,6 +101,11 @@ Future<void> navigateToChangeAvatarView(
                 ..add(
                   LoadPersonalPhotosStarted(),
                 ),
+            ),
+            BlocProvider(
+              create: (context) => PhotoPickerBloc(
+                imagePicker: context.read<Vault>().lookup<ImagePicker>(),
+              ),
             ),
             BlocProvider.value(
               value: profileBloc,

@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:swap_it/blocs/blocs.dart';
 import 'package:swap_it/data/data.dart';
 import 'package:swap_it/l10n/app_localizations.dart';
@@ -173,6 +174,10 @@ Vault<Object> vault({
     vault.store<AvatarRepository>(
       RealAvatarRepository(),
     );
+
+    vault.store<ImagePicker>(
+      ImagePicker(),
+    );
   } else {
     vault.store<GameRepository>(
       MockGameRepository(),
@@ -184,6 +189,10 @@ Vault<Object> vault({
 
     vault.store<AvatarRepository>(
       MockAvatarRepository(),
+    );
+
+    vault.store<ImagePicker>(
+      ImagePicker(),
     );
   }
 
