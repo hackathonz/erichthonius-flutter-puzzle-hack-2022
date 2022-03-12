@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:swap_it/blocs/blocs.dart';
@@ -112,6 +114,28 @@ Future<void> navigateToChangeAvatarView(
             ),
           ],
           child: const ChangeAvatarView(),
+        );
+      },
+    ),
+  );
+}
+
+Future<void> navigateToPhotoCropView(
+  final BuildContext context,
+  final Uint8List photoBytes,
+) {
+  return Navigator.of(context).push(
+    MaterialPageRoute(
+      builder: (routeContext) {
+        return MultiBlocProvider(
+          providers: [
+            BlocProvider(
+              create: (context) => PhotoCropBloc(
+                photoBytes: photoBytes,
+              ),
+            ),
+          ],
+          child: const PhotoCropView(),
         );
       },
     ),

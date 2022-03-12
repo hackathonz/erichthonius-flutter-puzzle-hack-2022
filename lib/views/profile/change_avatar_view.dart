@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart' hide GridTile;
 import 'package:swap_it/blocs/blocs.dart';
 import 'package:swap_it/l10n/app_localizations.dart';
+import 'package:swap_it/routing/routing.dart';
 import 'package:swap_it/widgets/scaffold.dart';
 import 'package:swap_it/widgets/widgets.dart';
 
@@ -23,16 +24,29 @@ class ChangeAvatarView extends StatelessWidget {
 
     final avatarBloc = context.read<AvatarBloc>();
 
+    final photoPickerBloc = context.read<PhotoPickerBloc>();
+
     final profileBloc = context.read<ProfileBloc>();
 
-    return BlocListener<AvatarBloc, AvatarState>(
-      listenWhen: (previous, current) =>
-          current is AvatarUpdate && current.markedAsChangeAvatar,
-      listener: (context, state) {
-        if (state is AvatarUpdate) {
-          _onAvatarUpdateStateReact(state, profileBloc);
-        }
-      },
+    return MultiBlocListener(
+      listeners: [
+        BlocListener<AvatarBloc, AvatarState>(
+          listenWhen: (previous, current) =>
+              current is AvatarUpdate && current.markedAsChangeAvatar,
+          listener: (context, state) {
+            if (state is AvatarUpdate) {
+              _onAvatarUpdateStateReact(state, profileBloc);
+            }
+          },
+        ),
+        BlocListener<PhotoPickerBloc, PhotoPickerState>(
+          listener: (context, state) {
+            if (state is PickPhotoSuccess) {
+              _onPickPhotoSuccessStateReact(context, state);
+            }
+          },
+        ),
+      ],
       child: SwapItScaffold(
         appBar: SwapItAppBar(
           title: localizations.changeAvatarTitle,
@@ -110,7 +124,11 @@ class ChangeAvatarView extends StatelessWidget {
                             iconData: SwapItIcons.add,
                           ),
                           isSelected: false,
-                          onPressed: () {},
+                          onPressed: () {
+                            photoPickerBloc.add(
+                              PickPhotoStarted(),
+                            );
+                          },
                         ),
                       ],
                     );
@@ -144,5 +162,12 @@ class ChangeAvatarView extends StatelessWidget {
         avatar: state.avatar,
       ),
     );
+  }
+
+  void _onPickPhotoSuccessStateReact(
+    final BuildContext context,
+    final PickPhotoSuccess state,
+  ) {
+    navigateToPhotoCropView(context, state.bytes);
   }
 }
