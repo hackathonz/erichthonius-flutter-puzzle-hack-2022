@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:swap_it/blocs/blocs.dart';
@@ -107,8 +109,19 @@ class AvatarBloc extends Bloc<AvatarEvent, AvatarState> {
   Stream<AvatarState> _mapPersonalPhotoSelectedToState(
     PersonalPhotoSelected event,
   ) async* {
-    selectedPhotoUrl = event.photoUrl;
-    selectedEmoji = null;
+    if (event is ExistingPersonalPhotoSelected) {
+      selectedPhotoUrl = event.photoUrl;
+      selectedEmoji = null;
+    } else if (event is NewPersonalPhotoSelected) {
+      final uploadedPhotoUrl = await avatarRepository.uploadPhoto(
+        event.photoBytes,
+      );
+
+      _personalPhotos.add(uploadedPhotoUrl);
+
+      selectedPhotoUrl = uploadedPhotoUrl;
+      selectedEmoji = null;
+    }
 
     yield LoadPersonalPhotosSuccess(
       urls: _personalPhotos,

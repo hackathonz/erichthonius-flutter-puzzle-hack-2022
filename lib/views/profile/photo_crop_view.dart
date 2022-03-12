@@ -26,6 +26,8 @@ class PhotoCropView extends StatelessWidget {
       MediaQuery.of(context).size.height * 0.08,
     );
 
+    final avatarBloc = context.read<AvatarBloc>();
+
     final photoCropBloc = context.read<PhotoCropBloc>();
 
     final photoToCrop = ExtendedMemoryImageProvider(
@@ -37,7 +39,7 @@ class PhotoCropView extends StatelessWidget {
         if (state is PhotoCropCancel) {
           _onPhotoCropCancelStateReact(context);
         } else if (state is PhotoCropSuccess) {
-          _onPhotoCropSuccessStateReact(context, state);
+          _onPhotoCropSuccessStateReact(context, state, avatarBloc);
         }
       },
       child: Container(
@@ -149,7 +151,14 @@ class PhotoCropView extends StatelessWidget {
   void _onPhotoCropSuccessStateReact(
     final BuildContext context,
     final PhotoCropSuccess state,
+    final AvatarBloc avatarBloc,
   ) {
     Navigator.of(context).pop();
+
+    avatarBloc.add(
+      NewPersonalPhotoSelected(
+        photoBytes: state.photoBytes,
+      ),
+    );
   }
 }

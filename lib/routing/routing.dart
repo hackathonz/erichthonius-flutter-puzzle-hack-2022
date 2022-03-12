@@ -123,6 +123,7 @@ Future<void> navigateToChangeAvatarView(
 Future<void> navigateToPhotoCropView(
   final BuildContext context,
   final Uint8List photoBytes,
+  final AvatarBloc avatarBloc,
 ) {
   return Navigator.of(context).push(
     MaterialPageRoute(
@@ -133,6 +134,9 @@ Future<void> navigateToPhotoCropView(
               create: (context) => PhotoCropBloc(
                 photoBytes: photoBytes,
               ),
+            ),
+            BlocProvider.value(
+              value: avatarBloc,
             ),
           ],
           child: const PhotoCropView(),

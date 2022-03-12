@@ -42,7 +42,7 @@ class ChangeAvatarView extends StatelessWidget {
         BlocListener<PhotoPickerBloc, PhotoPickerState>(
           listener: (context, state) {
             if (state is PickPhotoSuccess) {
-              _onPickPhotoSuccessStateReact(context, state);
+              _onPickPhotoSuccessStateReact(context, state, avatarBloc);
             }
           },
         ),
@@ -113,7 +113,7 @@ class ChangeAvatarView extends StatelessWidget {
                             ),
                             isSelected: x == state.selectedPhotoUrl,
                             onPressed: () => avatarBloc.add(
-                              PersonalPhotoSelected(
+                              ExistingPersonalPhotoSelected(
                                 photoUrl: x,
                               ),
                             ),
@@ -167,7 +167,12 @@ class ChangeAvatarView extends StatelessWidget {
   void _onPickPhotoSuccessStateReact(
     final BuildContext context,
     final PickPhotoSuccess state,
+    final AvatarBloc avatarBloc,
   ) {
-    navigateToPhotoCropView(context, state.bytes);
+    navigateToPhotoCropView(
+      context,
+      state.bytes,
+      avatarBloc,
+    );
   }
 }

@@ -15,11 +15,21 @@ class EmojiSelected extends AvatarEvent {
   });
 }
 
-class PersonalPhotoSelected extends AvatarEvent {
+abstract class PersonalPhotoSelected extends AvatarEvent {}
+
+class ExistingPersonalPhotoSelected extends PersonalPhotoSelected {
   final String photoUrl;
 
-  PersonalPhotoSelected({
+  ExistingPersonalPhotoSelected({
     required final this.photoUrl,
+  });
+}
+
+class NewPersonalPhotoSelected extends PersonalPhotoSelected {
+  final Uint8List photoBytes;
+
+  NewPersonalPhotoSelected({
+    required final this.photoBytes,
   });
 }
 
