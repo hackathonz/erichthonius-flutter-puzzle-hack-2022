@@ -50,8 +50,15 @@ const cropViewMaskColorDisabled = Color(0x33FFFFFF);
 const cropViewMaskColorPressed = Color(0x66FFFFFF);
 const cropViewBackgroundColor = Color(0xFF000000);
 const cropViewActionsBaseColor = Color(0xFFFFFFFF);
+const activeTabColor = Color(0xFFFFFFFF);
+const inactiveTabColor = Color(0xFF4447CA);
+const activeTabLabelColor = Color(0xFF4447CA);
+const inactiveTabLabelColor = Color(0xFFFFFFFF);
+const tabBarColor = Color(0xFF4447CA);
 
 const kListTileColor = Color(0xFF4447CA);
+
+final transparentMaterialState = MaterialStateProperty.all(Colors.transparent);
 
 const listTileBoxShadow = BoxShadow(
   color: Color.fromRGBO(0, 0, 0, 0.10000000149011612),

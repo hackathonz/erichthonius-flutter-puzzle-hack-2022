@@ -20,6 +20,7 @@ const kDialogRadius = 18.0;
 const kInputDecorationBorderRadius = 8.0;
 const kListTileRadius = 8.0;
 const kGridTileRadius = 8.0;
+const kTabRadRadius = 16.0;
 const kCardElevation = 2.0;
 const kBottomNavigationBarElevation = 0.0;
 const kAppBarElevation = 0.0;
@@ -41,6 +42,8 @@ const kPuzzleGameTilesSpacing = 13.0;
 const kDialogElevation = 24.0;
 const kAvatarCircleDiameter = 112.0;
 const kGridTileSize = Size.square(48.0);
+const kTabSize = Size(91.0, 28.0);
+const kTabBarSize = Size(327.0, 32.0);
 
 const iconThemeData = IconThemeData(
   color: iconsColor,

@@ -12,5 +12,6 @@ export 'input.dart';
 export 'puzzle.dart';
 export 'scaffold.dart';
 export 'sizes.dart';
+export 'tab.dart';
 export 'tiles.dart';
 export 'typography.dart';

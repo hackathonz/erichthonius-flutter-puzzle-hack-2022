@@ -209,3 +209,19 @@ const gridTileLabelTextStyle = TextStyle(
   fontWeight: FontWeight.w600,
   height: 1.0,
 );
+
+const activeTabLabelTextStyle = TextStyle(
+  color: activeTabLabelColor,
+  fontSize: 13.0,
+  letterSpacing: 0,
+  fontWeight: FontWeight.w600,
+  height: 1.0,
+);
+
+const inactiveTabLabelTextStyle = TextStyle(
+  color: inactiveTabLabelColor,
+  fontSize: 13.0,
+  letterSpacing: 0,
+  fontWeight: FontWeight.w600,
+  height: 1.0,
+);
