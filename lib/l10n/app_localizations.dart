@@ -420,6 +420,24 @@ class AppLocalizations {
       locale: localeName,
     );
   }
+
+  String get cancel {
+    return Intl.message(
+      'Cancel',
+      name: 'cancel',
+      desc: 'Cancel keyword',
+      locale: localeName,
+    );
+  }
+
+  String get done {
+    return Intl.message(
+      'Done',
+      name: 'done',
+      desc: 'Done keyword',
+      locale: localeName,
+    );
+  }
 }
 
 class AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

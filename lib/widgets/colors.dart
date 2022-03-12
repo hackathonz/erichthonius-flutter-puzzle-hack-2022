@@ -45,6 +45,11 @@ const primaryGridTileColor = Color(0x664447CA);
 const alternativeGridTileColor = Color(0xFFD2D3FF);
 const primaryGridTileBorderColor = Color(0xFF4447CA);
 const alternativeGridTileBorderColor = Color(0xFFFFFFFF);
+const cropViewCornerColor = Color(0xFFFFFFFF);
+const cropViewMaskColorDisabled = Color(0x33FFFFFF);
+const cropViewMaskColorPressed = Color(0x66FFFFFF);
+const cropViewBackgroundColor = Color(0xFF000000);
+const cropViewActionsBaseColor = Color(0xFFFFFFFF);
 
 const kListTileColor = Color(0xFF4447CA);
 
