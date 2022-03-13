@@ -146,7 +146,7 @@ class SwapItListLeaderboardListTile extends StatelessWidget {
           Text(
             entry.rankingPosition.toString(),
             style: leaderboardListTileRankingPositionTextStyle,
-            textAlign: TextAlign.center,
+            textAlign: TextAlign.start,
           ),
           Padding(
             padding: _kLeaderboardListTileAvatarPadding,
@@ -157,14 +157,14 @@ class SwapItListLeaderboardListTile extends StatelessWidget {
           Text(
             entry.userProfile.username,
             style: leaderboardListTileUsernameTextStyle,
-            textAlign: TextAlign.center,
+            textAlign: TextAlign.start,
           ),
           const Spacer(),
           Expanded(
             child: Text(
               localizations.totalPoints(entry.points),
               style: leaderboardListTilePointsTextStyle,
-              textAlign: TextAlign.center,
+              textAlign: TextAlign.end,
             ),
           ),
         ],
