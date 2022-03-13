@@ -53,6 +53,14 @@ class MyApp extends StatelessWidget {
               ),
             lazy: false,
           ),
+          BlocProvider<LeaderboardBloc>(
+            create: (context) => LeaderboardBloc(
+              leaderboardRepository: vault.lookup<LeaderboardRepository>(),
+            )..add(
+                RetrieveLeaderboardsStarted(),
+              ),
+            lazy: false,
+          ),
           BlocProvider<SettingsBloc>(
             create: (context) => SettingsBloc()
               ..add(
@@ -175,6 +183,10 @@ Vault<Object> vault({
       RealAvatarRepository(),
     );
 
+    vault.store<LeaderboardRepository>(
+      RealLeaderboardRepository(),
+    );
+
     vault.store<ImagePicker>(
       ImagePicker(),
     );
@@ -189,6 +201,10 @@ Vault<Object> vault({
 
     vault.store<AvatarRepository>(
       MockAvatarRepository(),
+    );
+
+    vault.store<LeaderboardRepository>(
+      MockLeaderboardRepository(),
     );
 
     vault.store<ImagePicker>(

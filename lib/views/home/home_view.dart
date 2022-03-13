@@ -13,6 +13,8 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context);
 
+    final leaderboardBloc = context.read<LeaderboardBloc>();
+
     final gameBloc = context.read<GameBloc>();
 
     final showContinueButton = gameBloc.game.gameUserProfile.hasPlayedAnyGame;
@@ -57,7 +59,10 @@ class HomeView extends StatelessWidget {
             );
           },
           onLeaderboardItemPressed: () {
-            navigateToLeaderboardView(context);
+            navigateToLeaderboardView(
+              context,
+              leaderboardBloc,
+            );
           },
           onSettingsItemPressed: () {
             navigateToSettingsView(context);

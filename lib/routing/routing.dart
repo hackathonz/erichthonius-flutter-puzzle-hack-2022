@@ -148,7 +148,14 @@ Future<void> navigateToPhotoCropView(
 
 Future<void> navigateToLeaderboardView(
   final BuildContext context,
+  final LeaderboardBloc leaderboardBloc,
 ) {
+  leaderboardBloc.add(
+    LoadLeaderboardStarted(
+      period: LeaderboardRankingPeriod.today,
+    ),
+  );
+
   return Navigator.of(context).push(
     MaterialPageRoute(
       builder: (routeContext) {
