@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:swap_it/l10n/l10n.dart';
+import 'package:swap_it/models/leaderboard.dart';
+import 'package:swap_it/models/profile.dart';
 import 'package:swap_it/widgets/scaffold.dart';
 import 'package:swap_it/widgets/widgets.dart';
+
+const _kLeaderboardPanelPadding = EdgeInsets.symmetric(vertical: 17.0);
 
 class LeaderboardView extends StatelessWidget {
   const LeaderboardView({
@@ -17,50 +21,89 @@ class LeaderboardView extends StatelessWidget {
       appBar: SwapItAppBar(
         title: localizations.leaderboardTitle,
       ),
-      body: Column(
-        children: [
-          Container(
-            padding: kScaffoldPadding,
-            child: SwapItTabBar(
-              tabs: [
-                TabOption(
-                  label: localizations.today,
-                  isActive: false,
-                  onPressed: () {},
+      body: Container(
+        child: Column(
+          children: [
+            Container(
+              padding: kScaffoldPadding,
+              child: Column(
+                children: [
+                  SwapItTabBar(
+                    tabs: [
+                      TabOption(
+                        label: localizations.today,
+                        isActive: false,
+                        onPressed: () {},
+                      ),
+                      TabOption(
+                        label: localizations.week,
+                        isActive: true,
+                        onPressed: () {},
+                      ),
+                      TabOption(
+                        label: localizations.month,
+                        isActive: false,
+                        onPressed: () {},
+                      ),
+                    ],
+                  ),
+                  Padding(
+                    padding: _kLeaderboardPanelPadding,
+                    child: SwapItLeaderboardPanel(
+                      topRankingEntries: [
+                        LeaderboardEntry(
+                          points: 500,
+                          rankingPosition: 1,
+                          userProfile: UserProfile(
+                            username: 'Swapper764',
+                            avatar: const Avatar(data: '😎', isUrl: false),
+                            dateJoined: DateTime.now(),
+                          ),
+                        ),
+                        LeaderboardEntry(
+                          points: 500,
+                          rankingPosition: 1,
+                          userProfile: UserProfile(
+                            username: 'Swapper764',
+                            avatar: const Avatar(data: '😎', isUrl: false),
+                            dateJoined: DateTime.now(),
+                          ),
+                        ),
+                        LeaderboardEntry(
+                          points: 500,
+                          rankingPosition: 1,
+                          userProfile: UserProfile(
+                            username: 'Swapper764',
+                            avatar: const Avatar(data: '😎', isUrl: false),
+                            dateJoined: DateTime.now(),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              decoration: BoxDecoration(
+                borderRadius: const BorderRadius.only(
+                  bottomLeft: Radius.circular(
+                    kLeaderboardCornerRadius,
+                  ),
+                  bottomRight: Radius.circular(
+                    kLeaderboardCornerRadius,
+                  ),
                 ),
-                TabOption(
-                  label: localizations.week,
-                  isActive: true,
-                  onPressed: () {},
-                ),
-                TabOption(
-                  label: localizations.month,
-                  isActive: false,
-                  onPressed: () {},
-                ),
-              ],
-            ),
-            decoration: const BoxDecoration(
-              borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(
-                  kLeaderboardCornerRadius,
-                ),
-                bottomRight: Radius.circular(
-                  kLeaderboardCornerRadius,
-                ),
+                gradient: backgroundDecoration.gradient,
               ),
             ),
-          ),
-          Expanded(
-            child: Container(
+            Expanded(
               child: ListView(
                 primary: false,
               ),
-              color: leaderboardViewBackgroundColor,
             ),
-          ),
-        ],
-        crossAxisAlignment: CrossAxisAlignment.center,
+          ],
+          crossAxisAlignment: CrossAxisAlignment.center,
+        ),
+        color: leaderboardViewBackgroundColor,
       ),
     );
   }
