@@ -145,3 +145,15 @@ Future<void> navigateToPhotoCropView(
     ),
   );
 }
+
+Future<void> navigateToLeaderboardView(
+  final BuildContext context,
+) {
+  return Navigator.of(context).push(
+    MaterialPageRoute(
+      builder: (routeContext) {
+        return const LeaderboardView();
+      },
+    ),
+  );
+}

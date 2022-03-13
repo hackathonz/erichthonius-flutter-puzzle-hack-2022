@@ -56,7 +56,9 @@ class HomeView extends StatelessWidget {
               gameBloc.game.gameUserProfile.profile,
             );
           },
-          onLeaderboardItemPressed: () {},
+          onLeaderboardItemPressed: () {
+            navigateToLeaderboardView(context);
+          },
           onSettingsItemPressed: () {
             navigateToSettingsView(context);
           },
