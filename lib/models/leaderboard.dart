@@ -13,3 +13,20 @@ class LeaderboardEntry {
     required final this.userProfile,
   });
 }
+
+class Leaderboard {
+  final List<LeaderboardEntry> topRanking;
+
+  final List<LeaderboardEntry> entries;
+
+  const Leaderboard({
+    required final this.entries,
+    required final this.topRanking,
+  });
+}
+
+enum LeaderboardRankingPeriod {
+  today,
+  weekly,
+  monthly,
+}

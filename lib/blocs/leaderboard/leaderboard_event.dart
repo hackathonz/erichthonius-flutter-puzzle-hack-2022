@@ -3,6 +3,14 @@ part of 'leaderboard_bloc.dart';
 @immutable
 abstract class LeaderboardEvent {}
 
-class LoadLeaderboardsStarted extends LeaderboardEvent {}
+class LoadLeaderboardStarted extends LeaderboardEvent {
+  final LeaderboardRankingPeriod period;
 
-class RefreshLeaderboardsStarted extends LoadLeaderboardsStarted {}
+  LoadLeaderboardStarted({
+    required final this.period,
+  });
+}
+
+class RetrieveLeaderboardsStarted extends LeaderboardEvent {}
+
+class RefreshLeaderboardsStarted extends RetrieveLeaderboardsStarted {}

@@ -5,22 +5,27 @@ abstract class LeaderboardState {}
 
 class LeaderboardInitial extends LeaderboardState {}
 
-class LoadLeaderboardsInProgress extends LeaderboardState {}
+class RetrieveLeaderboardsInProgress extends LeaderboardState {}
 
-class LoadLeaderboardsSuccess extends LeaderboardState {
-  final Leaderboard todayLeaderboard;
+class RetrieveLeaderboardsSuccess extends LeaderboardState {
+  final Map<LeaderboardRankingPeriod, Leaderboard> leaderboards;
 
-  final Leaderboard weeklyLeaderboard;
-
-  final Leaderboard monthlyLeaderboard;
-
-  LoadLeaderboardsSuccess({
-    required final this.todayLeaderboard,
-    required final this.weeklyLeaderboard,
-    required final this.monthlyLeaderboard,
+  RetrieveLeaderboardsSuccess({
+    required final this.leaderboards,
   });
 }
 
-class LoadLeaderboardsEmpty extends LeaderboardState {}
+class RetrieveLeaderboardsFailure extends LeaderboardState {}
 
-class LoadLeaderboardsFailure extends LeaderboardState {}
+class LoadLeaderboardSuccess extends LeaderboardState {
+  final Leaderboard leaderboard;
+
+  final LeaderboardRankingPeriod period;
+
+  LoadLeaderboardSuccess({
+    required final this.leaderboard,
+    required final this.period,
+  });
+}
+
+class LoadLeaderboardEmpty extends LeaderboardState {}

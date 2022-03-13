@@ -10,11 +10,7 @@ part 'leaderboard_state.dart';
 class LeaderboardBloc extends Bloc<LeaderboardEvent, LeaderboardState> {
   final LeaderboardRepository leaderboardRepository;
 
-  late Leaderboard todayLeaderboard;
-
-  late Leaderboard weeklyLeaderboard;
-
-  late Leaderboard monthlyLeaderboard;
+  final Map<LeaderboardRankingPeriod, Leaderboard> _leaderboards = {};
 
   LeaderboardBloc({
     required final this.leaderboardRepository,
@@ -22,13 +18,15 @@ class LeaderboardBloc extends Bloc<LeaderboardEvent, LeaderboardState> {
 
   @override
   Stream<LeaderboardState> mapEventToState(LeaderboardEvent event) async* {
-    if (event is LoadLeaderboardsStarted) {
-      yield* _mapLoadLeaderboardsStartedToState(event);
+    if (event is RetrieveLeaderboardsStarted) {
+      yield* _mapRetrieveLeaderboardsStartedToState(event);
+    } else if (event is LoadLeaderboardStarted) {
+      yield* _mapLoadLeaderboardStartedToState(event);
     }
   }
 
-  Stream<LeaderboardState> _mapLoadLeaderboardsStartedToState(
-    LoadLeaderboardsStarted event,
+  Stream<LeaderboardState> _mapRetrieveLeaderboardsStartedToState(
+    RetrieveLeaderboardsStarted event,
   ) async* {
     try {
       final currentDateTime = DateTime.now();
@@ -48,19 +46,40 @@ class LeaderboardBloc extends Bloc<LeaderboardEvent, LeaderboardState> {
         to: currentDateTime,
       );
 
-      if (monthlyLeaderboard.entries.isEmpty) {
-        yield LoadLeaderboardsEmpty();
-      } else {
-        yield LoadLeaderboardsSuccess(
-          todayLeaderboard: todayLeaderboard,
-          weeklyLeaderboard: weeklyLeaderboard,
-          monthlyLeaderboard: monthlyLeaderboard,
-        );
-      }
+      _leaderboards.clear();
+
+      _leaderboards.addAll(
+        {
+          LeaderboardRankingPeriod.today: todayLeaderboard,
+          LeaderboardRankingPeriod.weekly: weeklyLeaderboard,
+          LeaderboardRankingPeriod.monthly: monthlyLeaderboard,
+        },
+      );
+
+      yield RetrieveLeaderboardsSuccess(
+        leaderboards: _leaderboards,
+      );
     } on Object catch (error, stacktrace) {
       logError(error, stacktrace: stacktrace);
 
-      yield LoadLeaderboardsFailure();
+      yield RetrieveLeaderboardsFailure();
+    }
+  }
+
+  Stream<LeaderboardState> _mapLoadLeaderboardStartedToState(
+    LoadLeaderboardStarted event,
+  ) async* {
+    final period = event.period;
+
+    final leaderboard = _leaderboards[period];
+
+    if (leaderboard == null) {
+      yield LoadLeaderboardEmpty();
+    } else {
+      yield LoadLeaderboardSuccess(
+        leaderboard: leaderboard,
+        period: period,
+      );
     }
   }
 
