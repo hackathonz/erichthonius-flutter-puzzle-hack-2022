@@ -11,7 +11,11 @@ import 'package:swap_it/logging/logging.dart';
 import 'package:swap_it/views/views.dart';
 import 'package:swap_it/widgets/widgets.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await initFirebase();
+
   putLumberdashToWork(
     withClients: [
       ColorizeLumberdash(),

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <!--
     If you are serving your web app in a path other than the root, change the
@@ -29,7 +30,24 @@
   <title>swap_it</title>
   <link rel="manifest" href="manifest.json">
 </head>
+
 <body>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <!-- Firebase Configuration -->
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyBShMD5ODdfFfgoQgQx3oFZWjdXqzqPE48",
+      authDomain: "swapit-7c14a.firebaseapp.com",
+      projectId: "swapit-7c14a",
+      storageBucket: "swapit-7c14a.appspot.com",
+      messagingSenderId: "494947612201",
+      appId: "1:494947612201:web:fe9c8d7f60274dbf78ce38"
+    };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+  </script>
+
   <!-- This script installs service_worker.js to provide PWA functionality to
        application. For more information, see:
        https://developers.google.com/web/fundamentals/primers/service-workers -->
@@ -98,4 +116,5 @@
     }
   </script>
 </body>
+
 </html>
