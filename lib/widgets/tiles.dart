@@ -11,6 +11,10 @@ const _kLeaderboardListTilePadding = EdgeInsets.symmetric(
   horizontal: 16.0,
 );
 
+const _kLeaderboardListTileAvatarPadding = EdgeInsets.symmetric(
+  horizontal: 12.0,
+);
+
 class SwapItSwitchListTile extends StatelessWidget {
   final String leading;
 
@@ -140,26 +144,31 @@ class SwapItListLeaderboardListTile extends StatelessWidget {
       child: Row(
         children: [
           Text(
-            entry.points.toString(),
+            entry.rankingPosition.toString(),
             style: leaderboardListTileRankingPositionTextStyle,
             textAlign: TextAlign.center,
           ),
-          SwapItAvatar.leaderboardTile(
-            avatar: entry.userProfile.avatar,
+          Padding(
+            padding: _kLeaderboardListTileAvatarPadding,
+            child: SwapItAvatar.leaderboardTile(
+              avatar: entry.userProfile.avatar,
+            ),
           ),
           Text(
             entry.userProfile.username,
-            style: listTileLeadingTextStyle,
+            style: leaderboardListTileUsernameTextStyle,
             textAlign: TextAlign.center,
           ),
-          Text(
-            localizations.totalPoints(entry.points),
-            style: listTileLeadingTextStyle,
-            textAlign: TextAlign.center,
+          const Spacer(),
+          Expanded(
+            child: Text(
+              localizations.totalPoints(entry.points),
+              style: leaderboardListTilePointsTextStyle,
+              textAlign: TextAlign.center,
+            ),
           ),
         ],
         crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
       ),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(
