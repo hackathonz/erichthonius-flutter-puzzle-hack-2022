@@ -7,11 +7,25 @@ class SwapItAvatar extends StatelessWidget {
 
   final void Function()? onEditAvatarPressedCallback;
 
+  final double _diameter;
+
+  final TextStyle _emojiTextStyle;
+
   const SwapItAvatar({
     Key? key,
     required final this.avatar,
     final this.onEditAvatarPressedCallback,
-  }) : super(key: key);
+  })  : _diameter = kAvatarCircleDiameter,
+        _emojiTextStyle = avatarEmojiTextStyle,
+        super(key: key);
+
+  const SwapItAvatar.leaderboardTile({
+    Key? key,
+    required final this.avatar,
+    final this.onEditAvatarPressedCallback,
+  })  : _diameter = kLeaderboardListTileAvatarCircleDiameter,
+        _emojiTextStyle = leaderboardListTileAvatarEmojiTextStyle,
+        super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,14 +33,14 @@ class SwapItAvatar extends StatelessWidget {
       child: Stack(
         children: [
           Container(
-            width: kAvatarCircleDiameter,
-            height: kAvatarCircleDiameter,
+            width: _diameter,
+            height: _diameter,
             child: ClipOval(
               child: Center(
                 child: !avatar.isUrl
                     ? Text(
                         avatar.data,
-                        style: avatarEmojiTextStyle,
+                        style: _emojiTextStyle,
                         textAlign: TextAlign.center,
                       )
                     : null,
@@ -46,7 +60,7 @@ class SwapItAvatar extends StatelessWidget {
           if (onEditAvatarPressedCallback != null)
             Positioned(
               bottom: 0,
-              right: kAvatarCircleDiameter,
+              right: _diameter,
               child: IconBase(
                 key: const Key('avatar_edit_icon'),
                 child: const Icon(

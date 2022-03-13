@@ -225,3 +225,34 @@ const inactiveTabLabelTextStyle = TextStyle(
   fontWeight: FontWeight.w600,
   height: 1.0,
 );
+
+const leaderboardListTileRankingPositionTextStyle = TextStyle(
+  color: leaderboardListTileTextColor,
+  fontSize: 14.0,
+  letterSpacing: 0,
+  fontWeight: FontWeight.bold,
+  height: 1.0,
+);
+
+const leaderboardListTileAvatarEmojiTextStyle = TextStyle(
+  fontSize: 12.0,
+  letterSpacing: 0,
+  fontWeight: FontWeight.normal,
+  height: 1.0,
+);
+
+const leaderboardListTileUsernameTextStyle = TextStyle(
+  color: leaderboardListTileTextColor,
+  fontSize: 14.0,
+  letterSpacing: 0,
+  fontWeight: FontWeight.normal,
+  height: 1.0,
+);
+
+const leaderboardListTilePointsTextStyle = TextStyle(
+  color: leaderboardListTilePointsColor,
+  fontSize: 14.0,
+  letterSpacing: 0,
+  fontWeight: FontWeight.w600,
+  height: 1.0,
+);

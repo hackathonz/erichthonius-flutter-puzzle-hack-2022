@@ -55,8 +55,12 @@ const inactiveTabColor = Color(0xFF4447CA);
 const activeTabLabelColor = Color(0xFF4447CA);
 const inactiveTabLabelColor = Color(0xFFFFFFFF);
 const tabBarColor = Color(0xFF4447CA);
+const leaderboardViewBackgroundColor = Color(0xFFFFFFFF);
+const leaderboardListTileTextColor = Color(0xFF333333);
+const leaderboardListTilePointsColor = Color(0xFF4447CA);
 
 const kListTileColor = Color(0xFF4447CA);
+const kLeaderboardListTileColor = Color(0xFFF8F8F8);
 
 final transparentMaterialState = MaterialStateProperty.all(Colors.transparent);
 

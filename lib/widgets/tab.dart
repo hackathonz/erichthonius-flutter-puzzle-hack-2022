@@ -31,7 +31,7 @@ class SwapItTab extends StatelessWidget {
       width: kTabSize.width,
       height: kTabSize.height,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(kTabRadRadius),
+        borderRadius: BorderRadius.circular(kTabRadius),
         color: tabColor,
       ),
       child: Text(
@@ -108,7 +108,7 @@ class _SwapItTabBarState extends State<SwapItTabBar> {
       ),
       decoration: BoxDecoration(
         color: tabBarColor,
-        borderRadius: BorderRadius.circular(kTabRadRadius),
+        borderRadius: BorderRadius.circular(kTabRadius),
       ),
       alignment: Alignment.center,
       height: kTabBarSize.height,
