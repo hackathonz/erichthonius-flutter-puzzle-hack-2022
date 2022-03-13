@@ -9,6 +9,7 @@ export 'grid.dart';
 export 'icons.dart';
 export 'images.dart';
 export 'input.dart';
+export 'panel.dart';
 export 'puzzle.dart';
 export 'scaffold.dart';
 export 'sizes.dart';

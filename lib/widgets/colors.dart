@@ -58,6 +58,9 @@ const tabBarColor = Color(0xFF4447CA);
 const leaderboardViewBackgroundColor = Color(0xFFFFFFFF);
 const leaderboardListTileTextColor = Color(0xFF333333);
 const leaderboardListTilePointsColor = Color(0xFF4447CA);
+const leaderboardPanelAvatarBorderColor = Color(0xFF4447CA);
+const leaderboardPanelUsernameColor = Color(0xCCFFFFFF);
+const leaderboardPanelPointsColor = Color(0xFFFFFFFF);
 
 const kListTileColor = Color(0xFF4447CA);
 const kLeaderboardListTileColor = Color(0xFFF8F8F8);

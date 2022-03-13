@@ -256,3 +256,34 @@ const leaderboardListTilePointsTextStyle = TextStyle(
   fontWeight: FontWeight.w600,
   height: 1.0,
 );
+
+const leaderboardPanelAvatarEmojiTextStyle = TextStyle(
+  fontSize: 30.0,
+  letterSpacing: 0,
+  fontWeight: FontWeight.normal,
+  height: 1.0,
+);
+
+const leaderboardPanelUsernameTextStyle = TextStyle(
+  color: leaderboardPanelUsernameColor,
+  fontSize: 12.0,
+  letterSpacing: 0,
+  fontWeight: FontWeight.normal,
+  height: 1.0,
+);
+
+const leaderboardPanelTotalPointsTextStyle = TextStyle(
+  color: leaderboardPanelPointsColor,
+  fontSize: 14.0,
+  letterSpacing: 0,
+  fontWeight: FontWeight.w600,
+  height: 1.0,
+);
+
+const leaderboardPanelRankingPositionTextStyle = TextStyle(
+  color: leaderboardPanelPointsColor,
+  fontSize: 14.0,
+  letterSpacing: 0,
+  fontWeight: FontWeight.bold,
+  height: 1.0,
+);

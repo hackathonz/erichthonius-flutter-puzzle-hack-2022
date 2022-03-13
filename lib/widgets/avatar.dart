@@ -11,20 +11,37 @@ class SwapItAvatar extends StatelessWidget {
 
   final TextStyle _emojiTextStyle;
 
+  final Border? _border;
+
   const SwapItAvatar({
     Key? key,
     required final this.avatar,
     final this.onEditAvatarPressedCallback,
   })  : _diameter = kAvatarCircleDiameter,
         _emojiTextStyle = avatarEmojiTextStyle,
+        _border = null,
         super(key: key);
 
   const SwapItAvatar.leaderboardTile({
     Key? key,
     required final this.avatar,
-    final this.onEditAvatarPressedCallback,
-  })  : _diameter = kLeaderboardListTileAvatarCircleDiameter,
+  })  : onEditAvatarPressedCallback = null,
+        _diameter = kLeaderboardListTileAvatarCircleDiameter,
         _emojiTextStyle = leaderboardListTileAvatarEmojiTextStyle,
+        _border = null,
+        super(key: key);
+
+  SwapItAvatar.leaderboardPanel({
+    Key? key,
+    required final this.avatar,
+  })  : onEditAvatarPressedCallback = null,
+        _diameter = kLeaderboardPanelAvatarCircleDiameter,
+        _emojiTextStyle = leaderboardPanelAvatarEmojiTextStyle,
+        _border = Border.all(
+          color: leaderboardPanelAvatarBorderColor,
+          style: BorderStyle.solid,
+          width: 2.0,
+        ),
         super(key: key);
 
   @override
@@ -49,6 +66,7 @@ class SwapItAvatar extends StatelessWidget {
             decoration: BoxDecoration(
               color: avatarBackgroundColor,
               shape: BoxShape.circle,
+              border: _border,
               image: avatar.isUrl
                   ? DecorationImage(
                       image: NetworkImage(avatar.data),

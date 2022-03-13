@@ -45,6 +45,7 @@ const kPuzzleGameTilesSpacing = 13.0;
 const kDialogElevation = 24.0;
 const kAvatarCircleDiameter = 112.0;
 const kLeaderboardListTileAvatarCircleDiameter = 32.0;
+const kLeaderboardPanelAvatarCircleDiameter = 96.0;
 const kGridTileSize = Size.square(48.0);
 const kTabSize = Size(91.0, 28.0);
 const kTabBarSize = Size(327.0, 32.0);
