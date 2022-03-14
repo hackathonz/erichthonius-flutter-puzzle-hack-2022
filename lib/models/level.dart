@@ -117,6 +117,8 @@ class GameLevelDifficulty {
 class GameLevelPlayEntry {
   final GameLevel gameLevel;
 
+  final DateTime playDateTime;
+
   final Duration timeTookToFinish;
 
   final int piecesMoved;
@@ -128,6 +130,7 @@ class GameLevelPlayEntry {
     required final this.piecesLeftForCompletion,
     required final this.piecesMoved,
     required final this.timeTookToFinish,
+    required final this.playDateTime,
   });
 
   bool get hasCompletedLevel => piecesLeftForCompletion == 0;
@@ -163,6 +166,9 @@ class GameLevelPlayEntry {
         json['gameLevel'],
         levels,
       ),
+      playDateTime: DateTime.fromMillisecondsSinceEpoch(
+        json['playDateTime'],
+      ),
       piecesLeftForCompletion: json['piecesLeftForCompletion'],
       piecesMoved: json['piecesMoved'],
       timeTookToFinish: Duration(
@@ -174,6 +180,7 @@ class GameLevelPlayEntry {
   Map<String, dynamic> toJson() {
     return {
       'gameLevel': gameLevel.toJson(),
+      'playDateTime': playDateTime.toUtc().millisecondsSinceEpoch,
       'timeTookToFinish': timeTookToFinish.inMilliseconds,
       'piecesMoved': piecesMoved,
       'piecesLeftForCompletion': piecesLeftForCompletion,

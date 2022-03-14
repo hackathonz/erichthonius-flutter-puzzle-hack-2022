@@ -80,6 +80,7 @@ class PlayGameLevelBloc extends Bloc<PlayGameLevelEvent, PlayGameLevelState> {
     if (gameLevelTimeLeftInSeconds <= 0) {
       final results = GameLevelPlayEntry(
         gameLevel: gameLevel,
+        playDateTime: DateTime.now(),
         piecesLeftForCompletion:
             currentGameLevelPictureTiles.piecesLeftForCompletion,
         piecesMoved: piecesMoved,
@@ -126,6 +127,7 @@ class PlayGameLevelBloc extends Bloc<PlayGameLevelEvent, PlayGameLevelState> {
 
       final results = GameLevelPlayEntry(
         gameLevel: gameLevel,
+        playDateTime: DateTime.now(),
         piecesLeftForCompletion: 0,
         piecesMoved: piecesMoved,
         timeTookToFinish: Duration(

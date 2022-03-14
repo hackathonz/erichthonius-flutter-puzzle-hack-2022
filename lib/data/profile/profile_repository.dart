@@ -21,17 +21,8 @@ class RealProfileRepository extends ProfileRepository {
   Future<void> updateProfile(UserProfile profile) {
     final userDoc = firestore.collection('users').doc(deviceId);
 
-    final usernameDoc = firestore.collection('users').doc(profile.username);
-
-    return Future.wait(
-      [
-        userDoc.set(
-          profile.toJson(),
-        ),
-        usernameDoc.set(
-          {},
-        ),
-      ],
+    return userDoc.set(
+      profile.toJson(),
     );
   }
 
@@ -40,9 +31,12 @@ class RealProfileRepository extends ProfileRepository {
     if (username.isEmpty) {
       return false;
     } else {
-      final userDoc = await (firestore.collection('users').doc(username).get());
+      final query = await firestore
+          .collection('users')
+          .where('username', isEqualTo: username)
+          .get();
 
-      return userDoc.exists;
+      return query.size == 0;
     }
   }
 }
