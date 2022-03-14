@@ -62,20 +62,21 @@ abstract class GameLevelImage {
 class NetworkGameLevelImage extends GameLevelImage {
   final String url;
 
-  late Uint8List _image;
+  Uint8List? _image;
 
   NetworkGameLevelImage({
     required final this.url,
   });
 
   Future<void> loadUrl() async {
-    final response = await get(Uri.parse(url));
-
-    _image = response.bodyBytes;
+    if (_image == null) {
+      final response = await get(Uri.parse(url));
+      _image = response.bodyBytes;
+    }
   }
 
   @override
-  Uint8List get image => _image;
+  Uint8List get image => _image!;
 }
 
 class MemoryGameLevelImage extends GameLevelImage {

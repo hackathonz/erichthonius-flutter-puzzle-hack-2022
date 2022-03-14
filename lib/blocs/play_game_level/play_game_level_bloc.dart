@@ -166,6 +166,10 @@ class PlayGameLevelBloc extends Bloc<PlayGameLevelEvent, PlayGameLevelState> {
     );
 
     if (!isRestart) {
+      if (gameLevel.image is NetworkGameLevelImage) {
+        (gameLevel.image as NetworkGameLevelImage).loadUrl();
+      }
+
       gameLevelPictureTiles.addAll(
         _splitPictureInTiles(
           picture: gameLevel.image.image,
