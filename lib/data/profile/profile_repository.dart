@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:swap_it/models/models.dart';
 
 abstract class ProfileRepository {
@@ -7,14 +8,42 @@ abstract class ProfileRepository {
 }
 
 class RealProfileRepository extends ProfileRepository {
+  final FirebaseFirestore firestore;
+
+  final String deviceId;
+
+  RealProfileRepository({
+    required final this.deviceId,
+    required final this.firestore,
+  });
+
   @override
   Future<void> updateProfile(UserProfile profile) {
-    throw UnimplementedError();
+    final userDoc = firestore.collection('users').doc(deviceId);
+
+    final usernameDoc = firestore.collection('users').doc(profile.username);
+
+    return Future.wait(
+      [
+        userDoc.set(
+          profile.toJson(),
+        ),
+        usernameDoc.set(
+          {},
+        ),
+      ],
+    );
   }
 
   @override
-  Future<bool> validateUsername(String username) {
-    throw UnimplementedError();
+  Future<bool> validateUsername(String username) async {
+    if (username.isEmpty) {
+      return false;
+    } else {
+      final userDoc = await (firestore.collection('users').doc(username).get());
+
+      return userDoc.exists;
+    }
   }
 }
 

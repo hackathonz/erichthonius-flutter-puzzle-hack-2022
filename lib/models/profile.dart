@@ -49,6 +49,14 @@ class UserProfile {
       dateJoined: dateJoined,
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'username': username,
+      'avatar': avatar.toJson(),
+      'dateJoined': dateJoined.toUtc().millisecondsSinceEpoch,
+    };
+  }
 }
 
 class Avatar {
@@ -60,4 +68,11 @@ class Avatar {
     required final this.data,
     required final this.isUrl,
   });
+
+  Map<String, dynamic> toJson() {
+    return {
+      'data': data,
+      'isUrl': isUrl,
+    };
+  }
 }

@@ -1,3 +1,4 @@
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -171,6 +172,7 @@ class Vault<T> {
 
 Vault<Object> vault({
   required final bool isReleaseMode,
+  required final String deviceId,
 }) {
   final vault = Vault<Object>();
 
@@ -184,7 +186,10 @@ Vault<Object> vault({
     );
 
     vault.store<AvatarRepository>(
-      RealAvatarRepository(),
+      RealAvatarRepository(
+        deviceId: deviceId,
+        storage: FirebaseStorage.instance,
+      ),
     );
 
     vault.store<LeaderboardRepository>(
