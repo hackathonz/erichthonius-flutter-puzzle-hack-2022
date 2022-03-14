@@ -14,7 +14,7 @@ final defaultGameLevels = [
     ),
     image: NetworkGameLevelImage(
       url:
-          'https://www.e30.pt/wp-content/uploads/2019/10/Embaladeiras-318is.jpg',
+          'https://korncars.files.wordpress.com/2013/08/bmw-m3-e36-korncars.jpg',
     ),
   ),
   GameLevel(
@@ -40,7 +40,7 @@ final defaultGameLevels = [
     ),
     image: NetworkGameLevelImage(
       url:
-          'https://img.gta5-mods.com/q95/images/bmw-m8-f92-akrapovic-sound/d64902-BMW-M8-Competition-Z-Performance-Wheels-7.jpg',
+          'https://korncars.files.wordpress.com/2013/08/bmw-m3-e36-korncars.jpg',
     ),
   ),
   GameLevel(
@@ -65,7 +65,8 @@ final defaultGameLevels = [
       y: 780.5,
     ),
     image: NetworkGameLevelImage(
-      url: 'https://carsopedia.com/files/generations/BMW-E91-550.jpg',
+      url:
+          'https://upload.wikimedia.org/wikipedia/commons/9/93/BMW_3200S_Repräsentationsfahrzeug.jpg',
     ),
   ),
   GameLevel(
