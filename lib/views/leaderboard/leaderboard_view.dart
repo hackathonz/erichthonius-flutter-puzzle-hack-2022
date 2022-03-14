@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:swap_it/blocs/blocs.dart';
 import 'package:swap_it/l10n/l10n.dart';
 import 'package:swap_it/models/models.dart';
-import 'package:swap_it/widgets/scaffold.dart';
 import 'package:swap_it/widgets/widgets.dart';
 
 const _kLeaderboardPanelPadding = EdgeInsets.symmetric(vertical: 17.0);

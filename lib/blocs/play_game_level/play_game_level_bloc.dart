@@ -4,7 +4,6 @@ import 'dart:typed_data';
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:meta/meta.dart';
 import 'package:swap_it/blocs/blocs.dart';
 import 'package:swap_it/models/models.dart';
 import 'package:image/image.dart';

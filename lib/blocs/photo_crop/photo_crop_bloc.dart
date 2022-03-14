@@ -2,7 +2,6 @@ import 'dart:typed_data';
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart' hide Image;
-import 'package:meta/meta.dart';
 import 'package:image/image.dart';
 import 'package:swap_it/logging/logging.dart';
 

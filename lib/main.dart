@@ -1,9 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -130,8 +128,9 @@ class MyApp extends StatelessWidget {
               child: Navigator(
                 initialRoute: '/',
                 onGenerateRoute: (settings) {
+                  Route? route;
                   if (settings.name == '/') {
-                    return MaterialPageRoute(
+                    route = MaterialPageRoute(
                       builder: (routeContext) {
                         return BlocBuilder<GameBloc, GameState>(
                           buildWhen: (previous, current) =>
@@ -147,6 +146,8 @@ class MyApp extends StatelessWidget {
                       },
                     );
                   }
+
+                  return route;
                 },
               ),
             ),
