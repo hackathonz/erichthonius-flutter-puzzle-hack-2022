@@ -1,4 +1,5 @@
 import 'dart:typed_data';
+import 'package:firebase_storage/firebase_storage.dart';
 
 const defaultAvailableEmojis = [
   '😎',
@@ -24,19 +25,44 @@ abstract class AvatarRepository {
 }
 
 class RealAvatarRepository extends AvatarRepository {
+  final FirebaseStorage storage;
+
+  final String deviceId;
+
+  RealAvatarRepository({
+    required final this.deviceId,
+    required final this.storage,
+  });
+
   @override
   Future<List<String>> availableEmojis() {
-    throw UnimplementedError();
+    return Future.value(defaultAvailableEmojis);
   }
 
   @override
-  Future<List<String>> personalPhotos() {
-    throw UnimplementedError();
+  Future<List<String>> personalPhotos() async {
+    final results = await storage.ref(deviceId).child('photos').listAll();
+
+    final photos = <String>[];
+
+    for (var x in results.items) {
+      photos.add(
+        await x.getDownloadURL(),
+      );
+    }
+
+    return photos;
   }
 
   @override
-  Future<String> uploadPhoto(Uint8List bytes) {
-    throw UnimplementedError();
+  Future<String> uploadPhoto(Uint8List bytes) async {
+    final photosRef = storage
+        .ref(deviceId)
+        .child('photos/${DateTime.now().millisecondsSinceEpoch}');
+
+    await photosRef.putData(bytes);
+
+    return await photosRef.getDownloadURL();
   }
 }
 
