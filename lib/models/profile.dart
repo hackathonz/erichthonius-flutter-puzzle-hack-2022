@@ -24,6 +24,27 @@ class GameUserProfile {
       profile: profile ?? this.profile,
     );
   }
+
+  static GameUserProfile fromJson(
+    Map<String, dynamic> json,
+    List<GameLevel> levels,
+  ) {
+    return GameUserProfile(
+      profile: UserProfile.fromJson(
+        json['profile'],
+      ),
+      levelsPlayed: List.castFrom<dynamic, Map<String, dynamic>>(
+        json['levelsPlayed'],
+      ).map((x) => GameLevelPlayEntry.fromJson(x, levels)).toList(),
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'profile': profile.toJson(),
+      'levelsPlayed': levelsPlayed.map((x) => x.toJson()).toList(),
+    };
+  }
 }
 
 class UserProfile {
@@ -50,6 +71,20 @@ class UserProfile {
     );
   }
 
+  static UserProfile fromJson(
+    Map<String, dynamic> json,
+  ) {
+    return UserProfile(
+      avatar: Avatar.fromJson(
+        json['avatar'],
+      ),
+      dateJoined: DateTime.fromMillisecondsSinceEpoch(
+        json['dateJoined'],
+      ),
+      username: json['username'],
+    );
+  }
+
   Map<String, dynamic> toJson() {
     return {
       'username': username,
@@ -68,6 +103,15 @@ class Avatar {
     required final this.data,
     required final this.isUrl,
   });
+
+  static Avatar fromJson(
+    Map<String, dynamic> json,
+  ) {
+    return Avatar(
+      data: json['data'],
+      isUrl: json['isUrl'] == 'true',
+    );
+  }
 
   Map<String, dynamic> toJson() {
     return {

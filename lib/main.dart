@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
@@ -178,11 +179,17 @@ Vault<Object> vault({
 
   if (isReleaseMode) {
     vault.store<GameRepository>(
-      RealGameRepository(),
+      RealGameRepository(
+        deviceId: deviceId,
+        firestore: FirebaseFirestore.instance,
+      ),
     );
 
     vault.store<ProfileRepository>(
-      RealProfileRepository(),
+      RealProfileRepository(
+        deviceId: deviceId,
+        firestore: FirebaseFirestore.instance,
+      ),
     );
 
     vault.store<AvatarRepository>(

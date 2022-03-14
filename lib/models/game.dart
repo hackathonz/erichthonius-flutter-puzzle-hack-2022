@@ -46,4 +46,23 @@ class Game {
       gameUserProfile: gameUserProfile ?? this.gameUserProfile,
     );
   }
+
+  static Game fromJson(
+    Map<String, dynamic> json,
+    List<GameLevel> levels,
+  ) {
+    return Game(
+      gameUserProfile: GameUserProfile.fromJson(
+        json['gameUserProfile'],
+        levels,
+      ),
+      gameLevels: levels,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'gameUserProfile': gameUserProfile.toJson(),
+    };
+  }
 }

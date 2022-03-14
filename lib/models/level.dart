@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'dart:typed_data';
 
+import 'package:extended_image/extended_image.dart';
 import 'package:flutter/painting.dart';
 
 const _kEasyGameDuration = Duration(minutes: 3);
@@ -29,7 +30,7 @@ class GameLevel {
 
   final LevelMarkerPoint point;
 
-  final Uint8List image;
+  final GameLevelImage image;
 
   const GameLevel({
     required final this.id,
@@ -37,6 +38,55 @@ class GameLevel {
     required final this.point,
     required final this.image,
   });
+
+  static GameLevel fromJson(
+    Map<String, dynamic> json,
+    List<GameLevel> levels,
+  ) {
+    final id = json['id'];
+
+    return levels.firstWhere((x) => x.id == id);
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+    };
+  }
+}
+
+abstract class GameLevelImage {
+  Uint8List get image;
+}
+
+class NetworkGameLevelImage extends GameLevelImage {
+  final String url;
+
+  late Uint8List _image;
+
+  NetworkGameLevelImage({
+    required final this.url,
+  });
+
+  Future<void> loadUrl() async {
+    final response = await get(Uri.parse(url));
+
+    _image = response.bodyBytes;
+  }
+
+  @override
+  Uint8List get image => _image;
+}
+
+class MemoryGameLevelImage extends GameLevelImage {
+  final Uint8List _image;
+
+  MemoryGameLevelImage({
+    required final Uint8List image,
+  }) : _image = image;
+
+  @override
+  Uint8List get image => _image;
 }
 
 class GameLevelDifficulty {
@@ -102,6 +152,32 @@ class GameLevelPlayEntry {
     } else {
       return 3;
     }
+  }
+
+  static GameLevelPlayEntry fromJson(
+    Map<String, dynamic> json,
+    List<GameLevel> levels,
+  ) {
+    return GameLevelPlayEntry(
+      gameLevel: GameLevel.fromJson(
+        json['gameLevel'],
+        levels,
+      ),
+      piecesLeftForCompletion: json['piecesLeftForCompletion'],
+      piecesMoved: json['piecesMoved'],
+      timeTookToFinish: Duration(
+        milliseconds: json['timeTookToFinish'],
+      ),
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'gameLevel': gameLevel.toJson(),
+      'timeTookToFinish': timeTookToFinish.inMilliseconds,
+      'piecesMoved': piecesMoved,
+      'piecesLeftForCompletion': piecesLeftForCompletion,
+    };
   }
 }
 

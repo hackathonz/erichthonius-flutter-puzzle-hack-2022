@@ -166,7 +166,7 @@ class PlayGameLevelBloc extends Bloc<PlayGameLevelEvent, PlayGameLevelState> {
     if (!isRestart) {
       gameLevelPictureTiles.addAll(
         _splitPictureInTiles(
-          picture: gameLevel.image,
+          picture: gameLevel.image.image,
           tileCount: gameLevel.difficulty.pieces,
         ),
       );
