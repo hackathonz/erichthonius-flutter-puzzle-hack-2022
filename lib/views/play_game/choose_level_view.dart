@@ -65,6 +65,10 @@ class ChooseLevelView extends StatelessWidget {
     final BuildContext context,
     final StartPlayGameLevelInitial state,
   ) {
-    navigateToPlayGameView(context, state.gameLevel);
+    navigateToPlayGameView(
+      context,
+      state.gameLevel,
+      state.isLastLevel,
+    );
   }
 }

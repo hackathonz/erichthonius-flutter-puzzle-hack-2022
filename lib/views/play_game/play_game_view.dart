@@ -179,6 +179,7 @@ class PlayGameView extends StatelessWidget {
       dialogBuilder: (dialogContext) {
         return GameFinishDialog(
           playEntry: state.results,
+          canPlayNextLevel: state.canPlayNextLevel,
           onExitGamePressed: () {
             Navigator.of(dialogContext).pop();
             Navigator.of(context).pop();

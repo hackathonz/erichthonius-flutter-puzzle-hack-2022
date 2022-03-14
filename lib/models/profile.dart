@@ -109,7 +109,7 @@ class Avatar {
   ) {
     return Avatar(
       data: json['data'],
-      isUrl: json['isUrl'] == 'true',
+      isUrl: json['isUrl'] == true,
     );
   }
 

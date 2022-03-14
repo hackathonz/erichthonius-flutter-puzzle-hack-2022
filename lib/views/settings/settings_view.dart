@@ -25,10 +25,6 @@ class SettingsView extends StatelessWidget {
 
     final settingOptions = [
       MapEntry(
-        SettingOption.notifications,
-        localizations.notificationsOption,
-      ),
-      MapEntry(
         SettingOption.sounds,
         localizations.soundsOption,
       ),

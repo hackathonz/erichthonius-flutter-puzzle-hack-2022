@@ -53,8 +53,15 @@ class GameBloc extends Bloc<GameEvent, GameState> {
     PlayGameLevelStarted event,
   ) async* {
     if (game.canPlayLevel(event.gameLevel)) {
+      final gameLevels = game.gameLevels
+          .where(
+            (x) => x.difficulty == event.gameLevel.difficulty,
+          )
+          .toList();
+
       yield StartPlayGameLevelInitial(
         gameLevel: event.gameLevel,
+        isLastLevel: gameLevels.last == event.gameLevel,
       );
     } else {
       yield PlayGameLevelFailure();
@@ -99,11 +106,14 @@ class GameBloc extends Bloc<GameEvent, GameState> {
     final indexOfPreviousGameLevel =
         gameLevels.indexOf(event.previousGameLevel);
 
-    final nextGameLevel = gameLevels[indexOfPreviousGameLevel + 1];
+    if (indexOfPreviousGameLevel + 1 < gameLevels.length) {
+      final nextGameLevel = gameLevels[indexOfPreviousGameLevel + 1];
 
-    yield StartPlayGameLevelInitial(
-      gameLevel: nextGameLevel,
-    );
+      yield StartPlayGameLevelInitial(
+        gameLevel: nextGameLevel,
+        isLastLevel: indexOfPreviousGameLevel + 1 == gameLevels.length - 1,
+      );
+    }
   }
 
   Stream<GameState> _mapSyncUserProfileChangesStartedToState(
@@ -114,6 +124,8 @@ class GameBloc extends Bloc<GameEvent, GameState> {
         profile: event.userProfile,
       ),
     );
+
+    await gameRepository.saveGame(game);
 
     yield SyncUserProfileChangesSuccess();
   }

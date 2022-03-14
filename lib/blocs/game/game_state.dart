@@ -20,8 +20,11 @@ class LoadGameFailure extends GameState {}
 class StartPlayGameLevelInitial extends GameState {
   final GameLevel gameLevel;
 
+  final bool isLastLevel;
+
   StartPlayGameLevelInitial({
     required final this.gameLevel,
+    required final this.isLastLevel,
   });
 }
 

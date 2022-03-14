@@ -1,6 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:swap_it/blocs/blocs.dart';
+import 'package:swap_it/data/data.dart';
+import 'package:swap_it/logging/logging.dart';
 import 'package:swap_it/models/models.dart';
 
 part 'settings_event.dart';
@@ -9,7 +11,11 @@ part 'settings_state.dart';
 class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
   final Map<SettingOption, bool> optionValues = {};
 
-  SettingsBloc() : super(SettingsInitial());
+  final SettingsRepository settingsRepository;
+
+  SettingsBloc({
+    required final this.settingsRepository,
+  }) : super(SettingsInitial());
 
   @override
   Stream<SettingsState> mapEventToState(SettingsEvent event) async* {
@@ -23,24 +29,41 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
   Stream<SettingsState> _mapRetrieveSettingOptionsValuesStartedToState(
     RetrieveSettingOptionsValuesStarted event,
   ) async* {
-    optionValues[SettingOption.notifications] = true;
-    optionValues[SettingOption.sounds] = true;
-    optionValues[SettingOption.vibration] = false;
+    try {
+      final _optionValues = await settingsRepository.options();
 
-    yield RetrieveSettingOptionsValuesSuccess(
-      optionValues: optionValues,
-    );
+      optionValues.addAll(_optionValues);
+
+      yield RetrieveSettingOptionsValuesSuccess(
+        optionValues: optionValues,
+      );
+    } on Object catch (error, stacktrace) {
+      logError(error, stacktrace: stacktrace);
+
+      yield RetrieveSettingOptionsValuesFailure();
+    }
   }
 
   Stream<SettingsState> _mapSettingOptionValueUpdatedToState(
     SettingOptionValueUpdated event,
   ) async* {
-    optionValues[event.option] = event.value;
+    try {
+      await settingsRepository.updateOption(
+        option: event.option,
+        value: event.value,
+      );
 
-    yield SettingOptionValueUpdateSuccess();
+      optionValues[event.option] = event.value;
 
-    yield RetrieveSettingOptionsValuesSuccess(
-      optionValues: optionValues,
-    );
+      yield SettingOptionValueUpdateSuccess();
+
+      yield RetrieveSettingOptionsValuesSuccess(
+        optionValues: optionValues,
+      );
+    } on Object catch (error, stacktrace) {
+      logError(error, stacktrace: stacktrace);
+
+      yield SettingOptionValueUpdateFailure();
+    }
   }
 }

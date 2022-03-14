@@ -39,8 +39,11 @@ class GameLevelNotFinish extends PlayGameLevelState {
 class GameLevelFinish extends PlayGameLevelState {
   final GameLevelPlayEntry results;
 
+  final bool canPlayNextLevel;
+
   GameLevelFinish({
     required final this.results,
+    required final this.canPlayNextLevel,
   });
 }
 

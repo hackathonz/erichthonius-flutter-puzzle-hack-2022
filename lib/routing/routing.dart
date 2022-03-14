@@ -36,6 +36,7 @@ Future<void> navigateToChooseLevelView(
 Future<void> navigateToPlayGameView(
   final BuildContext context,
   final GameLevel gameLevel,
+  final bool isLastLevel,
 ) {
   return Navigator.of(context).push(
     MaterialPageRoute(
@@ -43,6 +44,7 @@ Future<void> navigateToPlayGameView(
         return BlocProvider(
           create: (context) => PlayGameLevelBloc(
             gameLevel: gameLevel,
+            isLastLevel: isLastLevel,
           )..add(GameLevelStarted()),
           child: const PlayGameView(),
         );

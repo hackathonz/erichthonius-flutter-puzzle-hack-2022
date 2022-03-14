@@ -26,17 +26,7 @@ class RealLeaderboardRepository extends LeaderboardRepository {
     required DateTime from,
     required DateTime to,
   }) async {
-    final fromMillisecondsSinceEpoch = from.millisecondsSinceEpoch;
-    final toMillisecondsSinceEpoch = to.millisecondsSinceEpoch;
-
-    final games = await firestore
-        .collection('games')
-        .where(
-          'playDateTime',
-          isGreaterThanOrEqualTo: fromMillisecondsSinceEpoch,
-          isLessThanOrEqualTo: toMillisecondsSinceEpoch,
-        )
-        .get();
+    final games = await firestore.collection('games').get();
 
     final gameUserProfiles = games.docs.map(
       (x) => Game.fromJson(

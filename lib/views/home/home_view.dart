@@ -41,7 +41,13 @@ class HomeView extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(vertical: 12.0),
                   child: SwapItButton(
                     text: localizations.ccontinue,
-                    onPressed: () {},
+                    onPressed: () {
+                      navigateToChooseLevelView(
+                        context,
+                        gameBloc.game.gameUserProfile.levelsPlayed.last
+                            .gameLevel.difficulty,
+                      );
+                    },
                   ),
                 ),
               const Padding(

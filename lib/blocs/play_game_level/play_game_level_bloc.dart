@@ -15,6 +15,8 @@ part 'play_game_level_state.dart';
 class PlayGameLevelBloc extends Bloc<PlayGameLevelEvent, PlayGameLevelState> {
   final GameLevel gameLevel;
 
+  final bool isLastLevel;
+
   final List<PictureTile> gameLevelPictureTiles = [];
 
   late Timer gameLevelTimer;
@@ -27,6 +29,7 @@ class PlayGameLevelBloc extends Bloc<PlayGameLevelEvent, PlayGameLevelState> {
 
   PlayGameLevelBloc({
     required final this.gameLevel,
+    required final this.isLastLevel,
   })  : gameLevelTimeLeftInSeconds =
             gameLevel.difficulty.gameDuration.inSeconds,
         piecesMoved = 0,
@@ -52,7 +55,7 @@ class PlayGameLevelBloc extends Bloc<PlayGameLevelEvent, PlayGameLevelState> {
   Stream<PlayGameLevelState> _mapGameLevelStartedToState(
     GameLevelStarted event,
   ) async* {
-    _setupGameLevel();
+    await _setupGameLevel();
 
     yield GameLevelInitial(
       difficulty: gameLevel.difficulty.difficulty,
@@ -102,7 +105,7 @@ class PlayGameLevelBloc extends Bloc<PlayGameLevelEvent, PlayGameLevelState> {
   Stream<PlayGameLevelState> _mapGameLevelRestartedToState(
     GameLevelRestarted event,
   ) async* {
-    _setupGameLevel(
+    await _setupGameLevel(
       isRestart: true,
     );
 
@@ -137,6 +140,7 @@ class PlayGameLevelBloc extends Bloc<PlayGameLevelEvent, PlayGameLevelState> {
 
       yield GameLevelFinish(
         results: results,
+        canPlayNextLevel: !isLastLevel,
       );
     } else {
       yield GameLevelInProgress();
@@ -149,9 +153,9 @@ class PlayGameLevelBloc extends Bloc<PlayGameLevelEvent, PlayGameLevelState> {
     yield PlayNextLevelSuccess();
   }
 
-  void _setupGameLevel({
+  Future<void> _setupGameLevel({
     final bool isRestart = false,
-  }) {
+  }) async {
     gameLevelTimeLeftInSeconds = gameLevel.difficulty.gameDuration.inSeconds;
     piecesMoved = 0;
 
@@ -166,7 +170,7 @@ class PlayGameLevelBloc extends Bloc<PlayGameLevelEvent, PlayGameLevelState> {
 
     if (!isRestart) {
       if (gameLevel.image is NetworkGameLevelImage) {
-        (gameLevel.image as NetworkGameLevelImage).loadUrl();
+        await (gameLevel.image as NetworkGameLevelImage).loadUrl();
       }
 
       gameLevelPictureTiles.addAll(

@@ -5,8 +5,8 @@ import 'package:extended_image/extended_image.dart';
 import 'package:flutter/painting.dart';
 
 const _kEasyGameDuration = Duration(minutes: 3);
-const _kMediumGameDuration = Duration(minutes: 2);
-const _kHardGameDuration = Duration(minutes: 1, seconds: 30);
+const _kMediumGameDuration = Duration(minutes: 4);
+const _kHardGameDuration = Duration(minutes: 5, seconds: 30);
 
 const kGameLevelEasyDifficulty = GameLevelDifficulty(
   difficulty: LevelDifficulty.easy,

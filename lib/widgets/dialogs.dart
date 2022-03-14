@@ -36,6 +36,8 @@ class SwapItDialog extends StatelessWidget {
 class GameFinishDialog extends StatelessWidget {
   final GameLevelPlayEntry playEntry;
 
+  final bool canPlayNextLevel;
+
   final void Function() onNextLevelPressed;
 
   final void Function() onRetryPressed;
@@ -45,6 +47,7 @@ class GameFinishDialog extends StatelessWidget {
   const GameFinishDialog({
     Key? key,
     required final this.playEntry,
+    required final this.canPlayNextLevel,
     required final this.onNextLevelPressed,
     required final this.onRetryPressed,
     required final this.onExitGamePressed,
@@ -83,10 +86,11 @@ class GameFinishDialog extends StatelessWidget {
             style: dialogContentTextStyle,
           ),
         ),
-        SwapItButton(
-          text: localizations.nextLevel,
-          onPressed: onNextLevelPressed,
-        ),
+        if (canPlayNextLevel)
+          SwapItButton(
+            text: localizations.nextLevel,
+            onPressed: onNextLevelPressed,
+          ),
         const Padding(
           padding: EdgeInsets.symmetric(vertical: 6.5),
         ),

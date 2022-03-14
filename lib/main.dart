@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:image_picker/image_picker.dart';
@@ -26,7 +25,7 @@ void main() async {
   Bloc.observer = LogBlocObserver();
 
   final _vault = await vault(
-    isReleaseMode: kReleaseMode,
+    isReleaseMode: true,
   );
 
   runApp(
@@ -67,8 +66,9 @@ class MyApp extends StatelessWidget {
             lazy: false,
           ),
           BlocProvider<SettingsBloc>(
-            create: (context) => SettingsBloc()
-              ..add(
+            create: (context) => SettingsBloc(
+              settingsRepository: vault.lookup<SettingsRepository>(),
+            )..add(
                 RetrieveSettingOptionsValuesStarted(),
               ),
             lazy: false,
@@ -122,33 +122,40 @@ class MyApp extends StatelessWidget {
             inputDecorationTheme: inputDecorationTheme,
             scaffoldBackgroundColor: Colors.transparent,
           ),
-          home: Scaffold(
-            body: DecoratedBox(
-              decoration: backgroundDecoration,
-              child: Navigator(
-                initialRoute: '/',
-                onGenerateRoute: (settings) {
-                  Route? route;
-                  if (settings.name == '/') {
-                    route = MaterialPageRoute(
-                      builder: (routeContext) {
-                        return BlocBuilder<GameBloc, GameState>(
-                          buildWhen: (previous, current) =>
-                              current is LoadGameSuccess,
-                          builder: (context, state) {
-                            if (state is LoadGameSuccess) {
-                              return const HomeView();
-                            } else {
-                              return const SplashView();
-                            }
-                          },
-                        );
-                      },
-                    );
-                  }
+          home: BlocListener<GameBloc, GameState>(
+            listener: (context, state) {
+              if (state is SaveGameSuccess) {
+                _onSaveGameSuccessStateReact(context);
+              }
+            },
+            child: Scaffold(
+              body: DecoratedBox(
+                decoration: backgroundDecoration,
+                child: Navigator(
+                  initialRoute: '/',
+                  onGenerateRoute: (settings) {
+                    Route? route;
+                    if (settings.name == '/') {
+                      route = MaterialPageRoute(
+                        builder: (routeContext) {
+                          return BlocBuilder<GameBloc, GameState>(
+                            buildWhen: (previous, current) =>
+                                current is LoadGameSuccess,
+                            builder: (context, state) {
+                              if (state is LoadGameSuccess) {
+                                return const HomeView();
+                              } else {
+                                return const SplashView();
+                              }
+                            },
+                          );
+                        },
+                      );
+                    }
 
-                  return route;
-                },
+                    return route;
+                  },
+                ),
               ),
             ),
           ),
@@ -163,6 +170,14 @@ class MyApp extends StatelessWidget {
       ),
     );
   }
+}
+
+void _onSaveGameSuccessStateReact(
+  final BuildContext context,
+) {
+  context.read<LeaderboardBloc>().add(
+        RefreshLeaderboardsStarted(),
+      );
 }
 
 class Vault<T> {

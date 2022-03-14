@@ -13,7 +13,8 @@ final defaultGameLevels = [
       y: 80.0,
     ),
     image: NetworkGameLevelImage(
-      url: 'https://cdn.e-konomista.pt/uploads/2018/09/BMW_M3.jpg',
+      url:
+          'https://www.e30.pt/wp-content/uploads/2019/10/Embaladeiras-318is.jpg',
     ),
   ),
   GameLevel(
@@ -26,7 +27,7 @@ final defaultGameLevels = [
     ),
     image: NetworkGameLevelImage(
       url:
-          'https://images.ctfassets.net/buxxk7taiwc2/6Y4wPxz0CoZv2tVOlF9vBX/636e42c5770700006567237dedd0b725/white-propeller-blue-skies-61k-mile-1997-bmw-318i-convertible00I0I_rDlApGeMPLz_1320MM_1200x900.jpg',
+          'https://www.razaoautomovel.com/wp-content/uploads/2020/11/2018-bmw-i8-coupe_1_925x520_acf_cropped.jpg',
     ),
   ),
   GameLevel(
@@ -39,7 +40,7 @@ final defaultGameLevels = [
     ),
     image: NetworkGameLevelImage(
       url:
-          'https://www.mini.pt/pt_PT/home/range/mini-5-door-hatch/_jcr_content/main/par/mosaic_gallery/mosaicGalleryItemsPar/mosaic_gallery_item_2/imageItem/damImage.narrow.768w.j_1614927450848.jpg',
+          'https://img.gta5-mods.com/q95/images/bmw-m8-f92-akrapovic-sound/d64902-BMW-M8-Competition-Z-Performance-Wheels-7.jpg',
     ),
   ),
   GameLevel(
@@ -51,7 +52,8 @@ final defaultGameLevels = [
       y: 623.5,
     ),
     image: NetworkGameLevelImage(
-      url: 'https://cdn.e-konomista.pt/uploads/2018/09/BMW_M3.jpg',
+      url:
+          'https://cloud.leparking.fr/2021/08/19/00/57/bmw-3er-coupe-bmw-e36-m3-coupe-3-0-ringtool-tracktool-clubsport-weis_8243758665.jpg',
     ),
   ),
   GameLevel(
@@ -63,7 +65,7 @@ final defaultGameLevels = [
       y: 780.5,
     ),
     image: NetworkGameLevelImage(
-      url: 'https://cdn.e-konomista.pt/uploads/2018/09/BMW_M3.jpg',
+      url: 'https://carsopedia.com/files/generations/BMW-E91-550.jpg',
     ),
   ),
   GameLevel(
@@ -75,7 +77,8 @@ final defaultGameLevels = [
       y: 80.0,
     ),
     image: NetworkGameLevelImage(
-      url: 'https://cdn.e-konomista.pt/uploads/2018/09/BMW_M3.jpg',
+      url:
+          'https://upload.wikimedia.org/wikipedia/commons/3/3a/Romi-Isetta.jpg',
     ),
   ),
   GameLevel(
@@ -84,10 +87,11 @@ final defaultGameLevels = [
     point: const LevelMarkerPoint(
       mapSize: Size(390.0, 844.0),
       x: 27.5,
-      y: 80.0,
+      y: 140.0,
     ),
     image: NetworkGameLevelImage(
-      url: 'https://cdn.e-konomista.pt/uploads/2018/09/BMW_M3.jpg',
+      url:
+          'https://www.mini.pt/pt_PT/home/range/electric/jcr:content/main/par/mosaic_gallery/mosaicGalleryItemsPar/mosaic_gallery_item_0/imageItem/damImage.narrow.560w.j_1614857643619.jpg',
     ),
   ),
   GameLevel(
@@ -95,11 +99,12 @@ final defaultGameLevels = [
     difficulty: kGameLevelMediumDifficulty,
     point: const LevelMarkerPoint(
       mapSize: Size(390.0, 844.0),
-      x: 27.5,
-      y: 80.0,
+      x: 45.5,
+      y: 205.0,
     ),
     image: NetworkGameLevelImage(
-      url: 'https://cdn.e-konomista.pt/uploads/2018/09/BMW_M3.jpg',
+      url:
+          'https://www.turbo.pt/wp-content/uploads/MiniJCWGP2020_diagofrtebxandar.jpg',
     ),
   ),
   GameLevel(
@@ -108,10 +113,11 @@ final defaultGameLevels = [
     point: const LevelMarkerPoint(
       mapSize: Size(390.0, 844.0),
       x: 27.5,
-      y: 80.0,
+      y: 305.0,
     ),
     image: NetworkGameLevelImage(
-      url: 'https://cdn.e-konomista.pt/uploads/2018/09/BMW_M3.jpg',
+      url:
+          'https://auto-drive.pt/wp-content/uploads/2018/10/P90326038-the-first-ever-bmw-x7-with-design-pure-excellence-in-arctic-grey-light-alloy-wheels-styling-757-10-2-2248px.jpg',
     ),
   ),
   GameLevel(
@@ -119,11 +125,12 @@ final defaultGameLevels = [
     difficulty: kGameLevelMediumDifficulty,
     point: const LevelMarkerPoint(
       mapSize: Size(390.0, 844.0),
-      x: 27.5,
-      y: 80.0,
+      x: 80.5,
+      y: 470.0,
     ),
     image: NetworkGameLevelImage(
-      url: 'https://cdn.e-konomista.pt/uploads/2018/09/BMW_M3.jpg',
+      url:
+          'https://i2.wp.com/blog.texoleo.eu/wp-content/uploads/2018/03/Rolls-Royce-Phantom-2018-1024-27.jpg?resize=768%2C432&ssl=1',
     ),
   ),
   GameLevel(
@@ -135,7 +142,8 @@ final defaultGameLevels = [
       y: 80.0,
     ),
     image: NetworkGameLevelImage(
-      url: 'https://cdn.e-konomista.pt/uploads/2018/09/BMW_M3.jpg',
+      url:
+          'https://s2.glbimg.com/uL8enPicktNH18Ws_foLezDCJsU=/0x0:1600x1067/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_cf9d035bf26b4646b105bd958f32089d/internal_photos/bs/2021/9/I/xVOBWnTYGBSAlqBkfAQA/bmw-m8-painel-interior.jpg',
     ),
   ),
   GameLevel(
@@ -144,10 +152,11 @@ final defaultGameLevels = [
     point: const LevelMarkerPoint(
       mapSize: Size(390.0, 844.0),
       x: 27.5,
-      y: 80.0,
+      y: 140.0,
     ),
     image: NetworkGameLevelImage(
-      url: 'https://cdn.e-konomista.pt/uploads/2018/09/BMW_M3.jpg',
+      url:
+          'https://www.carpixel.net/w/823b46d820533c9852d7bd161b9c9117/bmw-i4-m50-wallpaper-hd-104582.jpg',
     ),
   ),
   GameLevel(
@@ -156,10 +165,11 @@ final defaultGameLevels = [
     point: const LevelMarkerPoint(
       mapSize: Size(390.0, 844.0),
       x: 27.5,
-      y: 80.0,
+      y: 200.0,
     ),
     image: NetworkGameLevelImage(
-      url: 'https://cdn.e-konomista.pt/uploads/2018/09/BMW_M3.jpg',
+      url:
+          'https://hips.hearstapps.com/hmg-prod/amv-prod-cad-assets/wp-content/uploads/2016/08/BMW-2002-Hommage-concept-104.jpg?resize=980:*',
     ),
   ),
   GameLevel(
@@ -168,10 +178,10 @@ final defaultGameLevels = [
     point: const LevelMarkerPoint(
       mapSize: Size(390.0, 844.0),
       x: 27.5,
-      y: 80.0,
+      y: 300.0,
     ),
     image: NetworkGameLevelImage(
-      url: 'https://cdn.e-konomista.pt/uploads/2018/09/BMW_M3.jpg',
+      url: 'https://jadefansite.com/images/a8caf8bmw_gina_galeria_4g.jpg',
     ),
   ),
   GameLevel(
@@ -180,10 +190,11 @@ final defaultGameLevels = [
     point: const LevelMarkerPoint(
       mapSize: Size(390.0, 844.0),
       x: 27.5,
-      y: 80.0,
+      y: 400.0,
     ),
     image: NetworkGameLevelImage(
-      url: 'https://cdn.e-konomista.pt/uploads/2018/09/BMW_M3.jpg',
+      url:
+          'https://upload.wikimedia.org/wikipedia/commons/9/93/BMW_3200S_Repräsentationsfahrzeug.jpg',
     ),
   ),
   GameLevel(
@@ -192,7 +203,7 @@ final defaultGameLevels = [
     point: const LevelMarkerPoint(
       mapSize: Size(390.0, 844.0),
       x: 27.5,
-      y: 80.0,
+      y: 500.0,
     ),
     image: NetworkGameLevelImage(
       url: 'https://cdn.e-konomista.pt/uploads/2018/09/BMW_M3.jpg',
