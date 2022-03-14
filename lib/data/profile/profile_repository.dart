@@ -41,7 +41,7 @@ class RealProfileRepository extends ProfileRepository {
   }
 }
 
-class MockProfileRepository extends ProfileRepository {
+class FakeProfileRepository extends ProfileRepository {
   @override
   Future<void> updateProfile(UserProfile profile) {
     return Future.value();

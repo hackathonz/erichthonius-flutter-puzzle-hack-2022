@@ -73,7 +73,7 @@ class RealLeaderboardRepository extends LeaderboardRepository {
   }
 }
 
-class MockLeaderboardRepository extends LeaderboardRepository {
+class FakeLeaderboardRepository extends LeaderboardRepository {
   @override
   Future<List<LeaderboardEntry>> retrieveEntries({
     required DateTime from,

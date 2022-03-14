@@ -66,7 +66,7 @@ class RealAvatarRepository extends AvatarRepository {
   }
 }
 
-class MockAvatarRepository extends AvatarRepository {
+class FakeAvatarRepository extends AvatarRepository {
   final _personalPhotos = [
     'https://bk.ibxk.com.br/2015/6/programas/76091895.png',
   ];

@@ -53,7 +53,7 @@ class RealSettingsRepository extends SettingsRepository {
   }
 }
 
-class MockSettingsRepository extends SettingsRepository {
+class FakeSettingsRepository extends SettingsRepository {
   final _options = {
     SettingOption.notifications: true,
     SettingOption.sounds: true,

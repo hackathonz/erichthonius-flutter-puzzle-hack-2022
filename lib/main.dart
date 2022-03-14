@@ -221,23 +221,23 @@ Future<Vault<Object>> vault({
     );
   } else {
     vault.store<GameRepository>(
-      MockGameRepository(),
+      FakeGameRepository(),
     );
 
     vault.store<ProfileRepository>(
-      MockProfileRepository(),
+      FakeProfileRepository(),
     );
 
     vault.store<AvatarRepository>(
-      MockAvatarRepository(),
+      FakeAvatarRepository(),
     );
 
     vault.store<LeaderboardRepository>(
-      MockLeaderboardRepository(),
+      FakeLeaderboardRepository(),
     );
 
     vault.store<SettingsRepository>(
-      MockSettingsRepository(),
+      FakeSettingsRepository(),
     );
 
     vault.store<ImagePicker>(

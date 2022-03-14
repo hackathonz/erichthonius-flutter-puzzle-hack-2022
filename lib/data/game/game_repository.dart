@@ -71,7 +71,7 @@ class RealGameRepository extends GameRepository {
   }
 }
 
-class MockGameRepository extends GameRepository {
+class FakeGameRepository extends GameRepository {
   late Game game;
 
   @override
@@ -85,7 +85,7 @@ class MockGameRepository extends GameRepository {
             : '$id';
 
     game = Game(
-      gameLevels: defaultMockGameLevels,
+      gameLevels: defaultFakeGameLevels,
       gameUserProfile: GameUserProfile(
         profile: UserProfile(
           avatar: const Avatar(
