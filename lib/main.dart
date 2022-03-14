@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:swap_it/blocs/blocs.dart';
 import 'package:swap_it/data/data.dart';
 import 'package:swap_it/l10n/app_localizations.dart';
@@ -26,7 +27,7 @@ void main() async {
 
   Bloc.observer = LogBlocObserver();
 
-  final _vault = vault(
+  final _vault = await vault(
     isReleaseMode: kReleaseMode,
   );
 
@@ -171,13 +172,22 @@ class Vault<T> {
   T? lookup<S extends T>() => _vault[S];
 }
 
-Vault<Object> vault({
+Future<Vault<Object>> vault({
   required final bool isReleaseMode,
-  required final String deviceId,
-}) {
+}) async {
   final vault = Vault<Object>();
 
   if (isReleaseMode) {
+    final settingsRepository = RealSettingsRepository(
+      preferences: await SharedPreferences.getInstance(),
+    );
+
+    vault.store<SettingsRepository>(
+      settingsRepository,
+    );
+
+    final deviceId = await settingsRepository.deviceId;
+
     vault.store<GameRepository>(
       RealGameRepository(
         deviceId: deviceId,
@@ -200,7 +210,10 @@ Vault<Object> vault({
     );
 
     vault.store<LeaderboardRepository>(
-      RealLeaderboardRepository(),
+      RealLeaderboardRepository(
+        deviceId: deviceId,
+        firestore: FirebaseFirestore.instance,
+      ),
     );
 
     vault.store<ImagePicker>(
@@ -221,6 +234,10 @@ Vault<Object> vault({
 
     vault.store<LeaderboardRepository>(
       MockLeaderboardRepository(),
+    );
+
+    vault.store<SettingsRepository>(
+      MockSettingsRepository(),
     );
 
     vault.store<ImagePicker>(
