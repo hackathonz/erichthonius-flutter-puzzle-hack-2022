@@ -14,7 +14,7 @@ final defaultGameLevels = [
     ),
     image: NetworkGameLevelImage(
       url:
-          'https://korncars.files.wordpress.com/2013/08/bmw-m3-e36-korncars.jpg',
+          'https://s2.glbimg.com/uL8enPicktNH18Ws_foLezDCJsU=/0x0:1600x1067/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_cf9d035bf26b4646b105bd958f32089d/internal_photos/bs/2021/9/I/xVOBWnTYGBSAlqBkfAQA/bmw-m8-painel-interior.jpg',
     ),
   ),
   GameLevel(
